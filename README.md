@@ -44,6 +44,14 @@ rather than claimed:
   what those numbers mean. A price wants exactness; a chain wants proximity.
   ([the long version](https://rage.pythai.net/chainmarketcap-two-stores/))
 
+A version of the engine also runs the board at
+**[deltaverse.pythai.net/chainmarketcap.html](https://deltaverse.pythai.net/chainmarketcap.html)**,
+where retrieval is the whole product: 2,510 chains reconciled across CoinGecko,
+CoinMarketCap, `chainid.network` and the RPC endpoints themselves, with each
+source allowed to disagree in the open rather than being averaged into a single
+confident number. Its own documentation is embedded back into the pgvectorscale
+store, so the board is both a retrieval surface and part of the corpus.
+
 The ragebar is the smallest possible front door to that idea: *retrieval first,
 generation second.* That is what the R and the G in RAGE are for.
 
