@@ -1,0 +1,124 @@
+<style id="ragebar-css">
+:root{--rb-green:#3ddc84;--rb-hot:#ff3b30;--rb-ink:#e9ffe9;--rb-dim:#7f9c8a;--rb-bg:#05070a}
+/* ── the contrast repair the header search needs regardless of the ragebar ──
+   .head-search-input in blockchain-lite sets ONLY height:56px, so it inherits
+   the theme's #585858 body colour onto a near-white overlay: invisible text. */
+/* the theme already makes this a fixed overlay that slides down from top:0
+   on .head-search-expanded; pin it explicitly so the ragebar always opens
+   AT THE TOP of the page and scrolls within the viewport, never past it. */
+.head-search-form{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;max-width:100%!important;background-color:rgba(8,10,14,.97)!important;padding:16px 20px 18px!important;z-index:99999!important;max-height:100vh!important;overflow-y:auto!important;border-bottom:1px solid #1f3a2b!important;box-shadow:0 10px 40px rgba(0,0,0,.6)!important}
+.head-search-input{height:52px!important;display:block!important;width:100%!important;max-width:560px!important;margin:0 auto!important;padding:0 16px!important;color:var(--rb-ink)!important;background-color:var(--rb-bg)!important;border:1px solid #1f3a2b!important;border-radius:8px!important;caret-color:var(--rb-green)!important;font-size:16px!important;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important}
+.head-search-input:focus{outline:0!important;border-color:var(--rb-green)!important;box-shadow:0 0 0 3px rgba(61,220,132,.15)!important}
+.head-search-input::placeholder{color:#6d8a78!important;opacity:1!important}
+/* ── the ragebar itself ── */
+.rb-wrap{position:relative;max-width:560px;margin:0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.rb-canvas{position:absolute;left:0;right:0;top:-52px;height:52px;width:100%;display:block;pointer-events:none;opacity:.9;border-radius:8px}
+.rb-meter{height:3px;border-radius:2px;background:#11201a;overflow:hidden;margin:7px 0 0}
+.rb-meter i{display:block;height:100%;width:0;background:var(--rb-green);transition:width .18s ease,background .18s ease}
+.rb-stat{font-size:11px;color:var(--rb-dim);margin:7px 2px 0;letter-spacing:.04em;min-height:14px}
+.rb-stat.rb-hot{color:var(--rb-hot)}
+.rb-list{list-style:none;margin:9px 0 0;padding:0;display:grid;gap:6px;max-height:min(52vh,420px);overflow:auto}
+.rb-list li{margin:0}
+.rb-list a{display:block;padding:9px 11px;border:1px solid #16281e;border-radius:7px;background:rgba(6,14,10,.92);color:var(--rb-ink);text-decoration:none;font-size:13.5px;line-height:1.45}
+.rb-list a:hover,.rb-list a:focus{border-color:var(--rb-green);background:rgba(10,26,18,.98);outline:0}
+.rb-list .rb-k{color:var(--rb-green)}
+.sidebar a,.sidebar h2 a,.widget_block a{color:#123a22!important;text-decoration:underline!important;text-underline-offset:3px!important;font-weight:600!important}
+.sidebar a:hover,.sidebar h2 a:hover,.widget_block a:hover{color:#0a7a3a!important}
+/* the in-page ragebar (the /ragebar/ page supplies just the input; the script
+   below drives it exactly like the header one) */
+#ragebar-input{height:52px;display:block;width:100%;max-width:560px;margin:0 auto;padding:0 16px;color:var(--rb-ink);background:var(--rb-bg);border:1px solid #1f3a2b;border-radius:8px;caret-color:var(--rb-green);font-size:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+#ragebar-input:focus{outline:0;border-color:var(--rb-green);box-shadow:0 0 0 3px rgba(61,220,132,.15)}
+#ragebar-input::placeholder{color:#6d8a78;opacity:1}
+@media (prefers-reduced-motion:reduce){.rb-canvas{display:none}}
+</style>
+<script id="ragebar-js">
+(function(){
+  if(window.__ragebar) return; window.__ragebar=1;
+  function attach(input){
+    if(!input||input.dataset.rb) return; input.dataset.rb='1';
+    // Build the UI with the DOM API, never innerHTML with markup: WordPress
+    // content filters rewrite HTML inside strings (wpautop turned the blank
+    // lines in the first version of this script into </p><p> and broke it).
+    var wrap=document.createElement('div'); wrap.className='rb-wrap';
+    var cv=document.createElement('canvas'); cv.className='rb-canvas'; cv.setAttribute('aria-hidden','true');
+    var meter=document.createElement('div'); meter.className='rb-meter';
+    var fill=document.createElement('i'); meter.appendChild(fill);
+    var stat=document.createElement('p'); stat.className='rb-stat'; stat.setAttribute('role','status'); stat.setAttribute('aria-live','polite');
+    var list=document.createElement('ul'); list.className='rb-list';
+    wrap.appendChild(cv); wrap.appendChild(meter); wrap.appendChild(stat); wrap.appendChild(list);
+    input.parentNode.insertBefore(wrap, input.nextSibling);
+    var ctx=cv.getContext('2d'), rage=0, target=0, sparks=[], last=0, keys=[];
+    var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+    function resize(){var d=Math.min(window.devicePixelRatio||1,2);cv.width=(wrap.clientWidth||560)*d;cv.height=52*d;}
+    function spark(n,hot){for(var i=0;i<n;i++){sparks.push({x:Math.random()*cv.width,y:cv.height*(0.4+Math.random()*0.5),vx:(Math.random()-0.5)*2.4,vy:-(0.5+Math.random()*2),l:1,hot:hot});}}
+    function draw(now){
+      requestAnimationFrame(draw);
+      if(reduce||!cv.width) return;
+      if(now-last<33) return; last=now;
+      rage+=(target-rage)*0.09; target*=0.965;
+      ctx.clearRect(0,0,cv.width,cv.height);
+      var g=ctx.createLinearGradient(0,cv.height,0,0);
+      g.addColorStop(0,'rgba(61,220,132,'+(0.04+rage*0.22).toFixed(3)+')');
+      g.addColorStop(1,'rgba(61,220,132,0)');
+      ctx.fillStyle=g; ctx.fillRect(0,0,cv.width,cv.height);
+      for(var i=sparks.length-1;i>=0;i--){var s=sparks[i];s.x+=s.vx;s.y+=s.vy;s.vy+=0.02;s.l-=0.022;
+        if(s.l<=0){sparks.splice(i,1);continue;}
+        ctx.globalAlpha=Math.max(0,s.l)*0.85; ctx.fillStyle=s.hot?'#ff3b30':'#3ddc84'; ctx.fillRect(s.x,s.y,2,2);}
+      ctx.globalAlpha=1;
+    }
+    window.addEventListener('resize',resize); resize(); requestAnimationFrame(draw);
+    function setRage(v,hot){
+      target=Math.max(target,Math.min(1,v));
+      fill.style.width=Math.round(Math.min(1,target)*100)+'%';
+      fill.style.background=hot?'#ff3b30':'#3ddc84';
+      if(!reduce) spark(hot?18:8,!!hot);
+    }
+    function say(msg,hot){ stat.textContent=msg; if(hot){stat.classList.add('rb-hot');} else {stat.classList.remove('rb-hot');} }
+    function row(title,url,q){
+      var li=document.createElement('li'), a=document.createElement('a');
+      a.href=url; var i=title.toLowerCase().indexOf(q.toLowerCase());
+      if(i<0||!q){ a.textContent=title; }
+      else{
+        a.appendChild(document.createTextNode(title.slice(0,i)));
+        var k=document.createElement('span'); k.className='rb-k'; k.textContent=title.slice(i,i+q.length);
+        a.appendChild(k); a.appendChild(document.createTextNode(title.slice(i+q.length)));
+      }
+      li.appendChild(a); return li;
+    }
+    var timer=null, ctl=null, seq=0;
+    function search(q){
+      var mine=++seq;
+      if(ctl){ try{ctl.abort();}catch(e){} }
+      ctl=('AbortController' in window)? new AbortController() : null;
+      say('raging through the corpus...');
+      fetch('/wp-json/wp/v2/search?per_page=8&search='+encodeURIComponent(q), ctl?{signal:ctl.signal}:undefined)
+        .then(function(r){ if(!r.ok) throw new Error(r.status); var tot=r.headers.get('X-WP-Total');
+          return r.json().then(function(j){ return {j:j,tot:tot}; }); })
+        .then(function(o){
+          if(mine!==seq) return;
+          while(list.firstChild) list.removeChild(list.firstChild);
+          if(!o.j.length){ say('nothing. the engine is furious.',true); setRage(1,true); return; }
+          for(var i=0;i<o.j.length;i++){ list.appendChild(row(String(o.j[i].title||'(untitled)'), String(o.j[i].url||'#'), q)); }
+          var n=o.tot||o.j.length;
+          say(n+' result'+(String(n)==='1'?'':'s')+' - showing '+o.j.length+'.');
+          setRage(0.35+Math.min(0.6,o.j.length/8*0.6));
+        })
+        .catch(function(e){ if(e&&e.name==='AbortError') return; if(mine!==seq) return;
+          say('the engine could not reach the corpus.',true); setRage(1,true); });
+    }
+    input.addEventListener('input',function(){
+      var q=input.value.trim(), n=Date.now();
+      keys.push(n); keys=keys.filter(function(x){return n-x<1500;});
+      setRage(Math.min(0.9,keys.length/9));
+      clearTimeout(timer);
+      if(q.length<2){ while(list.firstChild) list.removeChild(list.firstChild); say(q?'keep going...':''); return; }
+      timer=setTimeout(function(){ search(q); },260);
+    });
+  }
+  function boot(){
+    attach(document.getElementById('head-search-input'));
+    attach(document.getElementById('ragebar-input'));
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
+})();
+</script>
