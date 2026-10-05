@@ -1,0 +1,17 @@
+<!doctype html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ragewatch — demo</title>
+<link rel="stylesheet" href="src/ragebar.css">
+<style>body{background:#05070a;color:#e9ffe9;font-family:ui-monospace,Menlo,monospace;padding:10vh 16px}
+h1{font-size:14px;letter-spacing:.24em;text-transform:uppercase;color:#3ddc84;text-align:center;margin:0 0 4px}
+p.s{font-size:11px;color:#7f9c8a;text-align:center;margin:0 0 22px}</style>
+<h1>ragewatch</h1>
+<p class="s">the ragebar, pointed at a leaderboard</p>
+<div id="watch"></div>
+<script src="src/ragebar.js"></script>
+<script src="src/ragewatch.js"></script>
+<script>
+  // Reads the local snapshot when served from a checkout (npx serve .);
+  // leave `src` out to read the copy the scheduled workflow commits to GitHub.
+  Ragebar.watch(document.getElementById('watch'), { src: 'data/benchwatch.json', slug: 'mimo-v2-6-pro' });
+</script>

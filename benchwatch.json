@@ -1,0 +1,11 @@
+{
+  "source": "https://benchlm.ai/data/models.json",
+  "out": "data/benchwatch.json",
+  "history": "data/benchwatch-history.jsonl",
+  "models": [
+    {
+      "benchlm": "mimo-v2-6-pro",
+      "hf": ["XiaomiMiMo/MiMo-V2.6-Pro-RL", "Gregory-L/MiMo-V2.6-Pro-RL"]
+    }
+  ]
+}

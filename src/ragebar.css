@@ -29,3 +29,41 @@
 .rb-list .rb-k{color:var(--rb-green)}
 
 @media (prefers-reduced-motion:reduce){.rb-canvas{display:none}}
+
+/* ── ragewatch: the ragebar pointed at a leaderboard (src/ragewatch.js) ── */
+.rw-card{max-width:560px;margin:0 auto;padding:14px 14px 10px;border:1px solid var(--rb-edge);border-radius:10px;
+  background:var(--rb-bg);color:var(--rb-ink);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  transition:border-color .3s,box-shadow .3s}
+.rw-card.rw-hot{border-color:#5a1f1c}
+.rw-card a{color:var(--rb-ink);text-decoration:none;border-bottom:1px dotted #2a5c3f}
+.rw-card a:hover,.rw-card a:focus{color:var(--rb-green);outline:0}
+.rw-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.rw-name{font-size:15px;font-weight:700;letter-spacing:.02em}
+.rw-sub{font-size:11px;color:var(--rb-dim)}
+.rw-score{margin:10px 0 0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.rw-score b{font-size:30px;line-height:1;color:var(--rb-green)}
+.rw-hot .rw-score b{color:var(--rb-hot)}
+.rw-score span{font-size:11px;color:var(--rb-dim)}
+.rw-meter{position:relative;height:5px}
+.rw-meter i{position:relative;z-index:1}
+.rw-band{position:absolute;top:0;bottom:0;background:rgba(61,220,132,.18)}
+.rw-rank{font-size:12px;color:var(--rb-dim);margin:9px 0 0}
+.rw-rank b{color:var(--rb-ink)}
+.rw-cats,.rw-hf,.rw-changes{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:5px;font-size:11.5px}
+.rw-cats li{display:grid;grid-template-columns:7.5em 1fr 5.5em;align-items:center;gap:8px}
+.rw-cats .rw-meter{margin:0;height:3px}
+.rw-hf li,.rw-changes li{display:flex;justify-content:space-between;gap:10px;min-width:0}
+.rw-hf a{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.rw-k{color:var(--rb-dim)}
+.rw-v{text-align:right;white-space:nowrap;color:var(--rb-ink)}
+.rw-miss .rw-v,.rw-down,.rw-down .rw-k{color:var(--rb-hot)}
+.rw-up,.rw-up .rw-k{color:var(--rb-green)}
+.rw-changes{border-top:1px solid #12211a;padding-top:8px}
+.rw-more{color:var(--rb-dim)}
+.rw-foot{font-size:10.5px;color:var(--rb-dim);margin:10px 0 0}
+.rw-card .rb-stat{margin:6px 0 0}
+.rw-surge{animation:rw-surge 1.4s ease-out}
+.rw-hot.rw-surge{animation-name:rw-surge-hot}
+@keyframes rw-surge{0%{box-shadow:0 0 0 0 rgba(61,220,132,.55)}100%{box-shadow:0 0 0 14px rgba(61,220,132,0)}}
+@keyframes rw-surge-hot{0%{box-shadow:0 0 0 0 rgba(255,59,48,.55)}100%{box-shadow:0 0 0 14px rgba(255,59,48,0)}}
+@media (prefers-reduced-motion:reduce){.rw-surge,.rw-hot.rw-surge{animation:none}}

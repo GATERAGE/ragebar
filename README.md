@@ -134,6 +134,51 @@ Two traps, learned the hard way:
   `wp_inactive_widgets`. Assign it with `POST /wp/v2/sidebars/<id>` — which
   *blanks the content* — then write the content again. Three calls, in that order.
 
+## Watch a model: ragewatch
+
+The same meter, pointed at a leaderboard instead of a corpus. It follows
+[MiMo-V2.6-Pro](https://benchlm.ai/models/mimo-v2-6-pro), at the time of writing
+the top open-weight model on [BenchLM.ai](https://benchlm.ai) (75.5/100, #11 of
+208 overall). It also follows two repos on the Hub:
+[XiaomiMiMo/MiMo-V2.6-Pro-RL](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL)
+and a pointer fork,
+[Gregory-L/MiMo-V2.6-Pro-RL](https://huggingface.co/Gregory-L/MiMo-V2.6-Pro-RL), which
+carries the config, code and tokenizer at a pinned upstream commit, without the
+~600 GB of weights.
+
+| signal | what drives it |
+|---|---|
+| meter width | the BenchLM score out of 100, with its 90% interval shaded behind it |
+| card surges | the snapshot moved since this viewer last looked |
+| card goes red | the last move was a loss (score down, rank number up), or a watched repo is missing from the Hub |
+
+It comes in two parts, because benchlm.ai publishes its rankings as open JSON
+but sends no CORS headers, so a browser cannot read them from another origin:
+
+- **`tools/benchwatch.mjs`** (Node 18+, zero dependencies) reads
+  `benchlm.ai/data/models.json` with `If-None-Match` and the Hub API, then writes
+  `data/benchwatch.json` plus one line per moved field to
+  `data/benchwatch-history.jsonl`. When nothing moved it writes nothing.
+  `.github/workflows/benchwatch.yml` runs it every six hours and commits only
+  when something changed.
+- **`src/ragewatch.js`** renders the snapshot. By default it reads the committed
+  copy from `raw.githubusercontent.com`, which serves it with CORS open.
+
+```html
+<link rel="stylesheet" href="src/ragebar.css">
+<div id="watch"></div>
+<script src="src/ragewatch.js"></script>
+<script>Ragebar.watch(document.getElementById('watch'), { slug: 'mimo-v2-6-pro' });</script>
+```
+
+To follow another model, add it to `benchwatch.json`. The `benchlm` value is the
+slug from the model's URL on benchlm.ai, and `hf` lists any repos to track with
+it. `watch.html` is the demo.
+
+The BenchLM data is **CC BY-NC 4.0, not Apache-2.0**: non-commercial use with the
+credit *Data from BenchLM.ai* and a link. The card prints that credit, and
+`data/README.md` says the same.
+
 ## Design notes
 
 - **30fps cap, `requestAnimationFrame`, rage decays** — the canvas is cheap and
