@@ -7,3 +7,6 @@
 {"ts":"2026-10-06T00:04:35.209Z","slug":"mimo-v2-6-pro","field":"benchmarks.agentic.aaBriefcaseElo","from":1515,"to":1516}
 {"ts":"2026-10-06T00:04:35.209Z","slug":"mimo-v2-6-pro","field":"benchmarks.multimodalGrounded.designArenaWebsite","from":1321,"to":1317}
 {"ts":"2026-10-06T00:04:35.209Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":652,"to":655}
+{"ts":"2026-10-06T18:23:30.311Z","slug":"mimo-v2-6-pro","field":"displayScore","from":74.13,"to":74.17}
+{"ts":"2026-10-06T18:23:30.311Z","slug":"mimo-v2-6-pro","field":"benchmarks.multimodalGrounded.designArenaWebsite","from":1317,"to":1315}
+{"ts":"2026-10-06T18:23:30.311Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":655,"to":658}
