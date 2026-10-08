@@ -1,10 +1,10 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-07T23:06:21.726Z",
+  "checkedAt": "2026-10-08T06:06:37.793Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"b6d1968b269a4ba891ae97e89e93a39e\"",
-    "generatedAt": "2026-10-07T22:36:19.406Z",
+    "etag": "W/\"a3c0f54fc9fb286a82c44a37681a5091\"",
+    "generatedAt": "2026-10-08T05:36:15.368Z",
     "sourceLastUpdated": "October 7, 2026",
     "totalModels": 887,
     "rankedModels": 212,
@@ -79,7 +79,7 @@
           "sha": "73875d00b30a89ef8cc353a0b60b0e9f9561952d",
           "lastModified": "2026-09-22T03:52:00.000Z",
           "downloads": 91768,
-          "likes": 667
+          "likes": 668
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -90,49 +90,14 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-07T23:06:21.726Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "displayScore",
-          "from": 74.17,
-          "to": 74.18
-        },
-        {
-          "ts": "2026-10-07T23:06:21.726Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryScores.coding",
-          "from": 60.3,
-          "to": 60.4
-        },
-        {
-          "ts": "2026-10-07T23:06:21.726Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryScores.knowledge",
-          "from": 60.5,
-          "to": 60.6
-        },
-        {
-          "ts": "2026-10-07T23:06:21.726Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.coding",
-          "from": 12,
-          "to": 11
-        },
-        {
-          "ts": "2026-10-07T23:06:21.726Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
-          "from": 1315,
-          "to": 1314
-        },
-        {
-          "ts": "2026-10-07T23:06:21.726Z",
+          "ts": "2026-10-08T06:06:37.793Z",
           "slug": "mimo-v2-6-pro",
           "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 663,
-          "to": 667
+          "from": 667,
+          "to": 668
         }
       ],
-      "changedAt": "2026-10-07T23:06:21.726Z"
+      "changedAt": "2026-10-08T06:06:37.793Z"
     }
   ]
 }
