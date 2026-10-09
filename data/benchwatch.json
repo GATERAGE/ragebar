@@ -1,10 +1,10 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-09T06:10:49.251Z",
+  "checkedAt": "2026-10-09T13:19:19.296Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"212a55ff6199086a9eebc57e91653598\"",
-    "generatedAt": "2026-10-09T05:18:38.881Z",
+    "etag": "W/\"12641abc1676ab685d08b5224c79dc40\"",
+    "generatedAt": "2026-10-09T12:36:31.957Z",
     "sourceLastUpdated": "October 8, 2026",
     "totalModels": 889,
     "rankedModels": 212,
@@ -77,10 +77,10 @@
         {
           "id": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
-          "sha": "73875d00b30a89ef8cc353a0b60b0e9f9561952d",
-          "lastModified": "2026-09-22T03:52:00.000Z",
-          "downloads": 93473,
-          "likes": 675
+          "sha": "b61f21852680ee02a29e946e18cf8697f4844061",
+          "lastModified": "2026-10-09T06:30:24.000Z",
+          "downloads": 94175,
+          "likes": 678
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -91,14 +91,21 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-09T06:10:49.251Z",
+          "ts": "2026-10-09T13:19:19.296Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.sha",
+          "from": "73875d00b30a89ef8cc353a0b60b0e9f9561952d",
+          "to": "b61f21852680ee02a29e946e18cf8697f4844061"
+        },
+        {
+          "ts": "2026-10-09T13:19:19.296Z",
           "slug": "mimo-v2-6-pro",
           "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 672,
-          "to": 675
+          "from": 675,
+          "to": 678
         }
       ],
-      "changedAt": "2026-10-09T06:10:49.251Z"
+      "changedAt": "2026-10-09T13:19:19.296Z"
     }
   ]
 }
