@@ -26,3 +26,8 @@
 {"ts":"2026-10-09T13:19:19.296Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.sha","from":"73875d00b30a89ef8cc353a0b60b0e9f9561952d","to":"b61f21852680ee02a29e946e18cf8697f4844061"}
 {"ts":"2026-10-09T13:19:19.296Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":675,"to":678}
 {"ts":"2026-10-09T22:39:42.498Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":678,"to":680}
+{"ts":"2026-10-10T05:54:22.514Z","slug":"mimo-v2-6-pro","field":"displayScore","from":74.11,"to":74.15}
+{"ts":"2026-10-10T05:54:22.514Z","slug":"mimo-v2-6-pro","field":"categoryScores.agentic","from":78.2,"to":77.8}
+{"ts":"2026-10-10T05:54:22.514Z","slug":"mimo-v2-6-pro","field":"categoryScores.reasoning","from":79.6,"to":83.4}
+{"ts":"2026-10-10T05:54:22.514Z","slug":"mimo-v2-6-pro","field":"categoryScores.knowledge","from":60.6,"to":58.4}
+{"ts":"2026-10-10T05:54:22.514Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":680,"to":686}
