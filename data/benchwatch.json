@@ -1,13 +1,13 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-15T17:02:51.415Z",
+  "checkedAt": "2026-10-15T21:24:14.510Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"bdcd07a93447f8c59e18bd457f79da19\"",
-    "generatedAt": "2026-10-15T15:08:47.819Z",
+    "etag": "W/\"caca9575c88a9ae8a20c2f62132b3c76\"",
+    "generatedAt": "2026-10-15T19:34:05.851Z",
     "sourceLastUpdated": "October 15, 2026",
-    "totalModels": 948,
-    "rankedModels": 218,
+    "totalModels": 949,
+    "rankedModels": 220,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/"
@@ -21,10 +21,10 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 73.55,
+      "displayScore": 73.62,
       "interval90": [
-        63.83,
-        83.27
+        63.9,
+        83.34
       ],
       "overallRank": 12,
       "openRank": 1,
@@ -81,7 +81,7 @@
           "sha": "b61f21852680ee02a29e946e18cf8697f4844061",
           "lastModified": "2026-10-09T06:30:24.000Z",
           "downloads": 99548,
-          "likes": 729
+          "likes": 730
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -92,21 +92,21 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-15T17:02:51.415Z",
+          "ts": "2026-10-15T21:24:14.510Z",
           "slug": "mimo-v2-6-pro",
           "field": "displayScore",
-          "from": 73.57,
-          "to": 73.55
+          "from": 73.55,
+          "to": 73.62
         },
         {
-          "ts": "2026-10-15T17:02:51.415Z",
+          "ts": "2026-10-15T21:24:14.510Z",
           "slug": "mimo-v2-6-pro",
           "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 725,
-          "to": 729
+          "from": 729,
+          "to": 730
         }
       ],
-      "changedAt": "2026-10-15T17:02:51.415Z"
+      "changedAt": "2026-10-15T21:24:14.510Z"
     }
   ]
 }
