@@ -1,10 +1,10 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-14T21:42:18.651Z",
+  "checkedAt": "2026-10-15T04:41:42.025Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"91c4705711d0e9c3683c0d1b9ba78c53\"",
-    "generatedAt": "2026-10-14T20:25:37.633Z",
+    "etag": "W/\"aaa2099c66da98152e6772d508b784f2\"",
+    "generatedAt": "2026-10-15T01:33:09.307Z",
     "sourceLastUpdated": "October 14, 2026",
     "totalModels": 935,
     "rankedModels": 217,
@@ -21,10 +21,10 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 73.53,
+      "displayScore": 73.57,
       "interval90": [
-        63.81,
-        83.25
+        63.85,
+        83.29
       ],
       "overallRank": 12,
       "openRank": 1,
@@ -55,6 +55,7 @@
         "agentic.aaAutomationBench": 58.6,
         "agentic.aaGdpPdf": 19.2,
         "agentic.aaTerminalBench4": 34.8,
+        "agentic.aaAnalystAgent": 37.5,
         "coding.deepSwe": 71.9,
         "coding.programBench": 26.5,
         "coding.terminalBench21": 89.9,
@@ -63,7 +64,7 @@
         "reasoning.lcr": 86.3,
         "reasoning.critpt": 26.6,
         "reasoning.aaMlcr": 18.3,
-        "multimodalGrounded.designArenaWebsite": 1312,
+        "multimodalGrounded.designArenaWebsite": 1309,
         "knowledge.artificialAnalysis": 46.32,
         "knowledge.aaHle": 49.4,
         "knowledge.aaOmniscienceIndex": 8.4,
@@ -80,7 +81,7 @@
           "sha": "b61f21852680ee02a29e946e18cf8697f4844061",
           "lastModified": "2026-10-09T06:30:24.000Z",
           "downloads": 98513,
-          "likes": 721
+          "likes": 723
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -91,28 +92,35 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-14T21:42:18.651Z",
+          "ts": "2026-10-15T04:41:42.025Z",
           "slug": "mimo-v2-6-pro",
           "field": "displayScore",
-          "from": 73.52,
-          "to": 73.53
+          "from": 73.53,
+          "to": 73.57
         },
         {
-          "ts": "2026-10-14T21:42:18.651Z",
+          "ts": "2026-10-15T04:41:42.025Z",
           "slug": "mimo-v2-6-pro",
-          "field": "overallRank",
-          "from": 13,
-          "to": 12
+          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
+          "from": 1312,
+          "to": 1309
         },
         {
-          "ts": "2026-10-14T21:42:18.651Z",
+          "ts": "2026-10-15T04:41:42.025Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.agentic.aaAnalystAgent",
+          "from": null,
+          "to": 37.5
+        },
+        {
+          "ts": "2026-10-15T04:41:42.025Z",
           "slug": "mimo-v2-6-pro",
           "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 716,
-          "to": 721
+          "from": 721,
+          "to": 723
         }
       ],
-      "changedAt": "2026-10-14T21:42:18.651Z"
+      "changedAt": "2026-10-15T04:41:42.025Z"
     }
   ]
 }
