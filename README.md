@@ -122,7 +122,21 @@ already attached.
 
 `wordpress/ragebar-widget.html` is the deployed drop-in: paste it into a
 **Custom HTML widget** in any always-rendered sidebar and it upgrades the
-theme's existing header search in place.
+theme's existing header search in place. v1.1.0: the canvas sleeps when idle,
+repeated queries answer from a 5-minute in-page cache, arrow keys walk the
+results and Esc comes back, `/` opens the search from anywhere, and a link
+reaches every result past the first eight. The search request is unchanged.
+
+`wordpress/ragebar-atlas-widget.html` is the atlas (rage.pythai.net footer
+widget `custom_html-7`). v2.0.0 has **no chooser**: instead of hiding behind
+a "rage" item in the header menu, the atlas is docked at the top of the
+content, open on the home page and folded to its head elsewhere; the header
+menu's links move into its foot. Data: `deltaverse.pythai.net/audio/atlas.json`.
+
+Both are tested offline in a DOM against recorded search answers:
+`JSDOM=/path/to/node_modules/jsdom node --test tests/wordpress-widgets.test.mjs`
+(jsdom is not a dependency; without it the suite skips). `tools/verify-rage-live.sh`
+checks the live site with curl after a deploy.
 
 Two traps, learned the hard way:
 
@@ -182,7 +196,7 @@ credit *Data from BenchLM.ai* and a link. The card prints that credit, and
 ## Design notes
 
 - **30fps cap, `requestAnimationFrame`, rage decays** — the canvas is cheap and
-  idles at nothing.
+  idles at nothing: the frame loop stops when the rage has decayed (v1.1.0).
 - **Stale answers lose.** Every search takes a sequence number and aborts the
   previous request; a slow reply for an old query can never overwrite a fast one.
 - **`prefers-reduced-motion`** removes the canvas entirely; the bar stays fully

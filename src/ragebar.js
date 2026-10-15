@@ -82,9 +82,12 @@
         vx: (Math.random() - 0.5) * 2.4, vy: -(0.5 + Math.random() * 2), l: 1, hot: hot
       });
     }
+    var raf = 0;
+    function wake() { if (!raf && !reduce) raf = requestAnimationFrame(draw); }
     function draw(now) {
-      requestAnimationFrame(draw);
+      raf = 0;
       if (reduce || !cv.width) return;
+      if (sparks.length || target > 0.004 || rage > 0.004) raf = requestAnimationFrame(draw);  // sleeps when idle
       if (now - last < 33) return; last = now;                 // 30fps cap
       rage += (target - rage) * 0.09; target *= 0.965;         // rage decays
       ctx.clearRect(0, 0, cv.width, cv.height);
@@ -101,13 +104,13 @@
       }
       ctx.globalAlpha = 1;
     }
-    global.addEventListener('resize', resize); resize(); requestAnimationFrame(draw);
+    global.addEventListener('resize', resize); resize();
 
     function setRage(v, hot) {
       target = Math.max(target, Math.min(1, v));
       fill.style.width = Math.round(Math.min(1, target) * 100) + '%';
       fill.style.background = hot ? '#ff3b30' : '#3ddc84';
-      if (!reduce) spark(hot ? 18 : 8, !!hot);
+      if (!reduce) { spark(hot ? 18 : 8, !!hot); wake(); }
     }
     function say(msg, hot) {
       stat.textContent = msg;
@@ -165,10 +168,23 @@
       timer = setTimeout(function () { search(q); }, o.debounce);
     });
 
+    // keyboard: ArrowDown walks into the results, arrows move, Esc comes back to the field
+    function links() { return Array.prototype.slice.call(list.querySelectorAll('a')); }
+    function go(i) { var L = links(); if (!L.length) return; L[(i + L.length) % L.length].focus(); }
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' && links().length) { e.preventDefault(); go(0); }
+    });
+    list.addEventListener('keydown', function (e) {
+      var L = links(), i = L.indexOf(document.activeElement); if (i < 0) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); go(i + 1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); if (i === 0) input.focus(); else go(i - 1); }
+      else if (e.key === 'Escape') { e.preventDefault(); input.focus(); }
+    });
+
     return { input: input, search: search, el: wrap };
   }
 
-  var Ragebar = { attach: attach, defaults: DEFAULTS, version: '1.0.0' };
+  var Ragebar = { attach: attach, defaults: DEFAULTS, version: '1.1.0' };
   if (typeof module !== 'undefined' && module.exports) module.exports = Ragebar;
   global.Ragebar = Ragebar;
 })(typeof window !== 'undefined' ? window : this);

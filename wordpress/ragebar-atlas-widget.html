@@ -1,6 +1,12 @@
-<!-- ragebar atlas menu (rage.pythai.net, footer custom_html widget) | mindX 2026-10-10
-     The header menu's first item, "rage": an accordion that drops in under the header and drops out
-     on Esc, close or a click outside. Travel collects complexity: branch -> path -> (month) -> article,
+<!-- ragebar atlas menu v2.0.0 (rage.pythai.net, footer custom_html widget custom_html-7) | 2026-10-15
+     github.com/GATERAGE/ragebar wordpress/ragebar-atlas-widget.html (v1 of 2026-10-10: mindX docs/rage_atlas_menu_widget.html)
+     v2: NO CHOOSER. The atlas used to hide behind "rage", the first item of a hard-to-see header menu.
+     Now every visitor lands IN it: the atlas is docked in the page, at the top of #site-content, open on
+     the home page; on other pages it shows its head (find, trail) and unfolds with one press (the
+     reader's last choice is remembered on this device). The header menu is hidden only once this script
+     runs (html.rm-docked), and its links move into the atlas foot, so nothing is lost and a failed
+     script leaves the old header in place. Undo: restore v1 from the backup named in the ragebar repo.
+     Travel collects complexity: branch -> path -> (month) -> article,
      every node opened is kept on the TRAIL and its tags are COLLECTED. An article is a point of
      conclusion (what it says, when, which voices LISTEN plays it in). From it, new paths spawn and drop
      in beneath it: kindred (shared tags and paths), its thread (neighbours in time on its path), any of
@@ -82,6 +88,29 @@ a.rm-act{text-decoration:none!important;color:var(--rm-g)!important;border-color
 .navigation-mobile li.rm-li>button{all:unset;cursor:pointer;display:block;padding:10px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.14em;color:#3ddc84;font-weight:700}
 @media (max-width:600px){.rm-panel{padding:0}.rm-box{max-height:88vh;border-radius:0 0 10px 10px}.rm-title{display:none}}
 @media (prefers-reduced-motion:reduce){.rm-box,.rm-panel.rm-closing .rm-box{animation:none}.rm-canvas{display:none}.rm-tw{transition:none}}
+/* ── v2: docked in the page, no chooser ── */
+html.rm-docked .head-mast nav.nav,html.rm-docked .head-mast .mobile-nav-trigger{display:none!important}
+.rm-panel.rm-dock{position:relative;display:block;left:auto;right:auto;padding:0;margin:0 0 24px;pointer-events:auto;z-index:1}
+.rm-dock .rm-box{max-width:none;max-height:none;overflow:visible;border:1px solid #2a5c3f;border-radius:12px;box-shadow:0 10px 34px rgba(0,0,0,.45);animation:none}
+.rm-dock .rm-head{position:relative;border-radius:12px 12px 0 0;padding:14px 16px 12px}
+.rm-dock .rm-title{font-size:13px;color:#7dffb4;display:inline}
+.rm-dock .rm-find{height:44px;font-size:16px;border-color:#2a5c3f}
+.rm-dock .rm-body{max-height:none}
+.rm-dock.rm-scroll .rm-body{max-height:52vh;overflow:auto;overscroll-behavior:contain}
+.rm-dock.rm-folded .rm-body{display:none}
+.rm-dock.rm-folded .rm-foot{border-top:0;padding-top:0}
+.rm-dock.rm-folded .rm-box{border-radius:12px}
+.rm-fold{all:unset;cursor:pointer;flex:none;font-size:12px;letter-spacing:.06em;color:#bfe8d0;padding:7px 10px;border:1px solid #2a5c3f;border-radius:7px;white-space:nowrap}
+.rm-fold:hover,.rm-fold:focus-visible{color:var(--rm-g);border-color:var(--rm-g);outline:2px solid var(--rm-g);outline-offset:2px}
+.rm-dock .rm-lab{font-size:14px}
+.rm-dock .rm-sum{padding:9px 10px;min-height:24px}
+.rm-dock .rm-n{color:#a9c9b6}
+.rm-dock .rm-lab i,.rm-dock .rm-meta,.rm-dock .rm-meter,.rm-dock .rm-foot{color:#9dbcaa}
+.rm-links{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.rm-links a{font-size:12px;padding:4px 10px;border:1px solid #2a5c3f;border-radius:6px;color:#e9ffe9!important;text-decoration:none!important;background:var(--rm-card)}
+.rm-links a:hover,.rm-links a:focus-visible{border-color:var(--rm-g);color:var(--rm-g)!important;outline:2px solid var(--rm-g);outline-offset:2px}
+.rm-sum:focus-visible,.rm-act:focus-visible,.rm-chip:focus-visible,.rm-trail button:focus-visible{outline:2px solid var(--rm-g)!important;outline-offset:1px}
+@media (max-width:600px){.rm-panel.rm-dock{margin:0 0 16px}.rm-dock .rm-head{padding:12px 12px 10px}.rm-dock .rm-title{display:none}.rm-dock .rm-body{padding:6px 6px 10px}.rm-dock .rm-kids{padding-left:8px}.rm-dock .rm-trail button{max-width:150px}}
 </style>
 <script id="ragemap-js">
 (function(){
@@ -107,25 +136,29 @@ a.rm-act{text-decoration:none!important;color:var(--rm-g)!important;border-color
       .catch(function(e){ loading=null; throw e; });
     return loading; }
   /* ── the panel ── */
-  var nav=document.querySelector('ul.navigation-main')||document.querySelector('nav ul');
-  if(!nav) return;
-  var btn=h('button',{type:'button','aria-expanded':'false','aria-controls':'rm-panel',title:'walk rage: the atlas'},[h('span',{'class':'rm-glyph','aria-hidden':'true',text:'◈'}),'rage']);
-  var li=h('li',{'class':'menu-item rm-li'},[btn]); nav.insertBefore(li,nav.firstChild);
-  // the theme clones the header menu into its drawer (copying this item, or not, depending on timing): exactly one copy
-  function mobile(){ var mob=document.querySelector('ul.navigation-mobile'); if(!mob) return; var c=mob.querySelectorAll('.rm-li');
-    if(!c.length) mob.insertBefore(li.cloneNode(true),mob.firstChild); for(var i=1;i<c.length;i++) c[i].parentNode.removeChild(c[i]); }
-  mobile(); document.addEventListener('DOMContentLoaded',function(){ setTimeout(mobile,0); }); window.addEventListener('load',function(){ mobile(); setTimeout(mobile,1500); });
+  // v2: no chooser. The atlas docks at the top of the content; the header menu's links move into its foot.
+  var dockAt=document.getElementById('site-content')||document.querySelector('main .container')||document.querySelector('main');
+  if(!dockAt) return;
+  var isHome=/(^|\s)home(\s|$)/.test(document.body.className)&&!/(^|\s)paged(\s|$)/.test(document.body.className);
+  var navLinks=[]; Array.prototype.forEach.call(document.querySelectorAll('ul.navigation-main > li > a[href]'),function(a){ var t=(a.textContent||'').trim(); if(t) navLinks.push({t:t,u:a.href,title:a.getAttribute('title')||'',blank:a.getAttribute('target')==='_blank'}); });
+  var FOLDKEY='ragemap_fold_v2', folded=!isHome;
+  try{ var fv=localStorage.getItem(FOLDKEY); if(!isHome&&fv!==null) folded=fv==='1'; }catch(e){}
+  var btn=h('button',{'class':'rm-fold',type:'button','aria-controls':'rm-panel'});
   var cv=h('canvas',{'class':'rm-canvas','aria-hidden':'true'});
   var find=h('input',{'class':'rm-find',type:'search',placeholder:'travel by a word…','aria-label':'travel the atlas by a word'});
-  var xbtn=h('button',{'class':'rm-x',type:'button','aria-label':'close the atlas',text:'×'});
+  var xbtn=btn;
   var bar=h('i'), meterTxt=h('span',{text:''});
   var trailEl=h('div',{'class':'rm-trail','aria-label':'the trail you have travelled'});
   var tagsEl=h('div',{'class':'rm-tags','aria-label':'what you have collected'});
   var body=h('div',{'class':'rm-body',role:'tree','aria-label':'rage atlas'});
   var foot=h('div',{'class':'rm-foot'});
   var head=h('div',{'class':'rm-head'},[cv,h('div',{'class':'rm-row1'},[h('span',{'class':'rm-title',text:'rage · atlas'}),find,xbtn]),h('div',{'class':'rm-meter'},[h('span',{text:'complexity'}),h('span',{'class':'rm-bar'},[bar]),meterTxt]),trailEl,tagsEl]);
-  var box=h('div',{'class':'rm-box',role:'dialog','aria-label':'rage atlas'},[head,body,foot]);
-  var panel=h('div',{'class':'rm-panel',id:'rm-panel'},[box]); document.body.appendChild(panel);
+  var linksEl=h('nav',{'class':'rm-links','aria-label':'rage links'});
+  navLinks.forEach(function(l){ var at={href:l.u,text:l.t}; if(l.title) at.title=l.title; if(l.blank){ at.target='_blank'; at.rel='noopener'; } linksEl.appendChild(h('a',at)); });
+  var box=h('div',{'class':'rm-box',role:'region','aria-label':'rage atlas'},[head,body,foot]);
+  var panel=h('section',{'class':'rm-panel rm-dock rm-open'+(isHome?'':' rm-scroll'),id:'rm-panel'},[box]);
+  dockAt.insertBefore(panel,dockAt.firstChild);
+  document.documentElement.classList.add('rm-docked');
   /* ── sparks, the ragebar's own ── */
   var ctx=cv.getContext('2d'), sparks=[], heat=0, raf=0, reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
   function sizeCv(){ var d=Math.min(window.devicePixelRatio||1,2); cv.width=head.clientWidth*d; cv.height=head.clientHeight*d; }
@@ -134,27 +167,15 @@ a.rm-act{text-decoration:none!important;color:var(--rm-g)!important;border-color
     var g=ctx.createLinearGradient(0,cv.height,0,0); g.addColorStop(0,'rgba(61,220,132,'+(heat*0.16).toFixed(3)+')'); g.addColorStop(1,'rgba(61,220,132,0)'); ctx.fillStyle=g; ctx.fillRect(0,0,cv.width,cv.height);
     for(var i=sparks.length-1;i>=0;i--){ var s=sparks[i]; s.x+=s.vx; s.y+=s.vy; s.vy+=0.02; s.l-=0.025; if(s.l<=0){ sparks.splice(i,1); continue; } ctx.globalAlpha=s.l*0.85; ctx.fillStyle=s.a?'#ffb340':'#3ddc84'; ctx.fillRect(s.x,s.y,2,2); }
     ctx.globalAlpha=1; if(sparks.length||heat>0.01) raf=requestAnimationFrame(draw); }
-  /* ── open / close ── */
+  /* ── fold / unfold (v2: the atlas is always here; folding only hides its tree) ── */
   var isOpen=false;
-  var from=null;
-  function place(){ var r=from&&from.getBoundingClientRect(), vh=window.innerHeight, top=0;
-    if(r&&r.height){ if(r.bottom>vh*0.45){ window.scrollBy(0,r.bottom-72); r=from.getBoundingClientRect(); } top=Math.max(0,r.bottom+6); }
-    if(vh-top<320) top=Math.max(0,vh-320-12);
-    panel.style.top=top+'px'; box.style.maxHeight=Math.max(300,vh-top-12)+'px'; }
-  function expanded(v){ Array.prototype.forEach.call(document.querySelectorAll('.rm-li>button'),function(b){ b.setAttribute('aria-expanded',v); }); }
-  function open(){ if(isOpen) return; isOpen=true; place(); panel.classList.remove('rm-closing'); panel.classList.add('rm-open'); expanded('true'); sizeCv(); spark(14);
-    if(!body.firstChild) build(); setTimeout(function(){ try{ find.focus({preventScroll:true}); }catch(e){} },60); }
-  function close(){ if(!isOpen) return; isOpen=false; expanded('false'); panel.classList.add('rm-closing');
-    setTimeout(function(){ if(!isOpen){ panel.classList.remove('rm-open','rm-closing'); } }, reduce?0:180); try{ (from&&from.offsetParent?from:btn).focus({preventScroll:true}); }catch(e){} }
-  // one handler for every copy of the button: the theme clones the header menu into its mobile drawer
-  document.addEventListener('click',function(e){ var b=e.target.closest&&e.target.closest('.rm-li>button'); if(!b) return; e.preventDefault();
-    if(isOpen){ close(); return; } from=b;
-    if(b.closest('.navigation-mobile')){ var d=document.querySelector('.navigation-mobile-dismiss'); if(d) d.click(); from=null; }
-    open(); });
-  xbtn.addEventListener('click',close);
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&isOpen) close(); });
-  document.addEventListener('pointerdown',function(e){ if(isOpen&&!box.contains(e.target)&&!(e.target.closest&&e.target.closest('.rm-li'))) close(); });
-  window.addEventListener('resize',function(){ if(isOpen){ place(); sizeCv(); } });
+  function foldLabel(){ btn.textContent=isOpen?'fold ▴':'unfold the atlas ▾'; btn.setAttribute('aria-expanded',String(isOpen)); btn.title=isOpen?'fold the atlas to its head':'show the whole atlas'; }
+  function open(remember){ isOpen=true; panel.classList.remove('rm-folded'); foldLabel(); sizeCv(); spark(14);
+    if(!body.firstChild) build(); if(remember){ try{ localStorage.setItem(FOLDKEY,'0'); }catch(e){} } }
+  function close(remember){ isOpen=false; panel.classList.add('rm-folded'); foldLabel(); if(remember){ try{ localStorage.setItem(FOLDKEY,'1'); }catch(e){} } }
+  btn.addEventListener('click',function(){ if(isOpen) close(true); else open(true); });
+  find.addEventListener('focus',function(){ if(!isOpen) open(false); });
+  window.addEventListener('resize',function(){ sizeCv(); });
   /* ── the accordion node: drop in, drop out ── */
   function node(o){
     // o: {key,label,sub,n,leaf,spawned,fill(kids),cls}
@@ -275,12 +296,12 @@ a.rm-act{text-decoration:none!important;color:var(--rm-g)!important;border-color
           });
         }}));
       });
-      clear(foot); foot.appendChild(h('div',{},['atlas of '+a.articles+' articles · drawn '+ago(Date.parse(a.generated))+' · ',h('a',{href:a.txt,target:'_blank',rel:'noopener',text:'atlas.txt'}),' (for machines) · ',h('a',{href:'/llms.txt',text:'llms.txt'}),' · ',h('a',{href:'/ragebar/',text:'ragebar'})]));
+      clear(foot); if(navLinks.length) foot.appendChild(linksEl); foot.appendChild(h('div',{},['atlas of '+a.articles+' articles · drawn '+ago(Date.parse(a.generated))+' · ',h('a',{href:a.txt,target:'_blank',rel:'noopener',text:'atlas.txt'}),' (for machines) · ',h('a',{href:'/llms.txt',text:'llms.txt'}),' · ',h('a',{href:'/ragebar/',text:'ragebar'})]));
       paintTravel();
       if(HERE&&BY[HERE]){ var me=BY[HERE], first=(me.p||[])[0]||'';
         ['b'+first.split('/')[0],'p'+first,'m'+first+me.d.slice(0,7)].forEach(function(k){ var el=body.querySelector('[data-k="'+k+'"]'); if(el&&!el.classList.contains('rm-on')) el._open(true); });
-        var mine=body.querySelector('[data-k="a'+HERE+'"]'); if(mine) mine.scrollIntoView({block:'nearest'}); }
-    }).catch(function(e){ clear(body); body.appendChild(h('div',{'class':'rm-empty'},['the atlas could not be read (',String(e.message||e),'). ',h('a',{href:'/ragebar/',text:'search with the ragebar instead'})])); });
+        var mine=body.querySelector('[data-k="a'+HERE+'"]'); if(mine&&panel.classList.contains('rm-scroll')) body.scrollTop=Math.max(0,mine.offsetTop-body.offsetTop-60); }
+    }).catch(function(e){ clear(body); body.appendChild(h('div',{'class':'rm-empty'},['the atlas could not be read (',String(e.message||e),'). ',h('a',{href:'/ragebar/',text:'search with the ragebar instead'})])); clear(foot); if(navLinks.length) foot.appendChild(linksEl); });
   }
   /* ── travel by a word: an instant path from the atlas, then the full text from WordPress ── */
   var timer=null, seq=0;
@@ -295,6 +316,7 @@ a.rm-act{text-decoration:none!important;color:var(--rm-g)!important;border-color
         if(more.length){ var k=holder.lastChild.querySelector('.rm-kids'); k.appendChild(h('div',{'class':'rm-meta',text:'… and in the full text:'})); more.forEach(function(a){ k.appendChild(artNode(a,'"'+q+'"')); }); }
       }).catch(function(){}); }); },300); });
   find.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); } });
-  paintTravel();
+  paintTravel(); foldLabel();
+  if(folded){ close(false); if(navLinks.length){ clear(foot); foot.appendChild(linksEl); } } else open(false);
 })();
 </script>
