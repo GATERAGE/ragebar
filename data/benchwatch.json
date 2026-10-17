@@ -1,11 +1,11 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-17T10:46:18.573Z",
+  "checkedAt": "2026-10-17T15:37:06.134Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"2599dd0439dcac0c0a5703650528455a\"",
-    "generatedAt": "2026-10-16T20:01:03.996Z",
-    "sourceLastUpdated": "October 16, 2026",
+    "etag": "W/\"02e5385b9dcfdb19177547af0fe7b69e\"",
+    "generatedAt": "2026-10-17T11:32:47.767Z",
+    "sourceLastUpdated": "October 17, 2026",
     "totalModels": 954,
     "rankedModels": 220,
     "attribution": "Data from BenchLM.ai",
@@ -21,10 +21,10 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 73.55,
+      "displayScore": 73.57,
       "interval90": [
-        63.83,
-        83.27
+        63.85,
+        83.29
       ],
       "overallRank": 12,
       "openRank": 1,
@@ -82,7 +82,7 @@
           "sha": "b61f21852680ee02a29e946e18cf8697f4844061",
           "lastModified": "2026-10-09T06:30:24.000Z",
           "downloads": 101728,
-          "likes": 737
+          "likes": 738
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -93,28 +93,21 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-16T21:10:42.548Z",
+          "ts": "2026-10-17T15:37:06.134Z",
           "slug": "mimo-v2-6-pro",
           "field": "displayScore",
-          "from": 73.62,
-          "to": 73.55
+          "from": 73.55,
+          "to": 73.57
         },
         {
-          "ts": "2026-10-16T21:10:42.548Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.reasoning.stemBench120",
-          "from": null,
-          "to": 2.172
-        },
-        {
-          "ts": "2026-10-16T21:10:42.548Z",
+          "ts": "2026-10-17T15:37:06.134Z",
           "slug": "mimo-v2-6-pro",
           "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 736,
-          "to": 737
+          "from": 737,
+          "to": 738
         }
       ],
-      "changedAt": "2026-10-16T21:10:42.548Z"
+      "changedAt": "2026-10-17T15:37:06.134Z"
     }
   ]
 }
