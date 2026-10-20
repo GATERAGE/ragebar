@@ -1,12 +1,12 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-20T11:39:30.965Z",
+  "checkedAt": "2026-10-20T17:08:52.151Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"0a09821af0001e0e72883a28e09e4b71\"",
-    "generatedAt": "2026-10-19T18:01:45.947Z",
-    "sourceLastUpdated": "October 19, 2026",
-    "totalModels": 956,
+    "etag": "W/\"f76bbebb9cc1d79bc8b741bb8587ef9b\"",
+    "generatedAt": "2026-10-20T16:45:21.250Z",
+    "sourceLastUpdated": "October 20, 2026",
+    "totalModels": 959,
     "rankedModels": 222,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
@@ -82,7 +82,7 @@
           "sha": "b61f21852680ee02a29e946e18cf8697f4844061",
           "lastModified": "2026-10-09T06:30:24.000Z",
           "downloads": 103649,
-          "likes": 750
+          "likes": 752
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -93,35 +93,14 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-19T22:22:28.751Z",
+          "ts": "2026-10-20T17:08:52.151Z",
           "slug": "mimo-v2-6-pro",
-          "field": "displayScore",
-          "from": 73.63,
-          "to": 73.67
-        },
-        {
-          "ts": "2026-10-19T22:22:28.751Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryScores.reasoning",
-          "from": 83.4,
-          "to": 82.5
-        },
-        {
-          "ts": "2026-10-19T22:22:28.751Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.knowledge",
-          "from": 18,
-          "to": 19
-        },
-        {
-          "ts": "2026-10-19T22:22:28.751Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
-          "from": 1309,
-          "to": 1308
+          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
+          "from": 750,
+          "to": 752
         }
       ],
-      "changedAt": "2026-10-19T22:22:28.751Z"
+      "changedAt": "2026-10-20T17:08:52.151Z"
     }
   ]
 }
