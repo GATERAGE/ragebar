@@ -19,7 +19,10 @@ there is no hosted third-party memory service.
 | [RAGE Embed — Semantic Search](EMBEDDING_SYSTEM.md) | The embedding layer: switchable model registry, three-source embedder, chunking, tables — **the canonical protocol reference** |
 | [pgvectorscale Memory Integration](pgvectorscale_memory_integration.md) | The semantic-memory backbone (PostgreSQL + pgvector, dual-write, resource metrics). ⚠️ Some model/dimension details are historical — see review below |
 | [Vector Search, Embeddings & pgvectorscale Deep-Dive](vectorsearch_pgvectorscale_embedding.md) | Vendor-neutral deep dive on embeddings, ANN indexes (IVFFlat / HNSW / DiskANN), StreamingDiskANN + SBQ benchmarks, and when a dedicated vector DB is warranted |
-| [gitmind](GITMIND.md) | **A RAGE extension** — self-contained git monitor + multi-source backup/rollback. Incremental **THOT** bundles linked into a **THlNK** and replicated to local + Lighthouse (IPFS) + Arweave — the same distribute-don't-delete doctrine RAGE applies to memory, applied to mindX's own source tree |
+| [gitmind](GITMIND.md) | **A RAGE extension** — self-contained git monitor + multi-source backup/rollback. Incremental **THOT** bundles linked into a **THlNK** and replicated to local + Lighthouse (IPFS) + Arweave — the same distribute-don't-delete doctrine RAGE applies to memory, applied to mindX's own source tree. With RAGE it is also how an LLM keeps `.memory` and `.history`: gitmind versions them, RAGE recalls them fast |
+| [GITMIND map](GITMIND_MAP.md) | Every piece of gitmind work, collected and categorized: the library, the vendored copies, mindX's build, browseML, what is open |
+| [ragesearch](ragesearch.md) | RAGE search for rage.pythai.net (ragesearch/1): BM25 + atlas + pgvectorscale, fused by rank; `corpus=self` is RAGE retrieving RAGE |
+| [Vector search, collected](VECTORSEARCH.md) | The vector-search work in order, as the Book of mindX carries it (Day 10, Memory) |
 
 ## Canonical embedding protocol (source of truth)
 
