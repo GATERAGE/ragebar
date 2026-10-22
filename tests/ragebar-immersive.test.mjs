@@ -168,14 +168,14 @@ test('personas: a built-in is read from its public file; a bad drop is refused p
   assert.ok(!d.querySelector('.ri').classList.contains('ri-open'), 'atlas hands over (the menu is not on this test page)');
 });
 
-function devBoot() {
-  const r = boot();
+function devBoot(opts) {
+  const r = boot(opts);
   const w = r.w, stopped = [];
   const track = (kind) => ({ kind, label: kind === 'video' ? 'FaceTime HD' : 'Built-in mic', stop() { stopped.push(kind); }, getSettings: () => (kind === 'video' ? { deviceId: 'cam1', width: 640, height: 480, frameRate: 30 } : { deviceId: 'mic1', sampleRate: 48000, channelCount: 1 }) });
   Object.defineProperty(w.navigator, 'mediaDevices', { value: {
     getUserMedia: (c) => Promise.resolve({ getTracks() { return [track(c.video ? 'video' : 'audio')]; }, getVideoTracks() { return [track('video')]; }, getAudioTracks() { return [track('audio')]; } }),
     enumerateDevices: () => Promise.resolve([{ kind: 'videoinput', deviceId: 'cam1', label: 'FaceTime HD' }, { kind: 'audioinput', deviceId: 'mic1', label: 'Built-in mic' }]) } });
-  w.AudioContext = function () { return { createAnalyser: () => ({ fftSize: 1024, getByteTimeDomainData(b) { b.fill(128); } }), createMediaStreamSource: () => ({ connect() {} }), close() {} }; };
+  w.AudioContext = function () { return { createAnalyser: () => ({ fftSize: 1024, getByteTimeDomainData(b) { b.fill(128); }, getFloatTimeDomainData(b) { b.fill(0.1); } }), createMediaStreamSource: () => ({ connect() {} }), close() {} }; };
   w.HTMLMediaElement.prototype.play = () => Promise.resolve();
   return { ...r, stopped };
 }
@@ -251,4 +251,56 @@ test('substrate page config: clear backdrop, opens by itself, type anywhere to a
   d.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape' })); await tick(220);
   d.body.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'g', bubbles: true })); await tick(40);
   assert.ok(box.classList.contains('ri-open') && d.querySelector('.ri-q').value === 'g', 'a letter typed anywhere opens it with that letter');
+});
+
+// a stand-in for three.js and ollywoo's faice.js, handed in through RAGEBAR.faice (the seam a page with its own three.js uses)
+const FAKE_FAICE = `<script>window.FZ={cams:[],ups:[],drag:0};
+window.RAGEBAR={faice:function(){ function K(){} K.prototype.add=function(){}; K.prototype.set=function(){};
+  var T={WebGLRenderer:function(){ this.setPixelRatio=function(){}; this.setSize=function(){}; this.render=function(){}; },Scene:function(){ this.add=function(){}; },
+    PerspectiveCamera:function(){ this.position={set:function(){}}; },HemisphereLight:function(){},DirectionalLight:function(){ this.position={set:function(){}}; },
+    Vector2:function(x,y){ this.x=x; this.y=y; },Raycaster:function(){ this.setFromCamera=function(){}; this.intersectObjects=function(L){ return window.FZ.hit?[{object:L[window.FZ.hit==='eyes'?0:4]}]:[]; }; }};
+  var eyes=[{},{},{},{}], ears=[{},{}];
+  return [T,{createFaice:function(){ return {group:{},organs:{eyes:eyes,ears:ears},attachDrag:function(){ window.FZ.drag++; },setCamera:function(v){ window.FZ.cams.push(v?v.tagName:null); },update:function(s){ window.FZ.ups.push(s); }}; }}]; }};</script>`;
+
+test("drag 👁 and 👂 onto Jaimla's faice: her eyes are the camera, her ears the microphone", { skip }, async () => {
+  const { w, d, stopped } = devBoot({ pre: FAKE_FAICE });
+  await tick(20); w.RagebarImmersive.open(''); await tick(30);
+  const btn = (t) => [...d.querySelectorAll('.ri-bar .ri-btn')].find((b) => b.textContent === t);
+  const fzp = d.querySelector('[aria-label="Jaimla\'s faice"]'), cam = d.querySelector('[aria-label="camera.control.panel"]'), aud = d.querySelector('[aria-label="audio.control.panel"]');
+  assert.ok(!fzp.classList.contains('ri-show'), 'the faice waits until it is asked for');
+  const P = (el, type, x, y) => el.dispatchEvent(new w.MouseEvent(type, { bubbles: true, clientX: x, clientY: y, button: 0 }));
+  const drag = async (el) => { P(el, 'pointerdown', 120, 40); P(el, 'pointermove', 80, 30); assert.ok(d.querySelector('.ri-ghost'), 'the organ follows the pointer');
+    assert.ok(fzp.classList.contains('ri-show'), 'the faice opens as the drag begins'); P(el, 'pointermove', 4, 4); assert.ok(fzp.classList.contains('ri-hover'), 'lit as a target');
+    P(el, 'pointerup', 4, 4); el.click(); await tick(120); };
+  await drag(btn('👁'));
+  assert.ok(!d.querySelector('.ri-ghost'), 'the ghost is gone on drop');
+  assert.ok(btn('👁').classList.contains('ri-live'), 'dropped on the faice: the camera is on');
+  assert.ok(!cam.classList.contains('ri-show'), 'the click that ends a drag is not a click: no panel');
+  assert.deepEqual([...w.FZ.cams], ['VIDEO'], 'her eyes are the camera stream');
+  assert.ok(w.FZ.drag === 1, 'the globe turns when grabbed');
+  assert.ok(w.FZ.ups.some((u) => u.camOn === true), 'the lids open');
+  assert.match(fzp.textContent, /eyes.*the camera · FaceTime HD/);
+  assert.match(d.querySelector('.ri-term-log').textContent, /Jaimla's eyes are the camera/);
+  await drag(btn('👂'));
+  assert.ok(btn('👂').classList.contains('ri-live') && !aud.classList.contains('ri-show'), 'the microphone is on, quietly');
+  assert.ok(w.FZ.ups.some((u) => u.micLevel > 0.4), 'her ears hear the microphone');
+  assert.match(fzp.textContent, /ears.*the microphone · Built-in mic/);
+  // a click on an eye opens its panel; a plain click on 👁 is still the button
+  w.FZ.hit = 'eyes'; const cv = fzp.querySelector('canvas'); P(cv, 'pointerdown', 10, 10); P(cv, 'pointerup', 11, 10);
+  assert.ok(cam.classList.contains('ri-show'), 'clicking her eye opens the camera.control.panel');
+  [...cam.querySelectorAll('.ri-btn')].find((b) => b.textContent === 'camera OFF').click(); await tick(60);
+  assert.deepEqual([...w.FZ.cams], ['VIDEO', null], 'camera off: her eyes go blind');
+  assert.match(fzp.textContent, /closed · drop 👁 here/);
+  // dropped somewhere else: nothing turns on
+  P(btn('👁'), 'pointerdown', 120, 40); P(btn('👁'), 'pointermove', 60, 300); P(btn('👁'), 'pointerup', 600, 600); await tick(30);
+  assert.ok(!btn('👁').classList.contains('ri-live'), 'missed the faice: the camera stays off');
+  // the faice from the rolodex and from :face
+  [...fzp.querySelectorAll('.ri-btn')].find((b) => b.textContent === 'close').click();
+  assert.ok(!fzp.classList.contains('ri-show'));
+  const chip = [...d.querySelectorAll('.ri-pc')].find((c) => /Jaimla/.test(c.textContent)).querySelector('.ri-fzc');
+  assert.ok(chip, "◉ on Jaimla's card"); chip.click(); assert.ok(fzp.classList.contains('ri-show'));
+  const q = d.querySelector('.ri-q'); q.value = ':face'; q.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); await tick(10);
+  assert.ok(!fzp.classList.contains('ri-show'), ':face toggles it');
+  d.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape' })); await tick(220);
+  assert.ok(stopped.includes('audio'), 'closing the stage still turns the microphone off');
 });

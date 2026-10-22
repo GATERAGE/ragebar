@@ -27,7 +27,13 @@
      trail, the same collected tags), so travel in the ragebar and in the menu is one journey. Enter opens the first
      article; Enter again reads it. On a substrate page (rage.html) a click on a star dispatches dv:rage.pick and the
      article opens here.
-     Config: window.RAGEBAR={search, deltaverse, atlas, backdrop:'clear', typeToOpen, open}.
+     JAIMLA'S FAICE: drag 👁 or 👂 out of the row (mouse or touch) and drop it on Jaimla's faice — ollywoo's faice.js,
+     the BASIC FAICE whose organs are the devices. 👁 dropped: the camera turns on and IS her eyes (the live picture is
+     the iris); 👂 dropped: the microphone turns on and her ears swell with what it hears; her mouth is the waveform of
+     the voice speaking the answer (🗣, in Jaimla's voice). Click an eye or an ear for its control panel; drag the globe
+     to turn it. Also from the ◉ on Jaimla's card in the rolodex, the eyes / ears buttons in the faice, or :face.
+     three.js and faice.js load from deltaverse.pythai.net only when the faice is opened; nothing leaves the browser.
+     Config: window.RAGEBAR={search, deltaverse, atlas, backdrop:'clear', typeToOpen, open, faice: () => [three, faice.js]}.
      DOM API only, no blank lines inside the script: content filters rewrite markup and blank lines. -->
 <style id="ragebar-immersive-css">
 :root{--ri-g:#3ddc84;--ri-hot:#ff3b30;--ri-amber:#ffb340;--ri-ink:#e9ffe9;--ri-dim:#86a492;--ri-line:#1f3a2b}
@@ -147,13 +153,23 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
 .ri-win-body{overflow:auto;padding:8px;display:grid;gap:8px}
 .ri-win .ri-card{padding:9px 12px}
 .ri-win .ri-t{font-size:13.5px}
+.ri-organ{touch-action:none}
+.ri-ghost{position:fixed;z-index:100001;pointer-events:none;font-size:30px;transform:translate(-50%,-50%);filter:drop-shadow(0 0 10px rgba(61,220,132,.8))}
+.ri-fz{text-align:center}
+.ri-fz canvas{display:block;width:220px;height:220px;margin:4px auto 8px;border-radius:50%;cursor:grab;touch-action:none;background:radial-gradient(circle,rgba(61,220,132,.1),transparent 70%);transition:box-shadow .2s ease}
+.ri-fz.ri-hover canvas{box-shadow:0 0 0 2px var(--ri-amber),0 0 40px rgba(255,179,64,.35)}
+.ri-fz .ri-diag{text-align:left;max-width:460px;margin:8px auto 0}
+.ri-fz .ri-acts{justify-content:center}
+.ri-fz .ri-note{text-align:left}
+.ri-pc .ri-fzc{position:absolute;bottom:4px;right:8px;font-size:10.5px;color:var(--ri-g)}
+.ri-pc .ri-fzc:hover{text-decoration:underline}
 @media (max-width:600px){.ri-stage{padding-top:24px}.ri-q{height:56px;font-size:18px}}
 @media (prefers-reduced-motion:reduce){.ri.ri-open,.ri.ri-closing,.ri-card{animation:none}.ri-sparks{display:none}}
 </style>
 <script id="ragebar-immersive-js">
 (function(){
   if(window.__ragebarImmersive) return; window.__ragebarImmersive=1; window.__ragebar=1;
-  var VERSION='1.2.0', cfg=window.RAGEBAR||{}, RS=typeof cfg.search==='string'?cfg.search.replace(/\/+$/,''):'https://deltaverse.pythai.net/ragesearch';
+  var VERSION='1.3.0', cfg=window.RAGEBAR||{}, RS=typeof cfg.search==='string'?cfg.search.replace(/\/+$/,''):'https://deltaverse.pythai.net/ragesearch';
   var LEGS=[['bm25','words'],['dense','meaning'],['atlas','atlas'],['wp','wordpress'],['persona','persona']], CORPORA=[['articles','articles'],['self',"RAGE's own"],['deltaverse','DeltaVerse'],['all','all']], KS=[5,10,20];
   var V={legs:{bm25:true,dense:true,atlas:true,wp:true,persona:true},corpus:'articles',k:10,panel:false,persona:'rage'};
   try{ var sv=JSON.parse(localStorage.getItem('ragebar_vars')||'null'); if(sv){ if(sv.legs) for(var l in V.legs) if(l in sv.legs) V.legs[l]=!!sv.legs[l]; if(sv.corpus) V.corpus=sv.corpus; if(sv.k) V.k=+sv.k; V.panel=!!sv.panel; if(sv.persona) V.persona=sv.persona; } }catch(e){}
@@ -167,10 +183,10 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
   var termBtn=h('button',{'class':'ri-btn',type:'button',title:'T — the control panel: RAGE variables, diagnostics, STOP, CLEAR','aria-pressed':'false','aria-label':'control panel',text:'T'});
   var spawnBtn=h('button',{'class':'ri-btn',type:'button',title:'❏ spawn a response window with these results','aria-label':'spawn a response window',text:'❏'});
   var homeBtn=h('button',{'class':'ri-btn',type:'button',title:'⌂ call every response window home','aria-label':'call the response windows home',text:'⌂'});
-  var eyeBtn=h('button',{'class':'ri-btn',type:'button',title:'👁 the camera: on, and the camera.control.panel','aria-label':'camera',text:'👁'});
-  var earBtn=h('button',{'class':'ri-btn',type:'button',title:'👂 the microphone: on, and the audio.control.panel','aria-label':'microphone',text:'👂'});
+  var eyeBtn=h('button',{'class':'ri-btn ri-organ',type:'button',title:"👁 the camera: on, and the camera.control.panel · drag it onto Jaimla's faice and her eyes are the camera",'aria-label':'camera',text:'👁'});
+  var earBtn=h('button',{'class':'ri-btn ri-organ',type:'button',title:"👂 the microphone: on, and the audio.control.panel · drag it onto Jaimla's faice and her ears are the microphone",'aria-label':'microphone',text:'👂'});
   var netBtn=h('button',{'class':'ri-btn',type:'button',title:'⇄ networking.tools: every service RAGE uses, timed','aria-label':'networking tools',text:'⇄'});
-  var camPanel=h('div',{'class':'ri-dev',role:'region','aria-label':'camera.control.panel'}), audPanel=h('div',{'class':'ri-dev',role:'region','aria-label':'audio.control.panel'}), netPanel=h('div',{'class':'ri-dev',role:'region','aria-label':'networking.tools'});
+  var camPanel=h('div',{'class':'ri-dev',role:'region','aria-label':'camera.control.panel'}), audPanel=h('div',{'class':'ri-dev',role:'region','aria-label':'audio.control.panel'}), netPanel=h('div',{'class':'ri-dev',role:'region','aria-label':'networking.tools'}), fzPanel=h('div',{'class':'ri-dev ri-fz',role:'region','aria-label':"Jaimla's faice"});
   var panel=h('div',{'class':'ri-panel',role:'region','aria-label':'RAGE control panel'}), diag=h('div',{'class':'ri-diag'});
   var mRage=h('button',{type:'button','aria-pressed':'true',title:'RAGE mode: search, and the control panel is the RAGE panel',text:'RAGE'}), mAtlas=h('button',{type:'button','aria-pressed':'false',title:'atlas: walk every article as a path (the rage menu)',text:'atlas'});
   var modeRow=h('span',{'class':'ri-mode',role:'group','aria-label':'mode'},[mRage,mAtlas]);
@@ -180,7 +196,7 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
   var vars=h('div',{'class':'ri-vars',role:'group','aria-label':'RAGE variables'});
   var fill=h('i'), status=h('span',{text:''});
   var hint=h('div',{'class':'ri-hint',text:''});
-  var field=h('div',{'class':'ri-field'},[h('div',{'class':'ri-bar'},[h('span',{'class':'ri-dot'}),h('b',{text:'RAGE'}),modeRow,h('span',{'class':'ri-sp'}),dvEl,termBtn,eyeBtn,earBtn,netBtn,spawnBtn,homeBtn,xBtn]),q,rolo,h('div',{'class':'ri-meter'},[h('span',{'class':'ri-bar2'},[fill]),status]),hint,panel,camPanel,audPanel,netPanel]);
+  var field=h('div',{'class':'ri-field'},[h('div',{'class':'ri-bar'},[h('span',{'class':'ri-dot'}),h('b',{text:'RAGE'}),modeRow,h('span',{'class':'ri-sp'}),dvEl,termBtn,eyeBtn,earBtn,netBtn,spawnBtn,homeBtn,xBtn]),q,rolo,h('div',{'class':'ri-meter'},[h('span',{'class':'ri-bar2'},[fill]),status]),hint,panel,fzPanel,camPanel,audPanel,netPanel]);
   var legsEl=h('div',{'class':'ri-legs','aria-live':'polite'}), log=h('div',{'class':'ri-term-log','aria-live':'polite'}), list=h('ol',{'class':'ri-results','aria-label':'results'});
   var foot=h('div',{'class':'ri-foot'},['ragebar immersive '+VERSION+' · RAGE search to the ',h('a',{href:'https://github.com/GATERAGE/ragebar/blob/main/RAGESEARCH.md',target:'_blank',rel:'noopener',text:'ragesearch/1 standard'}),' · variables after ',h('a',{href:'https://github.com/Professor-Codephreak/ultimate-input-field',target:'_blank',rel:'noopener',text:'ultimate-input-field'}),' · ',h('a',{href:'/ragebar/',text:'the ragebar page'})]);
   var trailEl=h('div',{'class':'ri-trail','aria-label':'the trail you have travelled (shared with the rage menu)'});
@@ -229,7 +245,7 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
   var isOpen=false, back=null;
   function open(seed){ mount(); if(!isOpen){ isOpen=true; back=document.activeElement; box.classList.remove('ri-closing'); box.classList.add('ri-open'); document.documentElement.style.overflow='hidden'; size(); paintVars(); spark(24); }
     substrates(); paintRolo(); loadBuilt(current()); atlasLoad().then(paintTrail,function(){}); if(V.panel) diagnose(); if(seed!=null&&seed!==''&&q.value!==seed){ q.value=seed; rerun(); } setTimeout(function(){ try{ q.focus({preventScroll:true}); }catch(e){} },30); }
-  function close(){ if(!isOpen) return; isOpen=false; if(cam.stream) camOff(); if(mic.stream) micOff(); box.classList.add('ri-closing'); document.documentElement.style.overflow='';
+  function close(){ if(!isOpen) return; isOpen=false; if(cam.stream) camOff(); if(mic.stream) micOff(); faceHide(); box.classList.add('ri-closing'); document.documentElement.style.overflow='';
     setTimeout(function(){ if(!isOpen) box.classList.remove('ri-open','ri-closing'); },reduce?0:180); try{ back&&back.focus&&back.focus({preventScroll:true}); }catch(e){} }
   xBtn.addEventListener('click',close);
   box.addEventListener('pointerdown',function(e){ if(e.target===stage||e.target.classList.contains('ri-back')) close(); });
@@ -263,10 +279,10 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
     sel.addEventListener('change',function(){ onpick(sel.value); }); return sel; }
   // the camera
   var cam={stream:null,video:null,mirror:true,face:null,raf:0,dev:''}, camRead=h('div',{'class':'ri-diag'});
-  function camOff(){ if(cam.raf) cancelAnimationFrame(cam.raf); cam.raf=0; if(cam.stream) cam.stream.getTracks().forEach(function(t){ t.stop(); }); cam.stream=null; eyeBtn.classList.remove('ri-live'); camPanel.classList.remove('ri-show'); say('camera off'); }
-  function camOn(dev){ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ say('this browser offers no camera here'); return; }
+  function camOff(){ if(cam.raf) cancelAnimationFrame(cam.raf); cam.raf=0; if(cam.stream) cam.stream.getTracks().forEach(function(t){ t.stop(); }); cam.stream=null; eyeBtn.classList.remove('ri-live'); camPanel.classList.remove('ri-show'); fz.eyes=false; faceDevices(); say('camera off'); }
+  function camOn(dev,quiet){ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ say('this browser offers no camera here'); return; }
     if(cam.stream) cam.stream.getTracks().forEach(function(t){ t.stop(); });
-    navigator.mediaDevices.getUserMedia({video:dev?{deviceId:{exact:dev}}:{facingMode:'user'},audio:false}).then(function(st){ cam.stream=st; cam.dev=(st.getVideoTracks()[0].getSettings()||{}).deviceId||dev||''; eyeBtn.classList.add('ri-live'); paintCam(); camPanel.classList.add('ri-show'); })
+    navigator.mediaDevices.getUserMedia({video:dev?{deviceId:{exact:dev}}:{facingMode:'user'},audio:false}).then(function(st){ cam.stream=st; cam.dev=(st.getVideoTracks()[0].getSettings()||{}).deviceId||dev||''; eyeBtn.classList.add('ri-live'); paintCam(); if(!quiet) camPanel.classList.add('ri-show'); faceDevices(); if(fz.eyes) say("Jaimla's eyes are the camera"); })
       .catch(function(e){ say('the camera did not open: '+(e.name||e.message||e)); }); }
   function paintCam(){ clear(camPanel); cam.video=h('video',{'class':cam.mirror?'ri-mirror':'',autoplay:'',muted:'',playsinline:''}); cam.video.muted=true; cam.video.srcObject=cam.stream; try{ cam.video.play(); }catch(e){}
     var t=cam.stream&&cam.stream.getVideoTracks()[0], st=t&&t.getSettings?t.getSettings():{};
@@ -286,17 +302,17 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
         kv(camRead,[['face','present'+(r.faces>1?' · '+r.faces+' faces':''),'ri-ok'],['distance','≈ '+r.distance_m+' m · proximity '+r.proximity.toFixed(2)],['head','yaw '+deg(P.yaw!=null?P.yaw:P.y)+' · pitch '+deg(P.pitch!=null?P.pitch:P.x)+' · roll '+deg(P.roll!=null?P.roll:P.z)],['expression',bs.map(function(x){ return x[0]+' '+x[1].toFixed(2); }).join(' · ')]]); })(); })
       .catch(function(e){ cam.face=null; paintCam(); kv(camRead,[['faicey','could not load: '+(e.message||e),'ri-bad']]); }); }
   function faceOff(){ if(cam.raf) cancelAnimationFrame(cam.raf); cam.raf=0; cam.face=null; paintCam(); }
-  eyeBtn.addEventListener('click',function(){ if(!cam.stream) camOn(''); else camPanel.classList.toggle('ri-show'); });
+  eyeBtn.addEventListener('click',function(){ if(Date.now()-(eyeBtn._dragged||0)<500) return; if(!cam.stream) camOn(''); else camPanel.classList.toggle('ri-show'); });
   // the microphone
   var mic={stream:null,ctx:null,an:null,raf:0,rec:null,voice:null,dev:''}, micRead=h('div',{'class':'ri-diag'}), scope=h('canvas',{'class':'ri-scope','aria-hidden':'true'});
   var Rec=window.SpeechRecognition||window.webkitSpeechRecognition;
   function micOff(){ if(mic.raf) cancelAnimationFrame(mic.raf); mic.raf=0; if(mic.rec){ try{ mic.rec.stop(); }catch(e){} mic.rec=null; } if(mic.stream) mic.stream.getTracks().forEach(function(t){ t.stop(); }); mic.stream=null;
-    if(mic.ctx){ try{ mic.ctx.close(); }catch(e){} mic.ctx=null; } earBtn.classList.remove('ri-live'); audPanel.classList.remove('ri-show'); say('microphone off'); }
-  function micOn(dev){ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ say('this browser offers no microphone here'); return; }
+    if(mic.ctx){ try{ mic.ctx.close(); }catch(e){} mic.ctx=null; } earBtn.classList.remove('ri-live'); audPanel.classList.remove('ri-show'); fz.ears=false; faceDevices(); say('microphone off'); }
+  function micOn(dev,quiet){ if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){ say('this browser offers no microphone here'); return; }
     if(mic.stream) mic.stream.getTracks().forEach(function(t){ t.stop(); });
     navigator.mediaDevices.getUserMedia({audio:dev?{deviceId:{exact:dev}}:true,video:false}).then(function(st){ mic.stream=st; mic.dev=(st.getAudioTracks()[0].getSettings()||{}).deviceId||dev||''; earBtn.classList.add('ri-live');
       try{ var AC=window.AudioContext||window.webkitAudioContext; if(mic.ctx) mic.ctx.close(); mic.ctx=new AC(); mic.an=mic.ctx.createAnalyser(); mic.an.fftSize=1024; mic.ctx.createMediaStreamSource(st).connect(mic.an); }catch(e){ mic.an=null; }
-      paintAud(); audPanel.classList.add('ri-show'); drawScope(); }).catch(function(e){ say('the microphone did not open: '+(e.name||e.message||e)); }); }
+      paintAud(); if(!quiet) audPanel.classList.add('ri-show'); drawScope(); faceDevices(); if(fz.ears) say("Jaimla's ears are the microphone"); }).catch(function(e){ say('the microphone did not open: '+(e.name||e.message||e)); }); }
   function drawScope(){ if(mic.raf) cancelAnimationFrame(mic.raf); var c=scope.getContext&&scope.getContext('2d'); if(!c||!mic.an) return; var buf=new Uint8Array(mic.an.fftSize);
     (function loop(){ mic.raf=requestAnimationFrame(loop); var w=scope.width=scope.clientWidth||300, hh=scope.height=56; mic.an.getByteTimeDomainData(buf); var peak=0;
       c.clearRect(0,0,w,hh); c.strokeStyle='#3ddc84'; c.lineWidth=1.5; c.beginPath(); for(var i=0;i<buf.length;i++){ var v=(buf[i]-128)/128; peak=Math.max(peak,Math.abs(v)); var x=i/buf.length*w, y=hh/2+v*hh/2; if(i) c.lineTo(x,y); else c.moveTo(x,y); } c.stroke();
@@ -317,10 +333,66 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
   function speakAnswer(){ var cards=Array.prototype.slice.call(list.querySelectorAll('.ri-t')).slice(0,3).map(function(t){ return t.textContent; });
     if(!cards.length){ say('nothing to speak yet: ask first'); return; } var text=(lastQuery?'For '+lastQuery+': ':'')+cards.join('. ')+'.';
     window.OLLYWOO_ENGINE_BASE=window.OLLYWOO_ENGINE_BASE||DV+'/engine/ngn/'; window.OLLYWOO_DOCSPLAYER_URL=window.OLLYWOO_DOCSPLAYER_URL||DV+'/docsplayer';
-    var p=current(); import(DV+'/ollywoo/voicey.js').then(function(Vy){ return Vy.initVoicey({id:p.id,name:p.name,voice:p.id==='jaimla'?{docsplayer:'jaimla'}:undefined}).then(function(){ return Vy; }); })
-      .then(function(Vy){ mic.voice=(Vy.label&&Vy.label())||Vy.tierNow(); if(mic.stream) paintAud(); say('speaking in '+p.name+"'s voice · "+mic.voice); return Vy.speak(text); })
+    var p=faceOpen()?jaimla():current(); import(DV+'/ollywoo/voicey.js').then(function(Vy){ return Vy.initVoicey({id:p.id,name:p.name,voice:p.id==='jaimla'?{docsplayer:'jaimla'}:undefined}).then(function(){ return Vy; }); })
+      .then(function(Vy){ fz.Vy=Vy; mic.voice=(Vy.label&&Vy.label())||Vy.tierNow(); if(mic.stream) paintAud(); if(faceOpen()) paintFace(); say('speaking in '+p.name+"'s voice · "+mic.voice); return Vy.speak(text); })
       .catch(function(e){ say('voaicey could not speak: '+(e.message||e)); }); }
-  earBtn.addEventListener('click',function(){ if(!mic.stream) micOn(''); else audPanel.classList.toggle('ri-show'); });
+  earBtn.addEventListener('click',function(){ if(Date.now()-(earBtn._dragged||0)<500) return; if(!mic.stream) micOn(''); else audPanel.classList.toggle('ri-show'); });
+  /* ── Jaimla's faice (ollywoo faice.js): drop 👁 on it and its eyes are the camera, 👂 and its ears are the microphone ── */
+  var fzCv=h('canvas',{'aria-label':"Jaimla's faice: drop 👁 on it for the eyes, 👂 for the ears; drag to turn it; click an eye or an ear for its panel"}), fzRead=h('div',{'class':'ri-diag'});
+  var fz={F:null,T:null,R:null,sc:null,c3:null,raf:0,last:0,w:0,eyes:false,ears:false,seeing:null,video:null,Vy:null,buf:null,loading:null,err:''};
+  function jaimla(){ var L=people(); for(var i=0;i<L.length;i++) if(L[i].id==='jaimla') return L[i]; return current(); }
+  function faceOpen(){ return fzPanel.classList.contains('ri-show'); }
+  function paintFace(){ var vt=cam.stream&&cam.stream.getVideoTracks()[0], at=mic.stream&&mic.stream.getAudioTracks()[0], see=!!(fz.eyes&&cam.stream), hear=!!(fz.ears&&mic.stream);
+    kv(fzRead,[['eyes',see?'the camera · '+((vt&&vt.label)||'on'):'closed · drop 👁 here',see?'ri-ok':''],['ears',hear?'the microphone · '+((at&&at.label)||'on'):'not listening · drop 👂 here',hear?'ri-ok':''],
+      ['mouth',fz.Vy?'the voice · '+((fz.Vy.label&&fz.Vy.label())||fz.Vy.tierNow()):'closed · 🗣 speaks the answer in her voice'],
+      ['faice',fz.err?'could not load: '+fz.err:fz.F?'ollywoo faice.js on three.js, drawn in this browser':'loading three.js and faice.js from '+DV+' …',fz.err?'ri-bad':(fz.F?'ri-ok':'ri-pend')]]); }
+  function faceShow(){ if(!faceOpen()){ fzPanel.classList.add('ri-show'); try{ fzPanel.scrollIntoView({block:'nearest'}); }catch(e){} } fz.err=''; paintFace();
+    faceLoad().then(function(){ if(faceOpen()&&!fz.raf&&fz.F) faceFrame(); }); }
+  function faceHide(){ fzPanel.classList.remove('ri-show'); if(fz.raf) cancelAnimationFrame(fz.raf); fz.raf=0; }
+  function faceLoad(){ if(fz.F) return Promise.resolve(); if(fz.loading) return fz.loading;
+    fz.loading=(typeof cfg.faice==='function'?Promise.resolve(cfg.faice()):Promise.all([import(DV+'/vendor/three/build/three.module.min.js'),import(DV+'/ollywoo/faice.js')])).then(function(m){ var T=m[0];
+      fz.R=new T.WebGLRenderer({canvas:fzCv,alpha:true,antialias:true}); fz.R.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+      fz.sc=new T.Scene(); fz.c3=new T.PerspectiveCamera(30,1,.1,10); fz.c3.position.set(0,0,2.1);
+      fz.sc.add(new T.HemisphereLight(0xdfffe9,0x050807,1.6)); var dl=new T.DirectionalLight(0xffffff,2.2); dl.position.set(.7,.9,1.6); fz.sc.add(dl);
+      fz.F=m[1].createFaice(T,{accent:'#3ddc84',radius:.42}); fz.T=T; fz.sc.add(fz.F.group); fz.F.attachDrag(fzCv); faceEyes(); paintFace(); })
+      .catch(function(e){ fz.loading=null; fz.err=String(e&&e.message||e); paintFace(); }); return fz.loading; }
+  // the eyes see through the camera: the same stream, in a video of the faice's own (the panel's preview may be hidden)
+  function faceEyes(){ if(!fz.F) return; var s=fz.eyes&&cam.stream||null; if(s===fz.seeing) return; fz.seeing=s;
+    if(!s){ if(fz.video) fz.video.srcObject=null; fz.F.setCamera(null); return; }
+    if(!fz.video){ fz.video=h('video',{muted:'',playsinline:'',autoplay:'','aria-hidden':'true',style:'position:fixed;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none'}); fz.video.muted=true; box.appendChild(fz.video); }
+    fz.video.srcObject=s; try{ var pp=fz.video.play(); if(pp&&pp.catch) pp.catch(function(){}); }catch(e){} fz.F.setCamera(fz.video); }
+  function faceDevices(){ faceEyes(); if(faceOpen()) paintFace(); }
+  function faceFrame(){ fz.raf=requestAnimationFrame(faceFrame); if(document.hidden||!fz.F||!isOpen) return; var now=performance.now(); if(now-fz.last<33) return; fz.last=now;
+    var w=fzCv.clientWidth||220; if(fz.w!==w){ fz.w=w; fz.R.setSize(w,w,false); }
+    var ml=0; if(fz.ears&&mic.an&&mic.an.getFloatTimeDomainData){ if(!fz.buf||fz.buf.length!==mic.an.fftSize) fz.buf=new Float32Array(mic.an.fftSize); mic.an.getFloatTimeDomainData(fz.buf); var s=0; for(var i=0;i<fz.buf.length;i++) s+=fz.buf[i]*fz.buf[i]; ml=Math.min(1,Math.sqrt(s/fz.buf.length)*5); }
+    var Vy=fz.Vy, sp=!!(Vy&&Vy.speaking());
+    fz.F.update({wave:sp?Vy.wave():null,speaking:sp,micLevel:ml,camOn:!!fz.seeing,level:sp&&Vy.level?Vy.level():0}); fz.R.render(fz.sc,fz.c3); }
+  function plug(organ){ faceShow(); if(organ==='eyes'){ fz.eyes=true; if(cam.stream){ faceDevices(); say("Jaimla's eyes are the camera"); } else camOn('',true); }
+    else { fz.ears=true; if(mic.stream){ faceDevices(); say("Jaimla's ears are the microphone"); } else micOn('',true); } spark(16); }
+  // a click (not a turn) on an eye or an ear: plugged, its panel; not yet, plug it
+  var fzDown=null; fzCv.addEventListener('pointerdown',function(e){ fzDown={x:e.clientX,y:e.clientY}; });
+  fzCv.addEventListener('pointerup',function(e){ if(!fzDown||!fz.F) return; var moved=Math.abs(e.clientX-fzDown.x)+Math.abs(e.clientY-fzDown.y); fzDown=null; if(moved>5) return;
+    var r=fzCv.getBoundingClientRect(), T=fz.T, rc=new T.Raycaster(); if(fz.c3.updateMatrixWorld) fz.c3.updateMatrixWorld(); rc.setFromCamera(new T.Vector2((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height*2-1)),fz.c3);
+    var eyes=fz.F.organs.eyes, hit=rc.intersectObjects(eyes.concat(fz.F.organs.ears),false)[0]; if(!hit) return;
+    if(eyes.indexOf(hit.object)>=0){ if(fz.eyes&&cam.stream) camPanel.classList.toggle('ri-show'); else plug('eyes'); } else { if(fz.ears&&mic.stream) audPanel.classList.toggle('ri-show'); else plug('ears'); } });
+  // 👁 and 👂 drag out of the row (pointer events: mouse, pen and touch alike); a press without a drag is still a click
+  function organDrag(btn,organ){ var st=null, ghost=null;
+    function over(e){ if(!faceOpen()) return false; var r=fzCv.getBoundingClientRect(); return e.clientX>=r.left-24&&e.clientX<=r.right+24&&e.clientY>=r.top-24&&e.clientY<=r.bottom+24; }
+    btn.addEventListener('pointerdown',function(e){ if(e.button) return; st={x:e.clientX,y:e.clientY,id:e.pointerId,moved:false}; });
+    btn.addEventListener('pointermove',function(e){ if(!st||st.id!==e.pointerId) return;
+      if(!st.moved){ if(Math.abs(e.clientX-st.x)+Math.abs(e.clientY-st.y)<8) return; st.moved=true; try{ btn.setPointerCapture(e.pointerId); }catch(x){} ghost=h('div',{'class':'ri-ghost','aria-hidden':'true',text:btn.textContent}); box.appendChild(ghost); faceShow(); }
+      ghost.style.left=e.clientX+'px'; ghost.style.top=e.clientY+'px'; fzPanel.classList.toggle('ri-hover',over(e)); });
+    function end(e){ if(!st||st.id!==e.pointerId) return; var moved=st.moved; st=null; if(ghost&&ghost.parentNode) ghost.parentNode.removeChild(ghost); ghost=null; fzPanel.classList.remove('ri-hover'); if(!moved) return;
+      btn._dragged=Date.now(); if(e.type==='pointerup'&&over(e)) plug(organ); else say('drop '+btn.textContent+" on Jaimla's faice"); }
+    btn.addEventListener('pointerup',end); btn.addEventListener('pointercancel',end); }
+  organDrag(eyeBtn,'eyes'); organDrag(earBtn,'ears');
+  fzPanel.appendChild(h('h4',{text:"Jaimla's faice"})); fzPanel.appendChild(fzCv);
+  fzPanel.appendChild(h('div',{'class':'ri-acts'},[h('button',{'class':'ri-btn',type:'button',title:'her eyes are the camera',text:'👁 eyes',on:{click:function(){ plug('eyes'); }}}),
+    h('button',{'class':'ri-btn',type:'button',title:'her ears are the microphone',text:'👂 ears',on:{click:function(){ plug('ears'); }}}),
+    h('button',{'class':'ri-btn',type:'button',title:"the answer, in Jaimla's voice; her mouth is its waveform",text:'🗣 speak the answer',on:{click:function(){ speakAnswer(); }}}),
+    h('button',{'class':'ri-btn ri-stop',type:'button',text:'close',on:{click:faceHide}})]));
+  fzPanel.appendChild(fzRead);
+  fzPanel.appendChild(h('div',{'class':'ri-note',text:"ollywoo's BASIC FAICE: each organ is a device, so the face shows what the machine is actually doing. Her eyes are your camera, her ears your microphone, her mouth the waveform of the voice she speaks in (a flat line when the voice is the browser's own, which exposes no samples). A globe, not an invented likeness: Jaimla's embodiment is only ever cloned from a real capture. Nothing leaves this browser; three.js and faice.js are loaded once from "+DV+"."}));
   // networking.tools
   var netRead=h('div',{'class':'ri-diag'}), lastLegs=null;
   function timed(url,o){ var t0=performance.now(); return fetch(url,o).then(function(r){ return {ok:o&&o.mode==='no-cors'?true:r.ok,code:o&&o.mode==='no-cors'?'reached':r.status,ms:Math.round(performance.now()-t0)}; },function(e){ return {ok:false,code:e.name||'failed',ms:Math.round(performance.now()-t0)}; }); }
@@ -369,6 +441,7 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
     L.forEach(function(p,i){ var off=i-at, card=h('div',{'class':'ri-pc'+(off===0?' ri-on':'')+(p.id===fresh?' ri-new':''),role:'option','aria-selected':off===0?'true':'false',title:p.name+(p.items?' · '+p.items.length+' passages':'')},[h('b',{text:p.name}),h('i',{text:p.line||(p.url?'built in · read from its public .persona':'')})]);
       card.style.transform='translateX('+(off*150)+'px) translateZ('+(-Math.abs(off)*70)+'px) rotateY('+(-off*28)+'deg)'; card.style.opacity=Math.abs(off)>2?'0':String(1-Math.abs(off)*.28); card.style.zIndex=String(10-Math.abs(off));
       if(i>=BUILT.length){ var x=h('span',{'class':'ri-px',title:'remove this persona',text:'×'}); x.addEventListener('click',function(ev){ ev.stopPropagation(); mine=mine.filter(function(m){ return m.id!==p.id; }); keepPeople(); if(V.persona===p.id) V.persona='rage'; paintRolo(); }); card.appendChild(x); }
+      if(p.id==='jaimla'){ var fc=h('span',{'class':'ri-fzc',role:'button',tabindex:'0',title:"Jaimla's faice: drop 👁 or 👂 on it",text:'◉ faice'}); fc.addEventListener('click',function(ev){ ev.stopPropagation(); faceShow(); }); fc.addEventListener('keydown',function(ev){ if(ev.key==='Enter'){ ev.stopPropagation(); faceShow(); } }); card.appendChild(fc); }
       card.addEventListener('click',function(){ choose(p.id); }); rolo.appendChild(card); }); }
   rolo.addEventListener('keydown',function(e){ var L=people(), i=L.indexOf(current()); if(e.key==='ArrowRight'&&i<L.length-1){ e.preventDefault(); choose(L[i+1].id); } else if(e.key==='ArrowLeft'&&i>0){ e.preventDefault(); choose(L[i-1].id); } });
   rolo.addEventListener('wheel',function(e){ if(Math.abs(e.deltaX)+Math.abs(e.deltaY)<8) return; e.preventDefault(); var L=people(), i=L.indexOf(current()), d=(e.deltaY||e.deltaX)>0?1:-1; if(L[i+d]) choose(L[i+d].id); },{passive:false});
@@ -510,8 +583,9 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
     else if(c==='k'){ var n=parseInt(p[0],10); if(!(n>=1&&n<=30)){ say('k: 1..30'); return; } V.k=n; say('k → '+n); }
     else if(c==='spawn'){ spawn(); return; }
     else if(c==='clear'){ clearAll(); return; }
+    else if(c==='face'||c==='faice'){ if(faceOpen()) faceHide(); else faceShow(); return; }
     else if(c==='panel'){ V.panel=!V.panel; keep(); paintVars(); if(V.panel) diagnose(); return; }
-    else if(c==='help'||!c){ say(':legs words meaning atlas wordpress — which algorithms run\n:corpus articles|self|all — what is searched (self = RAGE retrieving RAGE)\n:k n — how many results\n:spawn — this answer as a response window · :clear · :panel\nanything else — the question'); return; }
+    else if(c==='help'||!c){ say(':legs words meaning atlas wordpress — which algorithms run\n:corpus articles|self|all — what is searched (self = RAGE retrieving RAGE)\n:k n — how many results\n:spawn — this answer as a response window · :clear · :panel\n:face — Jaimla’s faice: drop 👁 / 👂 on it\nanything else — the question'); return; }
     else { say('unknown: :'+c+' (try :help)'); return; }
     keep(); paintVars(); if(lastQuery) search(lastQuery); }
   q.addEventListener('input',function(){ var n=Date.now(); keys.push(n); keys=keys.filter(function(x){ return n-x<1500; }); meter(Math.min(.9,keys.length/9),false); spark(1);

@@ -1,4 +1,4 @@
-/* ragebar-classic (RAGE plugin 1.4.0) — built from GATERAGE/ragebar wordpress/ragebar-widget.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* ragebar-classic (RAGE plugin 1.5.0) — built from GATERAGE/ragebar wordpress/ragebar-widget.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 :root{--rb-green:#3ddc84;--rb-hot:#ff3b30;--rb-ink:#e9ffe9;--rb-dim:#7f9c8a;--rb-bg:#05070a}
 /* ── the contrast repair the header search needs regardless of the ragebar ──
    .head-search-input in blockchain-lite sets ONLY height:56px, so it inherits

@@ -4,7 +4,7 @@ Tags: search, semantic search, vector search, bm25, menu
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: Apache-2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0
 
@@ -60,6 +60,9 @@ Codephreak's ultimate-input-field (as browseML uses it):
 If your site already runs the rage menu as a Custom HTML widget, the menu loads once whichever is present.
 
 == Changelog ==
+
+= 1.5.0 =
+* Jaimla's faice: drag 👁 or 👂 out of the row (mouse or touch) and drop it on Jaimla's faice, ollywoo's BASIC FAICE whose organs are the devices. Her eyes become the camera (the live picture is the iris), her ears swell with what the microphone hears, and her mouth is the waveform of the voice speaking the answer in Jaimla's voice. Click an eye or an ear for its control panel; drag the globe to turn it. Also opened from the ◉ on Jaimla's card, its own eyes / ears buttons, or :face. three.js and faice.js load only when the faice is opened; nothing leaves the browser.
 
 = 1.4.0 =
 * Article results respond as the rage menu's top pick does: they open in place (excerpt, LISTEN voices, read, kindred, its thread, tags, converge) and spawn further articles; one trail shared with the menu. Enter opens the first article, Enter again reads it.
