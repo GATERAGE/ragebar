@@ -184,6 +184,8 @@
       else legs.persona={algorithm:'the persona',ok:false,n:0,ms:0,error:'pending: reading the .persona'}; }
     var server=V.legs.bm25||V.legs.dense||V.legs.atlas; if(server&&!env) legs.ragesearch={algorithm:RS||'no search service',ok:false,n:0,ms:0,error:RS?(env===false?'unavailable':'pending: asking RAGE'):'not configured'};
     var fused=rrf(R).slice(0,V.k); paintLegs(legs); clear(list);
+    // the DeltaVerse event contract: a substrate (rage-substrate.js) draws what RAGE just did
+    try{ document.dispatchEvent(new CustomEvent('dv:rage',{detail:{query:query,legs:legs,results:fused.map(function(e){ return {id:e.id,title:(items[e.id]||{}).title,ranks:e.ranks}; })}})); }catch(e){}
     fused.forEach(function(e,i){ var it=items[e.id]||{}, max=fused[0].s;
       var ranks=h('div',{'class':'ri-ranks'}); Object.keys(e.ranks).forEach(function(l){ ranks.appendChild(h('span',{'class':'ri-rank',text:legName(l)+' '+e.ranks[l]})); });
       var card=h(it.url?'a':'div',{'class':'ri-card',href:it.url||null,tabindex:'0',style:'animation-delay:'+(i*35)+'ms'},[h('div',{'class':'ri-t',text:it.title||String(e.id)}),h('div',{'class':'ri-m',text:[it.date,it.corpus==='self'?"RAGE's own":'',it.kind&&it.kind!=='article'?it.kind:''].filter(Boolean).join(' · ')}),it.snippet?h('div',{'class':'ri-s',text:it.snippet}):null,ranks,h('div',{'class':'ri-fuse',style:'width:'+Math.round(e.s/max*100)+'%'})]);
