@@ -16,6 +16,9 @@ function wp_enqueue_style($h, $src, $d, $v) { $GLOBALS['T']['enq'][] = [$h, $src
 function wp_enqueue_script($h, $src, $d, $v, $f) { $GLOBALS['T']['enq'][] = [$h, $src, $v, $f]; }
 function wp_add_inline_script($h, $js, $pos) { $GLOBALS['T']['inline'][] = [$h, $js, $pos]; }
 function wp_json_encode($v) { return json_encode($v, JSON_UNESCAPED_SLASHES); }
+function add_shortcode($t, $f) { $GLOBALS['T']['shortcodes'][$t] = $f; }
+function shortcode_atts($pairs, $atts, $tag = '') { return array_merge($pairs, is_array($atts) ? $atts : []); }
+function esc_attr($s) { return htmlspecialchars((string) $s, ENT_QUOTES); }
 require '/w/rage/rage.php';
 
 $fail = 0;
@@ -49,11 +52,27 @@ is_it('a non-array option reads as the defaults', rage_menu_config()['mode'], 'a
 $GLOBALS['T']['option'] = [];
 rage_menu_enqueue();
 is_it('style enqueued, versioned', $GLOBALS['T']['enq'][0], ['rage-menu', 'https://site.example/wp-content/plugins/rage/assets/rage-menu.css', RAGE_MENU_VERSION]);
+is_it('the immersive ragebar by default', array_column($GLOBALS['T']['enq'], 0), ['rage-menu', 'rage-menu', 'ragebar-immersive', 'ragebar-immersive']);
+is_it('the ragebar gets the search service', $GLOBALS['T']['inline'][1][1], 'window.RAGEBAR={"search":"https://deltaverse.pythai.net/ragesearch"};');
 is_it('script in the footer, versioned', $GLOBALS['T']['enq'][1], ['rage-menu', 'https://site.example/wp-content/plugins/rage/assets/rage-menu.js', RAGE_MENU_VERSION, true]);
 is_it('config inlined before the script', [$GLOBALS['T']['inline'][0][0], $GLOBALS['T']['inline'][0][2], strpos($GLOBALS['T']['inline'][0][1], 'window.RAGE_MENU={"mode":"atlas"') === 0], ['rage-menu', 'before', true]);
+$GLOBALS['T']['enq'] = []; $GLOBALS['T']['option']['rage_menu_settings'] = ['menu' => 0, 'ragebar' => 'classic'];
+rage_menu_enqueue();
+is_it('menu off, classic ragebar', array_column($GLOBALS['T']['enq'], 0), ['ragebar-classic', 'ragebar-classic']);
+$GLOBALS['T']['enq'] = []; $GLOBALS['T']['option']['rage_menu_settings'] = ['ragebar' => 'off', 'menu' => 0];
+rage_menu_enqueue();
+is_it('both off: nothing loads', $GLOBALS['T']['enq'], []);
+$GLOBALS['T']['option']['rage_menu_settings'] = ['ragebar' => 'evil'];
+is_it('an unknown ragebar falls back to immersive', rage_menu_opts()['ragebar'], 'immersive');
+$GLOBALS['T']['option'] = [];
+is_it('[ragebar] prints the field the ragebar opens from', strpos(call_user_func($GLOBALS['T']['shortcodes']['ragebar'], []), 'id="ragebar-input"') !== false, true);
 is_it('hooked to wp_enqueue_scripts', $GLOBALS['T']['actions']['wp_enqueue_scripts'] ?? null, 'rage_menu_enqueue');
 $js = file_get_contents('/w/rage/assets/rage-menu.js');
-is_it('built script carries the same version', (bool) preg_match("/VERSION='" . preg_quote(RAGE_MENU_VERSION) . "'/", $js), true);
+is_it('built menu carries its build stamp', strpos($js, 'RAGE plugin ' . RAGE_MENU_VERSION) !== false, true);
+foreach (['ragebar-immersive', 'ragebar-classic'] as $a) {
+    is_it("built $a.js and .css present", is_file("/w/rage/assets/$a.js") && is_file("/w/rage/assets/$a.css"), true);
+}
+is_it('the immersive ragebar guards against loading twice', strpos(file_get_contents('/w/rage/assets/ragebar-immersive.js'), 'if(window.__ragebarImmersive) return;') !== false, true);
 is_it('built script guards against loading twice (widget + plugin)', strpos($js, 'if(window.__ragemap) return;') !== false, true);
 printf("\n%s %d checks failed\n", $fail ? 'FAIL' : 'PASS', $fail);
 exit($fail ? 1 : 0);

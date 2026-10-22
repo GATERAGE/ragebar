@@ -1,0 +1,70 @@
+/* ragebar-classic (RAGE plugin 1.2.0) — built from GATERAGE/ragebar wordpress/ragebar-widget.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+:root{--rb-green:#3ddc84;--rb-hot:#ff3b30;--rb-ink:#e9ffe9;--rb-dim:#7f9c8a;--rb-bg:#05070a}
+/* ── the contrast repair the header search needs regardless of the ragebar ──
+   .head-search-input in blockchain-lite sets ONLY height:56px, so it inherits
+   the theme's #585858 body colour onto a near-white overlay: invisible text. */
+/* the theme already makes this a fixed overlay that slides down from top:0
+   on .head-search-expanded; pin it explicitly so the ragebar always opens
+   AT THE TOP of the page and scrolls within the viewport, never past it. */
+.head-search-form{position:fixed!important;top:0!important;left:0!important;right:0!important;width:100%!important;max-width:100%!important;background-color:rgba(8,10,14,.97)!important;padding:16px 20px 18px!important;z-index:99999!important;max-height:100vh!important;overflow-y:auto!important;border-bottom:1px solid #1f3a2b!important;box-shadow:0 10px 40px rgba(0,0,0,.6)!important}
+.head-search-input{height:52px!important;display:block!important;width:100%!important;max-width:560px!important;margin:0 auto!important;padding:0 16px!important;color:var(--rb-ink)!important;background-color:var(--rb-bg)!important;border:1px solid #1f3a2b!important;border-radius:8px!important;caret-color:var(--rb-green)!important;font-size:16px!important;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important}
+.head-search-input:focus{outline:0!important;border-color:var(--rb-green)!important;box-shadow:0 0 0 3px rgba(61,220,132,.15)!important}
+.head-search-input::placeholder{color:#6d8a78!important;opacity:1!important}
+/* ── the ragebar itself ── */
+.rb-wrap{position:relative;max-width:560px;margin:0 auto;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.rb-canvas{position:absolute;left:0;right:0;top:-52px;height:52px;width:100%;display:block;pointer-events:none;opacity:.9;border-radius:8px}
+.rb-meter{height:3px;border-radius:2px;background:#11201a;overflow:hidden;margin:7px 0 0}
+.rb-meter i{display:block;height:100%;width:0;background:var(--rb-green);transition:width .18s ease,background .18s ease}
+.rb-stat{font-size:11px;color:var(--rb-dim);margin:7px 2px 0;letter-spacing:.04em;min-height:14px}
+.rb-stat.rb-hot{color:var(--rb-hot)}
+.rb-list{list-style:none;margin:9px 0 0;padding:0;display:grid;gap:6px;max-height:min(52vh,420px);overflow:auto}
+.rb-list li{margin:0}
+.rb-list a{display:block;padding:9px 11px;border:1px solid #16281e;border-radius:7px;background:rgba(6,14,10,.92);color:var(--rb-ink);text-decoration:none;font-size:13.5px;line-height:1.45}
+.rb-list a:hover,.rb-list a:focus{border-color:var(--rb-green);background:rgba(10,26,18,.98);outline:0}
+.rb-list .rb-k{color:var(--rb-green)}
+.sidebar a,.sidebar h2 a,.widget_block a{color:#123a22!important;text-decoration:underline!important;text-underline-offset:3px!important;font-weight:600!important}
+.sidebar a:hover,.sidebar h2 a:hover,.widget_block a:hover{color:#0a7a3a!important}
+/* the in-page ragebar (the /ragebar/ page supplies just the input; the script
+   below drives it exactly like the header one) */
+#ragebar-input{height:52px;display:block;width:100%;max-width:560px;margin:0 auto;padding:0 16px;color:var(--rb-ink);background:var(--rb-bg);border:1px solid #1f3a2b;border-radius:8px;caret-color:var(--rb-green);font-size:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+#ragebar-input:focus{outline:0;border-color:var(--rb-green);box-shadow:0 0 0 3px rgba(61,220,132,.15)}
+#ragebar-input::placeholder{color:#6d8a78;opacity:1}
+/* ── the gaterage sidebar: a dark card in the RAGE palette ──────────────
+   The theme paints .sidebar #acb5bf light grey, which fights a black page and
+   makes every link inside it a contrast problem. Made it a proper card instead. */
+.sidebar{background:#080d0a!important;padding:0!important;border:1px solid #16281e!important;border-radius:12px!important;overflow:hidden!important}
+.sidebar .widget{background:transparent!important;padding:16px 16px 4px!important;margin:0!important;border:0!important}
+.sidebar .widget:not(:last-child){border-bottom:1px solid #12211a!important}
+.sidebar h2,.sidebar h3{margin:0 0 8px!important}
+.sidebar h2 a{color:var(--rb-green)!important;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace!important;font-size:19px!important;letter-spacing:.16em!important;text-transform:lowercase!important;text-decoration:none!important;font-weight:700!important}
+.sidebar h2 a:hover{color:#eaf6ef!important}
+.rg-note{font-size:11.5px;line-height:1.65;color:#8fb3a0;margin:0 0 4px}
+.rg-note em{color:var(--rb-green);font-style:normal}
+.rg-note a{color:#bfe8d0!important;text-decoration:underline!important;text-underline-offset:3px!important}
+.rg-h{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--rb-green);margin:2px 0 9px;opacity:.95}
+.rg-item{display:block!important;padding:7px 0 7px 11px!important;margin:0 0 5px!important;border-left:2px solid #1c3325!important;text-decoration:none!important;transition:border-color .15s,background .15s;border-radius:0 5px 5px 0}
+.rg-item:hover,.rg-item:focus{border-left-color:var(--rb-green)!important;background:rgba(61,220,132,.07)!important;outline:0}
+.rg-item b{display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:#eaf6ef!important;font-weight:600;letter-spacing:.01em}
+.rg-item i{display:block;font-style:normal;font-size:11px;line-height:1.5;color:#7f9c8a;margin-top:2px}
+.rg-item:hover b{color:var(--rb-green)!important}
+/* the deployed block is the headline — give it weight */
+.rg-live .rg-item{border-left-width:3px!important;border-left-color:#2a5c3f!important;background:rgba(61,220,132,.04)}
+.rg-live .rg-item b{font-size:13.5px}
+.rg-pair{font-size:11px;color:#7f9c8a;padding-left:13px;margin:0 0 6px}
+.rg-pair a{color:#bfe8d0!important;text-decoration:none!important;border-bottom:1px dotted #2a5c3f}
+.rg-pair a:hover{color:var(--rb-green)!important}
+/* ── v1.1.0: visibility, focus, mobile ── */
+.head-search-trigger{color:var(--rb-green)!important;display:inline-flex!important;align-items:center;justify-content:center;min-width:40px;min-height:40px;border-radius:8px}
+.head-search-trigger:hover{color:#eaffef!important;background:rgba(61,220,132,.12)}
+.head-search-trigger:focus-visible{outline:2px solid var(--rb-green)!important;outline-offset:2px}
+.head-search-input,#ragebar-input{box-sizing:border-box!important}
+.rb-list a:focus-visible{outline:2px solid var(--rb-green)!important;outline-offset:1px}
+.rb-list a[aria-selected="true"]{border-color:var(--rb-green);background:rgba(10,26,18,.98)}
+.rb-list .rb-t{float:right;margin-left:8px;font-size:10.5px;letter-spacing:.06em;color:#9dbcaa;text-transform:lowercase}
+.rb-all{display:inline-block;margin:8px 2px 0;font-size:12px;color:#bfe8d0!important;text-decoration:underline!important;text-underline-offset:3px}
+.rb-all:hover,.rb-all:focus-visible{color:var(--rb-green)!important;outline:2px solid var(--rb-green);outline-offset:2px}
+.rb-keys{font-size:10.5px;color:#9dbcaa;margin:6px 2px 0;letter-spacing:.03em}
+.rb-keys kbd{font:inherit;border:1px solid #2a5c3f;border-radius:4px;padding:0 4px;color:#e9ffe9}
+.rb-stat{color:#9dbcaa}
+@media (max-width:600px){.head-search-form{padding:10px 12px 14px!important}.rb-list{max-height:62vh}.rb-list a{padding:11px 11px;font-size:14px}.rb-keys{display:none}}
+@media (prefers-reduced-motion:reduce){.rb-canvas{display:none}}

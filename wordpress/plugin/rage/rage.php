@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       RAGE
  * Plugin URI:        https://github.com/GATERAGE/ragebar
- * Description:       Adds the "rage" menu to your header: walk your site's atlas, or switch to the ragebar and search it with RAGE — words (BM25) and meaning (vector search) at once, fused by rank, each method saying whether it worked.
- * Version:           1.1.0
+ * Description:       RAGE and the ragebar, complete: the "rage" menu (walk your site's atlas, or search it with RAGE) and the immersive ragebar (the header search as a full-screen RAGE field: legs, corpora, personas, response windows, a control panel). Words (BM25) and meaning (vector search) at once, fused by rank, each method saying whether it worked.
+ * Version:           1.2.0
  * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            Professor Codephreak
@@ -12,7 +12,16 @@
  * License URI:       https://www.apache.org/licenses/LICENSE-2.0
  * Text Domain:       rage
  *
- * WHAT IT IS. The menu rage.pythai.net runs, as a plugin. Its first header item, "rage", opens a panel
+ * WHAT IT IS. What rage.pythai.net runs, as one plugin: the rage menu and the ragebar.
+ *
+ * THE RAGEBAR (1.2.0), immersive by default: the header search (and the [ragebar] field, and "/") opens a
+ * full-screen glass field, adapted from Professor Codephreak's ultimate-input-field as browseML uses it. RAGE is a
+ * mode in its row of buttons; T opens the control panel, which in RAGE mode is the RAGE panel (legs, corpus, k,
+ * live diagnostics, STOP, CLEAR); ❏ spawns a response window. Personas roll in under the field like a rolodex:
+ * drop a .persona on it and its beliefs become a search leg, read in the visitor's browser only. "classic" keeps
+ * the small ragebar that searches WordPress alone.
+ *
+ * THE MENU: Its first header item, "rage", opens a panel
  * with two modes, and the visitor's choice is remembered in their own browser:
  *
  *   atlas    travel by a word through the site's atlas (a JSON map of branches, paths and articles),
@@ -38,7 +47,7 @@ if (!defined('ABSPATH')) {
     exit; // no direct access
 }
 
-define('RAGE_MENU_VERSION', '1.1.0');
+define('RAGE_MENU_VERSION', '1.2.0');
 define('RAGE_MENU_SEARCH_DEFAULT', 'https://deltaverse.pythai.net/ragesearch');
 define('RAGE_MENU_ATLAS_DEFAULT', 'https://deltaverse.pythai.net/audio/atlas.json');
 
@@ -47,6 +56,8 @@ function rage_menu_defaults() {
         'mode'   => 'atlas',                    // atlas | ragebar: how the panel opens until the visitor chooses
         'search' => RAGE_MENU_SEARCH_DEFAULT,   // a ragesearch/1 service; '' = WordPress search alone
         'atlas'  => RAGE_MENU_ATLAS_DEFAULT,    // the atlas JSON the menu walks
+        'menu'   => 1,                          // the "rage" menu in the header
+        'ragebar' => 'immersive',               // immersive | classic | off
     );
 }
 
@@ -68,6 +79,8 @@ function rage_menu_sanitize($in) {
     $out['search'] = array_key_exists('search', $in) ? rage_menu_url($in['search']) : $d['search'];
     $atlas = array_key_exists('atlas', $in) ? rage_menu_url($in['atlas']) : $d['atlas'];
     $out['atlas'] = $atlas !== '' ? $atlas : $d['atlas'];
+    $out['menu'] = array_key_exists('menu', $in) ? (empty($in['menu']) ? 0 : 1) : $d['menu'];
+    $out['ragebar'] = (isset($in['ragebar']) && in_array($in['ragebar'], array('immersive', 'classic', 'off'), true)) ? $in['ragebar'] : $d['ragebar'];
     return $out;
 }
 
@@ -89,10 +102,26 @@ function rage_menu_config() {
 
 function rage_menu_enqueue() {
     $base = plugin_dir_url(__FILE__) . 'assets/';
-    wp_enqueue_style('rage-menu', $base . 'rage-menu.css', array(), RAGE_MENU_VERSION);
-    wp_enqueue_script('rage-menu', $base . 'rage-menu.js', array(), RAGE_MENU_VERSION, true);
-    wp_add_inline_script('rage-menu', 'window.RAGE_MENU=' . wp_json_encode(rage_menu_config()) . ';', 'before');
+    $o = rage_menu_opts();
+    if ($o['menu']) {
+        wp_enqueue_style('rage-menu', $base . 'rage-menu.css', array(), RAGE_MENU_VERSION);
+        wp_enqueue_script('rage-menu', $base . 'rage-menu.js', array(), RAGE_MENU_VERSION, true);
+        wp_add_inline_script('rage-menu', 'window.RAGE_MENU=' . wp_json_encode(rage_menu_config()) . ';', 'before');
+    }
+    if ($o['ragebar'] !== 'off') {
+        $h = 'ragebar-' . $o['ragebar'];
+        wp_enqueue_style($h, $base . $h . '.css', array(), RAGE_MENU_VERSION);
+        wp_enqueue_script($h, $base . $h . '.js', array(), RAGE_MENU_VERSION, true);
+        wp_add_inline_script($h, 'window.RAGEBAR=' . wp_json_encode(array('search' => $o['search'])) . ';', 'before');
+    }
 }
+
+/** [ragebar]: a field anywhere that opens the ragebar (the /ragebar/ page uses one). */
+function rage_menu_shortcode($atts) {
+    $a = shortcode_atts(array('placeholder' => 'ask RAGE…'), $atts, 'ragebar');
+    return '<input type="search" id="ragebar-input" class="ragebar-input" autocomplete="off" placeholder="' . esc_attr($a['placeholder']) . '" aria-label="search with RAGE">';
+}
+add_shortcode('ragebar', 'rage_menu_shortcode');
 add_action('wp_enqueue_scripts', 'rage_menu_enqueue');
 
 /* ── Settings → RAGE ── */
@@ -121,6 +150,12 @@ function rage_menu_settings_page() {
     echo '<tr><th scope="row">Opens in</th><td>';
     foreach (array('atlas' => 'atlas — travel by a word through the atlas', 'ragebar' => 'ragebar — search with RAGE') as $k => $label) {
         printf('<label><input type="radio" name="%s[mode]" value="%s" %s> %s</label><br>', esc_attr($n), esc_attr($k), checked($o['mode'], $k, false), esc_html($label));
+    }
+    echo '</td></tr>';
+    printf('<tr><th scope="row">The rage menu</th><td><label><input type="checkbox" name="%s[menu]" value="1" %s> the "rage" item first in the header menu</label></td></tr>', esc_attr($n), checked($o['menu'], 1, false));
+    echo '<tr><th scope="row">The ragebar</th><td>';
+    foreach (array('immersive' => 'immersive — the header search opens the full-screen RAGE field', 'classic' => 'classic — the small ragebar over WordPress search', 'off' => 'off') as $k => $label) {
+        printf('<label><input type="radio" name="%s[ragebar]" value="%s" %s> %s</label><br>', esc_attr($n), esc_attr($k), checked($o['ragebar'], $k, false), esc_html($label));
     }
     echo '</td></tr>';
     printf('<tr><th scope="row"><label for="rage-search">Search service</label></th><td><input id="rage-search" class="regular-text code" type="url" name="%s[search]" value="%s"><p class="description">A ragesearch/1 service (https). Empty: WordPress search alone. Default: %s</p></td></tr>',
