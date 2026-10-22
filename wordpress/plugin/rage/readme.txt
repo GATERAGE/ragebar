@@ -4,7 +4,7 @@ Tags: search, semantic search, vector search, bm25, menu
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 License: Apache-2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0
 
@@ -44,6 +44,8 @@ Codephreak's ultimate-input-field (as browseML uses it):
   .persona on the field and it rolls in beside them. The chosen persona adds a leg: its beliefs, skills and
   exchanges, searched in the visitor's browser. A dropped file is never uploaded.
 * The bar shows the DeltaVerse substrate count, read live.
+* 👁 turns the camera on and opens the camera.control.panel; 👂 turns the microphone on and opens the
+  audio.control.panel; ⇄ opens networking.tools. Nothing turns on except by its own button.
 * Commands in the field: :legs, :corpus, :k, :spawn, :clear, :panel, :help.
 
 "classic" keeps the small ragebar over WordPress search; "off" leaves the theme's search alone.
@@ -58,6 +60,9 @@ Codephreak's ultimate-input-field (as browseML uses it):
 If your site already runs the rage menu as a Custom HTML widget, the menu loads once whichever is present.
 
 == Changelog ==
+
+= 1.3.0 =
+* 👁 the camera.control.panel (preview, camera choice, mirror, ollywoo's faicey face toolkit), 👂 the audio.control.panel (microphone choice, scope, dictation, voaicey speaking the answer in the persona's voice), ⇄ networking.tools (every service RAGE uses, timed). Each turns on only by its own button; closing the field turns them off.
 
 = 1.2.1 =
 * The immersive ragebar announces every answer as a dv:rage event, so a DeltaVerse substrate (rage-substrate.js) can draw it.

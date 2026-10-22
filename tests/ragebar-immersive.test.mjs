@@ -163,3 +163,47 @@ test('personas: a built-in is read from its public file; a bad drop is refused p
   d.querySelector('.ri-mode button:last-child').click(); await tick(220);
   assert.ok(!d.querySelector('.ri').classList.contains('ri-open'), 'atlas hands over (the menu is not on this test page)');
 });
+
+function devBoot() {
+  const r = boot();
+  const w = r.w, stopped = [];
+  const track = (kind) => ({ kind, label: kind === 'video' ? 'FaceTime HD' : 'Built-in mic', stop() { stopped.push(kind); }, getSettings: () => (kind === 'video' ? { deviceId: 'cam1', width: 640, height: 480, frameRate: 30 } : { deviceId: 'mic1', sampleRate: 48000, channelCount: 1 }) });
+  Object.defineProperty(w.navigator, 'mediaDevices', { value: {
+    getUserMedia: (c) => Promise.resolve({ getTracks() { return [track(c.video ? 'video' : 'audio')]; }, getVideoTracks() { return [track('video')]; }, getAudioTracks() { return [track('audio')]; } }),
+    enumerateDevices: () => Promise.resolve([{ kind: 'videoinput', deviceId: 'cam1', label: 'FaceTime HD' }, { kind: 'audioinput', deviceId: 'mic1', label: 'Built-in mic' }]) } });
+  w.AudioContext = function () { return { createAnalyser: () => ({ fftSize: 1024, getByteTimeDomainData(b) { b.fill(128); } }), createMediaStreamSource: () => ({ connect() {} }), close() {} }; };
+  w.HTMLMediaElement.prototype.play = () => Promise.resolve();
+  return { ...r, stopped };
+}
+
+test('👁 camera.control.panel; 👂 audio.control.panel; OFF stops the tracks; closing the stage turns them off', { skip }, async () => {
+  const { w, d, stopped } = devBoot();
+  await tick(20); w.RagebarImmersive.open(''); await tick(30);
+  const btn = (t) => [...d.querySelectorAll('.ri-bar .ri-btn')].find((b) => b.textContent === t);
+  btn('👁').click(); await tick(40);
+  const cam = d.querySelector('[aria-label="camera.control.panel"]');
+  assert.ok(cam.classList.contains('ri-show') && btn('👁').classList.contains('ri-live'), 'camera on, its panel open');
+  assert.match(cam.textContent, /FaceTime HD/); assert.match(cam.textContent, /640 × 480 · 30 fps/);
+  assert.ok(cam.querySelector('video.ri-mirror'), 'mirrored preview');
+  [...cam.querySelectorAll('.ri-btn')].find((b) => b.textContent === 'camera OFF').click(); await tick(10);
+  assert.deepEqual(stopped, ['video']); assert.ok(!cam.classList.contains('ri-show') && !btn('👁').classList.contains('ri-live'));
+  btn('👂').click(); await tick(40);
+  const aud = d.querySelector('[aria-label="audio.control.panel"]');
+  assert.ok(aud.classList.contains('ri-show') && aud.querySelector('canvas.ri-scope'));
+  assert.match(aud.textContent, /48000 Hz/);
+  [...aud.querySelectorAll('.ri-btn')].find((b) => /dictate/.test(b.textContent)).click(); await tick(10);
+  assert.match(d.querySelector('.ri-term-log').textContent, /no speech recogniser/, 'said plainly where there is none');
+  btn('👁').click(); await tick(40);
+  d.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape' })); await tick(220);
+  assert.deepEqual(stopped.sort(), ['audio', 'video', 'video'], 'closing the stage stops the camera and the microphone');
+});
+
+test('⇄ networking.tools times every service RAGE uses', { skip }, async () => {
+  const { w, d, calls } = boot();
+  await tick(20); w.RagebarImmersive.open(''); await ask(w, d, 'memory'); await tick(60);
+  [...d.querySelectorAll('.ri-bar .ri-btn')].find((b) => b.textContent === '⇄').click(); await tick(120);
+  const net = d.querySelector('[aria-label="networking.tools"]');
+  assert.ok(net.classList.contains('ri-show'));
+  for (const label of ['this connection', 'last search', 'RAGE search /health', 'WordPress search', 'DeltaVerse sequence', 'ollywoo toolkit', 'LUVping']) assert.match(net.textContent, new RegExp(label));
+  assert.ok(calls.some((c) => c.includes('luv.pythai.net/luvping')));
+});

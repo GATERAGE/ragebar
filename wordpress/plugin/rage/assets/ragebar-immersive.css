@@ -1,4 +1,4 @@
-/* ragebar-immersive (RAGE plugin 1.2.1) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* ragebar-immersive (RAGE plugin 1.3.0) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 :root{--ri-g:#3ddc84;--ri-hot:#ff3b30;--ri-amber:#ffb340;--ri-ink:#e9ffe9;--ri-dim:#86a492;--ri-line:#1f3a2b}
 .ri{position:fixed;inset:0;z-index:100000;display:none;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ri-ink)}
 .ri.ri-open{display:block;animation:riIn .22s ease-out}
@@ -69,6 +69,14 @@
 .ri-drop .ri-rolo::after{content:"drop the .persona: it rolls in here";position:absolute;inset:6px 0;display:flex;align-items:center;justify-content:center;border:1px dashed var(--ri-amber);border-radius:10px;color:var(--ri-amber);font-size:12px;background:rgba(20,14,4,.8)}
 .ri-panel{display:none;border-top:1px solid rgba(61,220,132,.16);padding:10px 12px 12px}
 .ri-panel-on .ri-panel{display:block}
+.ri-dev{display:none;border-top:1px solid rgba(61,220,132,.16);padding:10px 12px 12px}
+.ri-dev.ri-show{display:block}
+.ri-dev video{width:200px;max-width:45%;border-radius:8px;border:1px solid var(--ri-line);float:right;margin:0 0 8px 10px;background:#000}
+.ri-dev video.ri-mirror{transform:scaleX(-1)}
+.ri-dev canvas.ri-scope{display:block;width:100%;height:56px;border:1px solid var(--ri-line);border-radius:8px;background:rgba(0,0,0,.35);margin:6px 0}
+.ri-dev select{all:unset;cursor:pointer;font-size:11px;padding:3px 8px;border:1px solid var(--ri-line);border-radius:7px;color:var(--ri-ink);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ri-dev .ri-note{font-size:10.5px;color:var(--ri-dim);margin-top:6px;line-height:1.5;clear:both}
+.ri-btn.ri-live{border-color:var(--ri-hot);color:#ff8a80;box-shadow:0 0 12px rgba(255,59,48,.25)}
 .ri-panel h4{margin:8px 0 6px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ri-dim);font-weight:400}
 .ri-panel h4:first-child{margin-top:0}
 .ri-diag{display:grid;grid-template-columns:max-content 1fr;gap:2px 14px;font-size:11.5px}

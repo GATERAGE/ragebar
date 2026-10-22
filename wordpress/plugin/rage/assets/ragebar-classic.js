@@ -1,4 +1,4 @@
-/* ragebar-classic (RAGE plugin 1.2.1) — built from GATERAGE/ragebar wordpress/ragebar-widget.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* ragebar-classic (RAGE plugin 1.3.0) — built from GATERAGE/ragebar wordpress/ragebar-widget.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 /* ragebar widget v1.1.0 | github.com/GATERAGE/ragebar wordpress/ragebar-widget.html
    v1.1.0: the canvas sleeps when idle (no endless animation loop), repeated queries answer from a
    5-minute in-page cache, arrow keys walk the results and Esc returns to the field, "/" opens the
