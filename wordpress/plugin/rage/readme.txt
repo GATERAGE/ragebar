@@ -4,7 +4,7 @@ Tags: search, semantic search, vector search, bm25, menu
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: Apache-2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0
 
@@ -60,6 +60,9 @@ Codephreak's ultimate-input-field (as browseML uses it):
 If your site already runs the rage menu as a Custom HTML widget, the menu loads once whichever is present.
 
 == Changelog ==
+
+= 1.4.0 =
+* Article results respond as the rage menu's top pick does: they open in place (excerpt, LISTEN voices, read, kindred, its thread, tags, converge) and spawn further articles; one trail shared with the menu. Enter opens the first article, Enter again reads it.
 
 = 1.3.0 =
 * 👁 the camera.control.panel (preview, camera choice, mirror, ollywoo's faicey face toolkit), 👂 the audio.control.panel (microphone choice, scope, dictation, voaicey speaking the answer in the persona's voice), ⇄ networking.tools (every service RAGE uses, timed). Each turns on only by its own button; closing the field turns them off.

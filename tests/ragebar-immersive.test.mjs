@@ -31,7 +31,11 @@ function boot({ store, empty, pre } = {}) {
         calls.push(String(url));
         const u = new URL(url, 'https://rage.pythai.net/');
         let body;
-        if (u.pathname.endsWith('/substrate-sequence.json')) body = { name: 'DeltaVerse substrate sequence', version: '1.0.0', total: 1024, bundleCount: 128 };
+        if (u.pathname.endsWith('/atlas.json')) body = { tags: { 7: 'memory', 9: 'pgvectorscale' }, art: [
+          { id: 1, t: 'One', u: 'https://rage.pythai.net/one/', d: '2026-10-21', x: 'the excerpt of one', g: [7, 9], p: ['machine/rage'], v: ['neural', 'jaimla'] },
+          { id: 2, t: 'Two', u: 'https://rage.pythai.net/two/', d: '2026-10-20', x: 'the excerpt of two', g: [7], p: ['machine/rage'] },
+          { id: 3, t: 'Three', u: 'https://rage.pythai.net/three/', d: '2026-10-19', x: 'three', g: [9], p: ['machine/rage'] }] };
+        else if (u.pathname.endsWith('/substrate-sequence.json')) body = { name: 'DeltaVerse substrate sequence', version: '1.0.0', total: 1024, bundleCount: 128 };
         else if (u.hostname === 'raw.githubusercontent.com') body = { persona: 'mindx', name: 'mindX', mantra: 'Code is Law.', bdi: { beliefs: [] }, awareness: [{ belief: 'My memory is pgvectorscale with StreamingDiskANN.', source: 'docs/rage/EMBEDDING_SYSTEM.md' }] };
         else if (u.pathname === '/wp-json/wp/v2/search') body = empty ? [] : [{ id: 2, title: 'Two', url: 'https://rage.pythai.net/two/' }];
         else if (u.pathname === '/ragesearch/health') body = { standard: 'ragesearch/1', version: '1.0.0', documents: { articles: 226 }, passages: { articles: 1659 }, dense_documents: { self: 9 }, model: 'mxbai-embed-large', dims: 1024, query_vectors_cached: 3, embedding_now: 0, ingest: { last_run: '2026-10-22T06:00:00Z', errors: [] } };
@@ -206,4 +210,45 @@ test('⇄ networking.tools times every service RAGE uses', { skip }, async () =>
   assert.ok(net.classList.contains('ri-show'));
   for (const label of ['this connection', 'last search', 'RAGE search /health', 'WordPress search', 'DeltaVerse sequence', 'ollywoo toolkit', 'LUVping']) assert.match(net.textContent, new RegExp(label));
   assert.ok(calls.some((c) => c.includes('luv.pythai.net/luvping')));
+});
+
+test('articles respond as the rage menu does: open in place, kindred, thread, tags; one trail with the menu', { skip }, async () => {
+  const { w, d } = boot();
+  await tick(20); w.RagebarImmersive.open(''); await ask(w, d, 'memory'); await tick(80);
+  const card = d.querySelector('.ri-results .ri-art[data-id="1"]');
+  assert.ok(card, 'an article result is an atlas article node');
+  const q = d.querySelector('.ri-q'); q.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Enter' })); await tick(20);
+  assert.ok(card.classList.contains('ri-on'), 'Enter opens the first article in place');
+  assert.match(card.querySelector('.ri-body').textContent, /the excerpt of one/);
+  assert.match(card.querySelector('.ri-body').textContent, /LISTEN in NEURAL, JAIMLA/);
+  const acts = [...card.querySelectorAll('.ri-act')].map((a) => a.textContent);
+  assert.deepEqual(acts.slice(0, 3), ['read →', '✵ kindred', '↔ its thread']);
+  assert.ok(acts.includes('#memory') && acts.includes('#pgvectorscale'));
+  [...card.querySelectorAll('.ri-act')].find((a) => a.textContent === '✵ kindred').click(); await tick(10);
+  const sub = card.querySelector('.ri-sub');
+  assert.ok(sub && /kindred · One/.test(sub.textContent) && sub.querySelectorAll('.ri-art').length >= 1, 'kindred spawn beneath it');
+  const tr = JSON.parse(w.sessionStorage.getItem('ragemap_v1'));
+  assert.equal(tr.trail[0].k, 'a1'); assert.equal(tr.collected['7'], 1, 'the rage menu\'s own trail and collected tags');
+  assert.match(d.querySelector('.ri-trail').textContent, /trail/);
+  assert.match(d.querySelector('.ri-trail').textContent, /memory ×1/);
+});
+
+test('a star picked on the ground opens its article here (dv:rage.pick)', { skip }, async () => {
+  const { w, d } = boot();
+  await tick(20); w.RagebarImmersive.open(''); await ask(w, d, 'memory'); await tick(80);
+  d.dispatchEvent(new w.CustomEvent('dv:rage.pick', { detail: { id: 3 } })); await tick(40);
+  const c = d.querySelector('.ri-art[data-id="3"]');
+  assert.ok(c && c.classList.contains('ri-on'), 'not among the results: spawned from the ground and opened');
+  d.dispatchEvent(new w.CustomEvent('dv:rage.pick', { detail: { id: 1 } })); await tick(20);
+  assert.ok(d.querySelector('.ri-results .ri-art[data-id="1"]').classList.contains('ri-on'), 'among the results: opened in place');
+});
+
+test('substrate page config: clear backdrop, opens by itself, type anywhere to ask', { skip }, async () => {
+  const { w, d } = boot({ pre: '<script>window.RAGEBAR={search:"/ragesearch",backdrop:"clear",typeToOpen:true,open:true}</script>' });
+  await tick(500);
+  const box = d.querySelector('.ri');
+  assert.ok(box.classList.contains('ri-clear') && box.classList.contains('ri-open'), 'opens over a clear backdrop');
+  d.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'Escape' })); await tick(220);
+  d.body.dispatchEvent(new w.KeyboardEvent('keydown', { key: 'g', bubbles: true })); await tick(40);
+  assert.ok(box.classList.contains('ri-open') && d.querySelector('.ri-q').value === 'g', 'a letter typed anywhere opens it with that letter');
 });

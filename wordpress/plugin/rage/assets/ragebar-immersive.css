@@ -1,4 +1,4 @@
-/* ragebar-immersive (RAGE plugin 1.3.0) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* ragebar-immersive (RAGE plugin 1.4.0) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 :root{--ri-g:#3ddc84;--ri-hot:#ff3b30;--ri-amber:#ffb340;--ri-ink:#e9ffe9;--ri-dim:#86a492;--ri-line:#1f3a2b}
 .ri{position:fixed;inset:0;z-index:100000;display:none;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ri-ink)}
 .ri.ri-open{display:block;animation:riIn .22s ease-out}
@@ -52,6 +52,32 @@
 .ri-foot{max-width:760px;margin:18px auto 0;font-size:10.5px;color:var(--ri-dim);line-height:1.7}
 .ri-foot a{color:#bfe8d0!important}
 .ri-hint{font-size:10.5px;color:var(--ri-dim);padding:0 14px 10px}
+.ri-art{padding:0}
+.ri-ah{all:unset;box-sizing:border-box;display:block;width:100%;padding:12px 16px;cursor:pointer;border-radius:11px}
+.ri-ah:focus-visible{outline:2px solid var(--ri-g);outline-offset:-2px}
+.ri-ah .ri-t::before{content:"▸ ";color:var(--ri-g);display:inline-block;transition:transform .2s ease}
+.ri-art.ri-on>.ri-ah .ri-t::before{transform:rotate(90deg)}
+.ri-art.ri-on{border-color:var(--ri-g)}
+.ri-art.ri-seen>.ri-ah .ri-t{color:#9fd8b6}
+.ri-body{display:none;padding:0 16px 12px 16px;font-size:12.5px;line-height:1.6;color:#cfe9d9}
+.ri-art.ri-on>.ri-body{display:block}
+.ri-body p{margin:0 0 6px}
+.ri-voice{color:var(--ri-amber)}
+.ri-acts2{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 2px}
+.ri-act{all:unset;cursor:pointer;font-size:11px;padding:3px 9px;border:1px solid var(--ri-line);border-radius:6px;color:var(--ri-ink);background:rgba(6,14,10,.9)}
+.ri-act:hover,.ri-act:focus-visible{border-color:var(--ri-g);color:var(--ri-g)}
+a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
+.ri-sub{margin:8px 0 2px;padding-left:10px;border-left:2px dashed #2a5c3f;display:grid;gap:8px}
+.ri-sub-h{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--ri-amber)}
+.ri-sub-h span{flex:1}
+.ri-trail{max-width:760px;margin:12px auto 0;display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:10.5px;color:var(--ri-dim)}
+.ri-trail:empty{display:none}
+.ri-trail button{all:unset;cursor:pointer;padding:2px 8px;border:1px solid var(--ri-line);border-radius:10px;color:#bfe8d0;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ri-trail button:hover,.ri-trail button:focus-visible{border-color:var(--ri-g);color:var(--ri-g)}
+.ri-trail .ri-tag{color:var(--ri-g);background:rgba(61,220,132,.08)}
+.ri-clear .ri-back{background:radial-gradient(ellipse at 50% 18%,rgba(8,20,14,.55),rgba(3,5,8,.25) 70%);backdrop-filter:none;-webkit-backdrop-filter:none}
+.ri.ri-clear,.ri-clear .ri-stage,.ri-clear .ri-back{pointer-events:none}
+.ri-clear .ri-field,.ri-clear .ri-results,.ri-clear .ri-legs,.ri-clear .ri-foot,.ri-clear .ri-term-log,.ri-clear .ri-trail,.ri-clear .ri-win{pointer-events:auto}
 .ri-mode{display:inline-flex;border:1px solid var(--ri-line);border-radius:8px;overflow:hidden}
 .ri-mode button{all:unset;cursor:pointer;padding:3px 9px;font-size:11px;letter-spacing:.08em;color:var(--ri-dim)}
 .ri-mode button[aria-pressed="true"]{background:rgba(61,220,132,.16);color:var(--ri-g)}
