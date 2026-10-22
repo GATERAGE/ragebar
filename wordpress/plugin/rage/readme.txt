@@ -4,7 +4,7 @@ Tags: search, semantic search, vector search, bm25, menu
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 License: Apache-2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0
 
@@ -58,6 +58,9 @@ Codephreak's ultimate-input-field (as browseML uses it):
 If your site already runs the rage menu as a Custom HTML widget, the menu loads once whichever is present.
 
 == Changelog ==
+
+= 1.2.1 =
+* The immersive ragebar announces every answer as a dv:rage event, so a DeltaVerse substrate (rage-substrate.js) can draw it.
 
 = 1.2.0 =
 * RAGE and the ragebar as one plugin: the immersive ragebar (modes, control panel, response windows, persona

@@ -1,4 +1,4 @@
-/* ragebar-immersive (RAGE plugin 1.2.0) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* ragebar-immersive (RAGE plugin 1.2.1) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 (function(){
   if(window.__ragebarImmersive) return; window.__ragebarImmersive=1; window.__ragebar=1;
   var VERSION='1.0.0', cfg=window.RAGEBAR||{}, RS=typeof cfg.search==='string'?cfg.search.replace(/\/+$/,''):'https://deltaverse.pythai.net/ragesearch';

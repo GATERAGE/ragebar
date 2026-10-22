@@ -1,4 +1,4 @@
-/* rage-menu (RAGE plugin 1.2.0) — built from GATERAGE/ragebar wordpress/rage-menu-widget.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* rage-menu (RAGE plugin 1.2.1) — built from GATERAGE/ragebar wordpress/rage-menu-widget.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 :root{--rm-g:#3ddc84;--rm-hot:#ff3b30;--rm-amber:#ffb340;--rm-ink:#e9ffe9;--rm-dim:#7f9c8a;--rm-bg:#05070a;--rm-line:#16281e;--rm-card:rgba(6,14,10,.94)}
 .navigation-main li.rm-li>button{all:unset;cursor:pointer;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.14em;text-transform:lowercase;color:var(--rm-g);font-weight:700;padding:0 .2em;display:inline-flex;align-items:center;gap:.4em}
 .navigation-main li.rm-li>button:focus-visible{outline:2px solid var(--rm-g);outline-offset:3px;border-radius:3px}
