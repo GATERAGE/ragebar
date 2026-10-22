@@ -148,6 +148,36 @@ Two traps, learned the hard way:
   `wp_inactive_widgets`. Assign it with `POST /wp/v2/sidebars/<id>` — which
   *blanks the content* — then write the content again. Three calls, in that order.
 
+## RAGE search: the standard, the menu, the plugin
+
+RAGE searches with several optimized algorithms at once and fuses them by rank. That is now written down as a
+standard, **[RAGESEARCH.md](RAGESEARCH.md)** (ragesearch/1), with a stdlib reference implementation,
+[`python/ragesearch.py`](python/ragesearch.py), and conformance tests (`python3 tests/ragesearch.test.py [copy]`).
+
+| leg | algorithm |
+|---|---|
+| `bm25` | words: BM25 over full text (k1 1.2, b 0.75, the Savante/browseML formula) |
+| `dense` | meaning: the store's own embedding model, nearest neighbours by cosine (mindX: pgvectorscale StreamingDiskANN) |
+| `atlas` | the phrase in a title, excerpt or tag of the site's atlas |
+| `wp` | WordPress's own search, fused in the visitor's browser |
+
+Reciprocal rank fusion, k = 60. Every leg reports `ok`, `ms`, `n` or why not; a slow leg (meaning, while the query
+is embedded) says `pending` and folds in when it lands.
+
+- **On rage.pythai.net**: the header menu's first item, **rage**, has two modes, remembered per visitor:
+  **atlas** (the default, the menu as it was) and **ragebar** (RAGE search). Source:
+  [`wordpress/rage-menu-widget.html`](wordpress/rage-menu-widget.html) (footer widget `custom_html-7`, v1.1.0).
+  The service behind it is mindX's `ragesearch` (`https://deltaverse.pythai.net/ragesearch/search`, `/health`).
+- **RAGE retrieves RAGE**: `corpus=self` searches RAGE's own docs ([`docs/`](docs/README.md)) and its own code and
+  standard; `corpus=all` adds them to the articles ("+ RAGE's own docs" in the menu).
+- **The WordPress plugin**: [`wordpress/plugin/rage/`](wordpress/plugin/rage/) — the same menu with Settings → RAGE
+  (opening mode, search service, atlas). Built from the widget by `node tools/build-plugin.mjs` (assets + `rage.zip`
+  + sha256), tested by `tests/plugin_test.php` (docker php) and `tests/rage-menu-widget.test.mjs` (jsdom).
+- **bankML** searches itself the same way: `sAGI/selfsearch.py` over its code, logs, personas, `.memory`,
+  `.history` and gitmind ledgers.
+
+`wordpress/ragebar-atlas-widget.html` (v2.0.0, the atlas docked into the page) is a design that was never deployed.
+
 ## Watch a model: ragewatch
 
 The same meter, pointed at a leaderboard instead of a corpus. It follows
