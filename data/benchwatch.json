@@ -1,12 +1,12 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-23T17:09:11.088Z",
+  "checkedAt": "2026-10-23T21:25:41.259Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"3cdc25c4ccff0d1f49eaacfa75ff5500\"",
-    "generatedAt": "2026-10-23T15:31:07.429Z",
-    "sourceLastUpdated": "October 20, 2026",
-    "totalModels": 989,
+    "etag": "W/\"1e9b0cf2b01295e7908ab8407ed3331f\"",
+    "generatedAt": "2026-10-23T18:46:44.434Z",
+    "sourceLastUpdated": "October 23, 2026",
+    "totalModels": 991,
     "rankedModels": 224,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
@@ -21,18 +21,18 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 73.6,
+      "displayScore": 73.53,
       "interval90": [
-        63.88,
-        83.32
+        63.8,
+        83.25
       ],
       "overallRank": 12,
       "openRank": 1,
       "categoryScores": {
-        "agentic": 77.8,
+        "agentic": 77.9,
         "coding": 63.3,
         "reasoning": 82.5,
-        "knowledge": 58.4
+        "knowledge": 58.2
       },
       "categoryRanks": {
         "agentic": 13,
@@ -93,21 +93,28 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-23T11:40:59.962Z",
+          "ts": "2026-10-23T21:25:41.259Z",
           "slug": "mimo-v2-6-pro",
           "field": "displayScore",
-          "from": 73.66,
-          "to": 73.6
+          "from": 73.6,
+          "to": 73.53
         },
         {
-          "ts": "2026-10-23T11:40:59.962Z",
+          "ts": "2026-10-23T21:25:41.259Z",
           "slug": "mimo-v2-6-pro",
-          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 766,
-          "to": 768
+          "field": "categoryScores.agentic",
+          "from": 77.8,
+          "to": 77.9
+        },
+        {
+          "ts": "2026-10-23T21:25:41.259Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.knowledge",
+          "from": 58.4,
+          "to": 58.2
         }
       ],
-      "changedAt": "2026-10-23T11:40:59.962Z"
+      "changedAt": "2026-10-23T21:25:41.259Z"
     }
   ]
 }
