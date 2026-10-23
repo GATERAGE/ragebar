@@ -1,4 +1,4 @@
-/* rage-menu (RAGE plugin 1.5.0) — built from GATERAGE/ragebar wordpress/rage-menu-widget.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* rage-menu (RAGE plugin 1.5.3) — built from GATERAGE/ragebar wordpress/rage-menu-widget.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 (function(){
   if(window.__ragemap) return; window.__ragemap=1;
   var ATLAS='https://deltaverse.pythai.net/audio/atlas.json';

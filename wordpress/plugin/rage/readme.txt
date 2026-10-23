@@ -4,7 +4,7 @@ Tags: search, semantic search, vector search, bm25, menu
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.5.0
+Stable tag: 1.5.3
 License: Apache-2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0
 
@@ -60,6 +60,15 @@ Codephreak's ultimate-input-field (as browseML uses it):
 If your site already runs the rage menu as a Custom HTML widget, the menu loads once whichever is present.
 
 == Changelog ==
+
+= 1.5.3 =
+* Clear backdrop: the wheel or a touch drag that lands on the ground while the field is open scrolls the results (it used to zoom the ground, or do nothing, anywhere off a card).
+
+= 1.5.2 =
+* RAGEBAR.stay = true (a page that is the search itself): results, read → and Enter open the article in a new tab, so the search and its ground stay where they are.
+
+= 1.5.1 =
+* atlas on a page without the rage menu (a substrate such as deltaverse.pythai.net/rage) walks every article in the field, newest first, instead of leaving for the site's front page. RAGEBAR.wordpress = false (a host without WordPress) drops the wordpress leg, so no question waits on a missing /wp-json.
 
 = 1.5.0 =
 * Jaimla's faice: drag 👁 or 👂 out of the row (mouse or touch) and drop it on Jaimla's faice, ollywoo's BASIC FAICE whose organs are the devices. Her eyes become the camera (the live picture is the iris), her ears swell with what the microphone hears, and her mouth is the waveform of the voice speaking the answer in Jaimla's voice. Click an eye or an ear for its control panel; drag the globe to turn it. Also opened from the ◉ on Jaimla's card, its own eyes / ears buttons, or :face. three.js and faice.js load only when the faice is opened; nothing leaves the browser.

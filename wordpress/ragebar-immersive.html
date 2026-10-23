@@ -169,10 +169,12 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
 <script id="ragebar-immersive-js">
 (function(){
   if(window.__ragebarImmersive) return; window.__ragebarImmersive=1; window.__ragebar=1;
-  var VERSION='1.3.0', cfg=window.RAGEBAR||{}, RS=typeof cfg.search==='string'?cfg.search.replace(/\/+$/,''):'https://deltaverse.pythai.net/ragesearch';
+  var VERSION='1.3.3', cfg=window.RAGEBAR||{}, RS=typeof cfg.search==='string'?cfg.search.replace(/\/+$/,''):'https://deltaverse.pythai.net/ragesearch';
   var LEGS=[['bm25','words'],['dense','meaning'],['atlas','atlas'],['wp','wordpress'],['persona','persona']], CORPORA=[['articles','articles'],['self',"RAGE's own"],['deltaverse','DeltaVerse'],['all','all']], KS=[5,10,20];
   var V={legs:{bm25:true,dense:true,atlas:true,wp:true,persona:true},corpus:'articles',k:10,panel:false,persona:'rage'};
   try{ var sv=JSON.parse(localStorage.getItem('ragebar_vars')||'null'); if(sv){ if(sv.legs) for(var l in V.legs) if(l in sv.legs) V.legs[l]=!!sv.legs[l]; if(sv.corpus) V.corpus=sv.corpus; if(sv.k) V.k=+sv.k; V.panel=!!sv.panel; if(sv.persona) V.persona=sv.persona; } }catch(e){}
+  // a host without WordPress (deltaverse.pythai.net/rage) says so: the wordpress leg is neither offered nor fetched
+  if(cfg.wordpress===false){ V.legs.wp=false; LEGS=LEGS.filter(function(L){ return L[0]!=='wp'; }); }
   function keep(){ try{ localStorage.setItem('ragebar_vars',JSON.stringify(V)); }catch(e){} }
   function h(tag,attrs,kids){ var el=document.createElement(tag); if(attrs) for(var k in attrs){ if(k==='text') el.textContent=attrs[k]; else if(k==='on') for(var ev in attrs.on) el.addEventListener(ev,attrs.on[ev]); else el.setAttribute(k,attrs[k]); }
     (kids||[]).forEach(function(c){ if(c!=null) el.appendChild(typeof c==='string'?document.createTextNode(c):c); }); return el; }
@@ -248,7 +250,22 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
   function close(){ if(!isOpen) return; isOpen=false; if(cam.stream) camOff(); if(mic.stream) micOff(); faceHide(); box.classList.add('ri-closing'); document.documentElement.style.overflow='';
     setTimeout(function(){ if(!isOpen) box.classList.remove('ri-open','ri-closing'); },reduce?0:180); try{ back&&back.focus&&back.focus({preventScroll:true}); }catch(e){} }
   xBtn.addEventListener('click',close);
+  // RAGEBAR.stay (a page that IS the search, e.g. deltaverse.pythai.net/rage): reading never leaves it; a link opens beside it
+  function go(href){ if(!href) return; if(cfg.stay) window.open(href,'_blank','noopener'); else location.href=href; }
+  box.addEventListener('click',function(e){ if(!cfg.stay||e.defaultPrevented||e.button) return; var a=e.target.closest&&e.target.closest('a[href]'); if(!a||a.target==='_blank') return;
+    var u; try{ u=new URL(a.getAttribute('href'),location.href); }catch(x){ return; } if(u.origin===location.origin&&u.pathname===location.pathname) return; e.preventDefault(); go(u.href); });
   box.addEventListener('pointerdown',function(e){ if(e.target===stage||e.target.classList.contains('ri-back')) close(); });
+  // a clear backdrop lets the ground take clicks (stars), so the stage cannot take them: the wheel, or a touch drag, that lands
+  // on the ground while the field is open scrolls the results, rather than zooming the ground or doing nothing
+  if(cfg.backdrop==='clear'){
+    var outside=function(e){ return isOpen&&!(e.target.closest&&e.target.closest('.ri-field,.ri-results,.ri-legs,.ri-foot,.ri-term-log,.ri-trail,.ri-win')); };
+    window.addEventListener('wheel',function(e){ if(!outside(e)||stage.scrollHeight<=stage.clientHeight) return;
+      e.preventDefault(); e.stopPropagation(); stage.scrollTop+=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?stage.clientHeight:1); },{capture:true,passive:false});
+    var drag=null;
+    window.addEventListener('pointerdown',function(e){ if(e.pointerType!=='touch'||!outside(e)) return; drag={y:e.clientY,top:stage.scrollTop,id:e.pointerId}; },true);
+    window.addEventListener('pointermove',function(e){ if(!drag||e.pointerId!==drag.id) return; stage.scrollTop=drag.top-(e.clientY-drag.y); },true);
+    window.addEventListener('pointerup',function(e){ if(drag&&e.pointerId===drag.id) drag=null; },true);
+    window.addEventListener('pointercancel',function(){ drag=null; },true); }
   window.addEventListener('resize',function(){ if(isOpen) size(); });
   document.addEventListener('keydown',function(e){ var t=e.target, typing=t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable);
     if(e.key==='Escape'&&isOpen){ e.preventDefault(); close(); }
@@ -402,13 +419,15 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
     var rows=[], c=navigator.connection||{}; rows.push(['this connection',(navigator.onLine?'online':'offline')+(c.effectiveType?' · '+c.effectiveType:'')+(c.rtt!=null?' · rtt '+c.rtt+' ms':'')+(c.downlink!=null?' · '+c.downlink+' Mb/s':'')]);
     if(lastLegs) rows.push(['last search',Object.keys(lastLegs).map(function(k){ var l=lastLegs[k]; return legName(k)+' '+(l.ok?Math.round(l.ms)+' ms':(l.error||'—')); }).join(' · ')]);
     kv(netRead,rows.concat([['checking','…']]));
-    var checks=[['RAGE search /health',RS?RS+'/health':null,{cache:'no-store'}],['RAGE search, words',RS?RS+'/search?legs=bm25&k=1&q=rage':null,{cache:'no-store'}],['WordPress search','/wp-json/wp/v2/search?per_page=1&search=rage',{cache:'no-store'}],
+    var checks=[['RAGE search /health',RS?RS+'/health':null,{cache:'no-store'}],['RAGE search, words',RS?RS+'/search?legs=bm25&k=1&q=rage':null,{cache:'no-store'}],['WordPress search',cfg.wordpress===false?null:'/wp-json/wp/v2/search?per_page=1&search=rage',{cache:'no-store'}],
       ['DeltaVerse sequence',DVSEQ,{headers:{Range:'bytes=0-255'},cache:'no-store'}],['ollywoo toolkit',DV+'/ollywoo/voicey.js',{method:'HEAD',cache:'no-store'}],['LUVping (luv.pythai.net)','https://luv.pythai.net/luvping',{mode:'no-cors',cache:'no-store'}]];
     var out=rows.slice(); (function next(i){ if(i>=checks.length){ kv(netRead,out); return; } var ck=checks[i]; if(!ck[1]){ out.push([ck[0],'not configured','ri-bad']); next(i+1); return; }
       timed(ck[1],ck[2]).then(function(r){ out.push([ck[0],(r.ok?'':'✕ ')+r.code+' · '+r.ms+' ms',r.ok?(r.ms>1500?'ri-pend':'ri-ok'):'ri-bad']); kv(netRead,out.concat(i+1<checks.length?[['checking','…']]:[])); next(i+1); }); })(0); }
   netBtn.addEventListener('click',function(){ if(netPanel.classList.contains('ri-show')) netPanel.classList.remove('ri-show'); else { netPanel.classList.add('ri-show'); netRun(); } });
   /* ── modes: RAGE here; atlas hands over to the rage menu ── */
-  mAtlas.addEventListener('click',function(){ var b=document.querySelector('.rm-li>button'); close(); if(b) setTimeout(function(){ b.click(); },200); else location.href='/'; });
+  // no rage menu on this page (a substrate, /rage): walk the atlas here, never leave for '/'
+  mAtlas.addEventListener('click',function(){ var b=document.querySelector('.rm-li>button'); if(b){ close(); setTimeout(function(){ b.click(); },200); return; }
+    atlasLoad().then(function(){ open(''); paintTrail(); spawnList(list,'the atlas · every article, newest first',A.art.slice().sort(function(x,y){ return x.d<y.d?1:x.d>y.d?-1:0; }),true); },function(){ open(''); say('atlas unavailable'); }); });
   mRage.addEventListener('click',function(){ q.focus(); });
   /* ── personas, in a rolodex under the field: drop a .persona and it rolls in ── */
   var BUILT=[{id:'rage',name:'RAGE',line:'no persona: the corpus alone',items:[]},
@@ -594,8 +613,8 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
     var v=q.value.trim(), cmd=v.charAt(0)===':'||!v;
     if(e.key==='Enter'){ e.preventDefault(); if(!v) return; hist.push(v); hi=hist.length; if(v.charAt(0)===':'){ say('› '+v); command(v); q.value=''; return; }
       var first=list.querySelector('.ri-card'); if(!first) return;
-      if(first.classList.contains('ri-art')){ if(first.classList.contains('ri-on')){ var rd=first.querySelector('a.ri-act'); if(rd) location.href=rd.href; } else first._open(true); }
-      else if(first.href) location.href=first.href; }
+      if(first.classList.contains('ri-art')){ if(first.classList.contains('ri-on')){ var rd=first.querySelector('a.ri-act'); if(rd) go(rd.href); } else first._open(true); }
+      else if(first.href) go(first.href); }
     else if((e.key==='ArrowUp'||(e.key==='ArrowDown'&&cmd))&&cmd&&hist.length){ e.preventDefault(); hi=Math.max(0,Math.min(hist.length,hi+(e.key==='ArrowUp'?-1:1))); q.value=hist[hi]||''; }
     else if(e.key==='ArrowDown'){ var f=list.querySelector('.ri-ah, a.ri-card'); if(f){ e.preventDefault(); f.focus(); } } });
   list.addEventListener('keydown',function(e){ var L=Array.prototype.slice.call(list.querySelectorAll('.ri-ah, a.ri-card, .ri-act')), i=L.indexOf(document.activeElement); if(i<0) return;

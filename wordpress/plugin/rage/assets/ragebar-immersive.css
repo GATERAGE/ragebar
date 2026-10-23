@@ -1,4 +1,4 @@
-/* ragebar-immersive (RAGE plugin 1.5.0) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* ragebar-immersive (RAGE plugin 1.5.3) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 :root{--ri-g:#3ddc84;--ri-hot:#ff3b30;--ri-amber:#ffb340;--ri-ink:#e9ffe9;--ri-dim:#86a492;--ri-line:#1f3a2b}
 .ri{position:fixed;inset:0;z-index:100000;display:none;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ri-ink)}
 .ri.ri-open{display:block;animation:riIn .22s ease-out}
