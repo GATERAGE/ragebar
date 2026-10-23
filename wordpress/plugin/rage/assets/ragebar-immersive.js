@@ -1,12 +1,14 @@
-/* ragebar-immersive (RAGE plugin 1.5.5) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* ragebar-immersive (RAGE plugin 1.5.7) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 (function(){
   if(window.__ragebarImmersive) return; window.__ragebarImmersive=1; window.__ragebar=1;
-  var VERSION='1.3.5', cfg=window.RAGEBAR||{}, RS=typeof cfg.search==='string'?cfg.search.replace(/\/+$/,''):'https://deltaverse.pythai.net/ragesearch';
+  var VERSION='1.3.7', cfg=window.RAGEBAR||{}, RS=typeof cfg.search==='string'?cfg.search.replace(/\/+$/,''):'https://deltaverse.pythai.net/ragesearch';
   var LEGS=[['bm25','words'],['dense','meaning'],['atlas','atlas'],['wp','wordpress'],['persona','persona']], CORPORA=[['articles','articles'],['self',"RAGE's own"],['deltaverse','DeltaVerse'],['all','all']], KS=[5,10,20];
   var V={legs:{bm25:true,dense:true,atlas:true,wp:true,persona:true},corpus:'articles',k:10,panel:false,persona:'rage'};
-  try{ var sv=JSON.parse(localStorage.getItem('ragebar_vars')||'null'); if(sv){ if(sv.legs) for(var l in V.legs) if(l in sv.legs) V.legs[l]=!!sv.legs[l]; if(sv.corpus) V.corpus=sv.corpus; if(sv.k) V.k=+sv.k; V.panel=!!sv.panel; if(sv.persona) V.persona=sv.persona; } }catch(e){}
+  try{ var sv=JSON.parse(localStorage.getItem('ragebar_vars')||'null'); if(sv){ if(sv.legs) for(var l in V.legs) if(l in sv.legs) V.legs[l]=!!sv.legs[l]; if(sv.corpus) V.corpus=sv.corpus; if(sv.k) V.k=+sv.k; V.panel=!!sv.panel; if(sv.persona) V.persona=sv.persona; V.corpusPicked=!!sv.corpusPicked; } }catch(e){}
   // a host without WordPress (deltaverse.pythai.net/rage) says so: the wordpress leg is neither offered nor fetched
   if(cfg.wordpress===false){ V.legs.wp=false; LEGS=LEGS.filter(function(L){ return L[0]!=='wp'; }); }
+  // the host's corpus (RAGEBAR.corpus: the DeltaVerse's /rage searches 'all', RAGE and DeltaVerse together) until the reader picks one
+  if(CORPORA.some(function(C){ return C[0]===cfg.corpus; })&&!V.corpusPicked) V.corpus=cfg.corpus;
   function keep(){ try{ localStorage.setItem('ragebar_vars',JSON.stringify(V)); }catch(e){} }
   function h(tag,attrs,kids){ var el=document.createElement(tag); if(attrs) for(var k in attrs){ if(k==='text') el.textContent=attrs[k]; else if(k==='on') for(var ev in attrs.on) el.addEventListener(ev,attrs.on[ev]); else el.setAttribute(k,attrs[k]); }
     (kids||[]).forEach(function(c){ if(c!=null) el.appendChild(typeof c==='string'?document.createTextNode(c):c); }); return el; }
@@ -47,7 +49,7 @@
     vars.appendChild(h('span',{'class':'ri-lab',text:'legs'}));
     LEGS.forEach(function(L){ var on=V.legs[L[0]]; vars.appendChild(h('button',{'class':'ri-chip',type:'button','aria-pressed':on?'true':'false',title:{bm25:'BM25 over full text',dense:'meaning: mindX pgvectorscale',atlas:'the atlas phrase',wp:'WordPress search (this browser)'}[L[0]],text:L[1],on:{click:function(){ V.legs[L[0]]=!V.legs[L[0]]; if(!anyLeg()) V.legs[L[0]]=true; keep(); paintVars(); rerun(); }}})); });
     vars.appendChild(h('span',{'class':'ri-lab',text:'corpus'}));
-    CORPORA.forEach(function(C){ vars.appendChild(h('button',{'class':'ri-chip',type:'button','aria-pressed':V.corpus===C[0]?'true':'false',text:C[1],on:{click:function(){ V.corpus=C[0]; keep(); paintVars(); rerun(); }}})); });
+    CORPORA.forEach(function(C){ vars.appendChild(h('button',{'class':'ri-chip',type:'button','aria-pressed':V.corpus===C[0]?'true':'false',text:C[1],on:{click:function(){ V.corpus=C[0]; V.corpusPicked=true; keep(); paintVars(); rerun(); }}})); });
     vars.appendChild(h('span',{'class':'ri-lab',text:'k'}));
     KS.forEach(function(n){ vars.appendChild(h('button',{'class':'ri-chip',type:'button','aria-pressed':V.k===n?'true':'false',text:String(n),on:{click:function(){ V.k=n; keep(); paintVars(); rerun(); }}})); });
     termBtn.setAttribute('aria-pressed',V.panel?'true':'false'); field.classList.toggle('ri-panel-on',V.panel);
@@ -386,6 +388,11 @@
   var timer=null, seq=0, keys=[];
   function paintLegs(legs){ clear(legsEl); Object.keys(legs).forEach(function(n){ var l=legs[n], pend=!l.ok&&/^pending/.test(l.error||'');
     legsEl.appendChild(h('span',{title:(l.algorithm||'')+(l.error?' — '+l.error:'')},[legName(n)+' ',h('b',{'class':l.ok?'ri-ok':pend?'ri-pend':'ri-bad',text:l.ok?(l.n+' · '+Math.round(l.ms)+' ms'):pend?'embedding your words…':(l.error==='not configured'?'not configured':'unavailable')})])); }); }
+  // ragesearch's promise (env.fusion.share, corpus=all): each smaller corpus keeps its best N matches in the top k, at its
+  // own fused rank. The field fuses again (wordpress, persona), so it keeps the same promise rather than cutting at k blind.
+  function sharedTop(fused,k,env,items){ var want=env&&env.fusion&&env.fusion.share; if(!want||k<6) return fused.slice(0,k);
+    var keep={}, n=0; Object.keys(want).forEach(function(c){ var m=+want[c]||0; fused.forEach(function(e){ if(m>0&&!keep[e.id]&&(items[e.id]||{}).corpus===c){ keep[e.id]=1; m--; n++; } }); });
+    var room=Math.max(0,k-n), out=[]; fused.forEach(function(e){ if(keep[e.id]) out.push(e); else if(room>0){ out.push(e); room--; } }); return out.slice(0,k); }
   function render(env,wp,mine,query){ if(mine!==seq) return;
     var R={}, items={}, legs={};
     if(env&&env.legs) Object.keys(env.legs).forEach(function(k){ legs[k]=env.legs[k]; });
@@ -396,14 +403,14 @@
     if(V.legs.persona&&V.persona!=='rage'){ var pl=personaLeg(query); if(pl){ R.persona=pl.ids; for(var pk in pl.items) items[pk]=pl.items[pk]; legs.persona={algorithm:'BM25 over '+pl.name+"'s .persona (this browser)",ok:true,n:pl.ids.length,ms:pl.ms}; }
       else legs.persona={algorithm:'the persona',ok:false,n:0,ms:0,error:'pending: reading the .persona'}; }
     var server=V.legs.bm25||V.legs.dense||V.legs.atlas; if(server&&!env) legs.ragesearch={algorithm:RS||'no search service',ok:false,n:0,ms:0,error:RS?(env===false?'unavailable':'pending: asking RAGE'):'not configured'};
-    var fused=rrf(R).slice(0,V.k); paintLegs(legs); clear(list); lastLegs=legs;
+    var fused=sharedTop(rrf(R),V.k,env,items); paintLegs(legs); clear(list); lastLegs=legs;
     // the DeltaVerse event contract: a substrate (rage-substrate.js) draws what RAGE just did
     try{ document.dispatchEvent(new CustomEvent('dv:rage',{detail:{query:query,legs:legs,results:fused.map(function(e){ return {id:e.id,title:(items[e.id]||{}).title,ranks:e.ranks}; })}})); }catch(e){}
     fused.forEach(function(e,i){ var it=items[e.id]||{}, max=fused[0].s;
       var ranks=h('div',{'class':'ri-ranks'}); Object.keys(e.ranks).forEach(function(l){ ranks.appendChild(h('span',{'class':'ri-rank',text:legName(l)+' '+e.ranks[l]})); });
       var fuse=h('div',{'class':'ri-fuse',style:'width:'+Math.round(e.s/max*100)+'%'});
       if(BY[e.id]&&(it.corpus==null||it.corpus==='articles')){ var ac=artCard(BY[e.id],{ranks:ranks,snippet:it.snippet,fuse:fuse}); ac.style.animationDelay=(i*35)+'ms'; list.appendChild(h('li',{},[ac])); return; }
-      var card=h(it.url?'a':'div',{'class':'ri-card',href:it.url||null,tabindex:'0',style:'animation-delay:'+(i*35)+'ms'},[h('div',{'class':'ri-t',text:it.title||String(e.id)}),h('div',{'class':'ri-m',text:[it.date,it.corpus==='self'?"RAGE's own":'',it.kind&&it.kind!=='article'?it.kind:''].filter(Boolean).join(' · ')}),it.snippet?h('div',{'class':'ri-s',text:it.snippet}):null,ranks,fuse]);
+      var card=h(it.url?'a':'div',{'class':'ri-card',href:it.url||null,tabindex:'0',style:'animation-delay:'+(i*35)+'ms'},[h('div',{'class':'ri-t',text:it.title||String(e.id)}),h('div',{'class':'ri-m',text:[it.date,it.corpus==='self'?"RAGE's own":it.corpus==='deltaverse'?'DeltaVerse':'',it.kind&&it.kind!=='article'?it.kind:''].filter(Boolean).join(' · ')}),it.snippet?h('div',{'class':'ri-s',text:it.snippet}):null,ranks,fuse]);
       if(it.corpus==='self'||it.kind==='persona'){ if(it.url){ card.target='_blank'; card.rel='noopener'; } }
       if(!it.url) card.removeAttribute('href'); list.appendChild(h('li',{},[card])); });
     var pend=function(k){ return !legs[k].ok&&/^pending/.test(legs[k].error||''); };
@@ -430,13 +437,13 @@
     if(c==='legs'){ var want={}, map={words:'bm25',bm25:'bm25',meaning:'dense',dense:'dense',atlas:'atlas',wordpress:'wp',wp:'wp'}; p.forEach(function(w){ if(map[w]) want[map[w]]=true; });
       if(!Object.keys(want).length){ say('legs: words meaning atlas wordpress (now: '+LEGS.filter(function(L){ return V.legs[L[0]]; }).map(function(L){ return L[1]; }).join(' ')+')'); return; }
       LEGS.forEach(function(L){ V.legs[L[0]]=!!want[L[0]]; }); say('legs → '+LEGS.filter(function(L){ return V.legs[L[0]]; }).map(function(L){ return L[1]; }).join(' ')); }
-    else if(c==='corpus'){ var m={articles:'articles',self:'self',rage:'self',own:'self',all:'all',both:'all'}[p[0]]; if(!m){ say('corpus: articles · self · all'); return; } V.corpus=m; say('corpus → '+m); }
+    else if(c==='corpus'){ var m={articles:'articles',self:'self',rage:'self',own:'self',deltaverse:'deltaverse',dv:'deltaverse',all:'all',both:'all'}[p[0]]; if(!m){ say('corpus: articles · self · deltaverse · all'); return; } V.corpus=m; V.corpusPicked=true; say('corpus → '+m); }
     else if(c==='k'){ var n=parseInt(p[0],10); if(!(n>=1&&n<=30)){ say('k: 1..30'); return; } V.k=n; say('k → '+n); }
     else if(c==='spawn'){ spawn(); return; }
     else if(c==='clear'){ clearAll(); return; }
     else if(c==='face'||c==='faice'){ if(faceOpen()) faceHide(); else faceShow(); return; }
     else if(c==='panel'){ V.panel=!V.panel; keep(); paintVars(); if(V.panel) diagnose(); return; }
-    else if(c==='help'||!c){ say(':legs words meaning atlas wordpress — which algorithms run\n:corpus articles|self|all — what is searched (self = RAGE retrieving RAGE)\n:k n — how many results\n:spawn — this answer as a response window · :clear · :panel\n:face — Jaimla’s faice: drop 👁 / 👂 on it\nanything else — the question'); return; }
+    else if(c==='help'||!c){ say(':legs words meaning atlas wordpress — which algorithms run\n:corpus articles|self|deltaverse|all — what is searched (self = RAGE retrieving RAGE)\n:k n — how many results\n:spawn — this answer as a response window · :clear · :panel\n:face — Jaimla’s faice: drop 👁 / 👂 on it\nanything else — the question'); return; }
     else { say('unknown: :'+c+' (try :help)'); return; }
     keep(); paintVars(); if(lastQuery) search(lastQuery); }
   q.addEventListener('input',function(){ var n=Date.now(); keys.push(n); keys=keys.filter(function(x){ return n-x<1500; }); meter(Math.min(.9,keys.length/9),false); spark(1);

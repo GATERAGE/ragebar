@@ -4,7 +4,7 @@ Tags: search, semantic search, vector search, bm25, menu
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.5.5
+Stable tag: 1.5.7
 License: Apache-2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0
 
@@ -60,6 +60,12 @@ Codephreak's ultimate-input-field (as browseML uses it):
 If your site already runs the rage menu as a Custom HTML widget, the menu loads once whichever is present.
 
 == Changelog ==
+
+= 1.5.7 =
+* The field keeps ragesearch's share (fusion.share, corpus all): after fusing its own legs it still shows each smaller corpus's best matches (DeltaVerse, RAGE's own) in the top k, instead of cutting at k blind.
+
+= 1.5.6 =
+* RAGEBAR.corpus sets the host's default corpus (articles · self · deltaverse · all) until the reader picks one; the DeltaVerse /rage searches all, RAGE and DeltaVerse together. :corpus also takes deltaverse. A DeltaVerse result says so on its card, as RAGE's own does.
 
 = 1.5.5 =
 * The clear backdrop's scrolling stage takes the pointer inline as well as in the stylesheet, so a page still holding an older stylesheet from its cache scrolls too.
