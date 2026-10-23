@@ -1,7 +1,7 @@
-/* ragebar-immersive (RAGE plugin 1.5.3) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* ragebar-immersive (RAGE plugin 1.5.5) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 (function(){
   if(window.__ragebarImmersive) return; window.__ragebarImmersive=1; window.__ragebar=1;
-  var VERSION='1.3.3', cfg=window.RAGEBAR||{}, RS=typeof cfg.search==='string'?cfg.search.replace(/\/+$/,''):'https://deltaverse.pythai.net/ragesearch';
+  var VERSION='1.3.5', cfg=window.RAGEBAR||{}, RS=typeof cfg.search==='string'?cfg.search.replace(/\/+$/,''):'https://deltaverse.pythai.net/ragesearch';
   var LEGS=[['bm25','words'],['dense','meaning'],['atlas','atlas'],['wp','wordpress'],['persona','persona']], CORPORA=[['articles','articles'],['self',"RAGE's own"],['deltaverse','DeltaVerse'],['all','all']], KS=[5,10,20];
   var V={legs:{bm25:true,dense:true,atlas:true,wp:true,persona:true},corpus:'articles',k:10,panel:false,persona:'rage'};
   try{ var sv=JSON.parse(localStorage.getItem('ragebar_vars')||'null'); if(sv){ if(sv.legs) for(var l in V.legs) if(l in sv.legs) V.legs[l]=!!sv.legs[l]; if(sv.corpus) V.corpus=sv.corpus; if(sv.k) V.k=+sv.k; V.panel=!!sv.panel; if(sv.persona) V.persona=sv.persona; } }catch(e){}
@@ -86,18 +86,18 @@
   function go(href){ if(!href) return; if(cfg.stay) window.open(href,'_blank','noopener'); else location.href=href; }
   box.addEventListener('click',function(e){ if(!cfg.stay||e.defaultPrevented||e.button) return; var a=e.target.closest&&e.target.closest('a[href]'); if(!a||a.target==='_blank') return;
     var u; try{ u=new URL(a.getAttribute('href'),location.href); }catch(x){ return; } if(u.origin===location.origin&&u.pathname===location.pathname) return; e.preventDefault(); go(u.href); });
-  box.addEventListener('pointerdown',function(e){ if(e.target===stage||e.target.classList.contains('ri-back')) close(); });
-  // a clear backdrop lets the ground take clicks (stars), so the stage cannot take them: the wheel, or a touch drag, that lands
-  // on the ground while the field is open scrolls the results, rather than zooming the ground or doing nothing
-  if(cfg.backdrop==='clear'){
-    var outside=function(e){ return isOpen&&!(e.target.closest&&e.target.closest('.ri-field,.ri-results,.ri-legs,.ri-foot,.ri-term-log,.ri-trail,.ri-win')); };
-    window.addEventListener('wheel',function(e){ if(!outside(e)||stage.scrollHeight<=stage.clientHeight) return;
-      e.preventDefault(); e.stopPropagation(); stage.scrollTop+=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?stage.clientHeight:1); },{capture:true,passive:false});
-    var drag=null;
-    window.addEventListener('pointerdown',function(e){ if(e.pointerType!=='touch'||!outside(e)) return; drag={y:e.clientY,top:stage.scrollTop,id:e.pointerId}; },true);
-    window.addEventListener('pointermove',function(e){ if(!drag||e.pointerId!==drag.id) return; stage.scrollTop=drag.top-(e.clientY-drag.y); },true);
-    window.addEventListener('pointerup',function(e){ if(drag&&e.pointerId===drag.id) drag=null; },true);
-    window.addEventListener('pointercancel',function(){ drag=null; },true); }
+  box.addEventListener('pointerdown',function(e){ if(cfg.backdrop!=='clear'&&(e.target===stage||e.target.classList.contains('ri-back'))) close(); });
+  // a clear backdrop: the stage takes the pointer itself, so the results scroll natively (wheel, touch, and its own
+  // scrollbar, which a pass-through stage could never be grabbed by). A press on the stage's empty area, not its
+  // scrollbar, is handed to whatever lies beneath (the ground's stars, the page's own links) and never closes the field.
+  // set inline as well as in the css, so a page holding a stale stylesheet from its cache still scrolls
+  if(cfg.backdrop==='clear'){ stage.style.pointerEvents='auto';
+    var beneath=function(e){ if(e.target!==stage||e.offsetX>=stage.clientWidth) return null; stage.style.pointerEvents='none';
+      var el=document.elementFromPoint(e.clientX,e.clientY); stage.style.pointerEvents='auto'; return el&&!box.contains(el)?el:null; };
+    var pass=function(type,e,el){ try{ el.dispatchEvent(new PointerEvent(type,{bubbles:true,cancelable:true,clientX:e.clientX,clientY:e.clientY,pointerId:e.pointerId,pointerType:e.pointerType,button:e.button,buttons:e.buttons})); }catch(x){} };
+    stage.addEventListener('pointerdown',function(e){ var el=beneath(e); if(el) pass('pointerdown',e,el); });
+    stage.addEventListener('click',function(e){ var el=beneath(e); if(el&&el.tagName!=='CANVAS'&&el.click) el.click(); });
+    stage.addEventListener('pointermove',function(e){ var el=e.target===stage?beneath(e):null; stage.style.cursor=el?getComputedStyle(el).cursor:''; }); }
   window.addEventListener('resize',function(){ if(isOpen) size(); });
   document.addEventListener('keydown',function(e){ var t=e.target, typing=t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable);
     if(e.key==='Escape'&&isOpen){ e.preventDefault(); close(); }

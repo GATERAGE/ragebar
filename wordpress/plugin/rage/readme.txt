@@ -4,7 +4,7 @@ Tags: search, semantic search, vector search, bm25, menu
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.2
-Stable tag: 1.5.3
+Stable tag: 1.5.5
 License: Apache-2.0
 License URI: https://www.apache.org/licenses/LICENSE-2.0
 
@@ -60,6 +60,12 @@ Codephreak's ultimate-input-field (as browseML uses it):
 If your site already runs the rage menu as a Custom HTML widget, the menu loads once whichever is present.
 
 == Changelog ==
+
+= 1.5.5 =
+* The clear backdrop's scrolling stage takes the pointer inline as well as in the stylesheet, so a page still holding an older stylesheet from its cache scrolls too.
+
+= 1.5.4 =
+* Clear backdrop: the results scroll natively, so the scrollbar can be grabbed and dragged; a press on the empty area reaches the ground beneath (its stars, the page's links) and never closes the field.
 
 = 1.5.3 =
 * Clear backdrop: the wheel or a touch drag that lands on the ground while the field is open scrolls the results (it used to zoom the ground, or do nothing, anywhere off a card).

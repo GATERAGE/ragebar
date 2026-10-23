@@ -3,7 +3,7 @@
  * Plugin Name:       RAGE
  * Plugin URI:        https://github.com/GATERAGE/ragebar
  * Description:       RAGE and the ragebar, complete: the "rage" menu (walk your site's atlas, or search it with RAGE) and the immersive ragebar (the header search as a full-screen RAGE field: legs, corpora, personas, response windows, a control panel). Words (BM25) and meaning (vector search) at once, fused by rank, each method saying whether it worked.
- * Version:           1.5.3
+ * Version:           1.5.5
  * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            Professor Codephreak
@@ -47,7 +47,7 @@ if (!defined('ABSPATH')) {
     exit; // no direct access
 }
 
-define('RAGE_MENU_VERSION', '1.5.3');
+define('RAGE_MENU_VERSION', '1.5.5');
 define('RAGE_MENU_SEARCH_DEFAULT', 'https://deltaverse.pythai.net/ragesearch');
 define('RAGE_MENU_ATLAS_DEFAULT', 'https://deltaverse.pythai.net/audio/atlas.json');
 

@@ -1,4 +1,4 @@
-/* ragebar-immersive (RAGE plugin 1.5.3) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
+/* ragebar-immersive (RAGE plugin 1.5.5) — built from GATERAGE/ragebar wordpress/ragebar-immersive.html by tools/build-plugin.mjs. Edit the widget, not this file. */
 :root{--ri-g:#3ddc84;--ri-hot:#ff3b30;--ri-amber:#ffb340;--ri-ink:#e9ffe9;--ri-dim:#86a492;--ri-line:#1f3a2b}
 .ri{position:fixed;inset:0;z-index:100000;display:none;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ri-ink)}
 .ri.ri-open{display:block;animation:riIn .22s ease-out}
@@ -76,7 +76,8 @@ a.ri-act{color:var(--ri-g)!important;text-decoration:none!important}
 .ri-trail button:hover,.ri-trail button:focus-visible{border-color:var(--ri-g);color:var(--ri-g)}
 .ri-trail .ri-tag{color:var(--ri-g);background:rgba(61,220,132,.08)}
 .ri-clear .ri-back{background:radial-gradient(ellipse at 50% 18%,rgba(8,20,14,.55),rgba(3,5,8,.25) 70%);backdrop-filter:none;-webkit-backdrop-filter:none}
-.ri.ri-clear,.ri-clear .ri-stage,.ri-clear .ri-back{pointer-events:none}
+.ri.ri-clear,.ri-clear .ri-back{pointer-events:none}
+.ri-clear .ri-stage{pointer-events:auto}
 .ri-clear .ri-field,.ri-clear .ri-results,.ri-clear .ri-legs,.ri-clear .ri-foot,.ri-clear .ri-term-log,.ri-clear .ri-trail,.ri-clear .ri-win{pointer-events:auto}
 .ri-mode{display:inline-flex;border:1px solid var(--ri-line);border-radius:8px;overflow:hidden}
 .ri-mode button{all:unset;cursor:pointer;padding:3px 9px;font-size:11px;letter-spacing:.08em;color:var(--ri-dim)}
