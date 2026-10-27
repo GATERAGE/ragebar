@@ -1,10 +1,10 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-26T22:41:03.563Z",
+  "checkedAt": "2026-10-27T05:07:31.685Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"33377e91918ffca516dcbe25bd7d9f48\"",
-    "generatedAt": "2026-10-26T22:12:51.621Z",
+    "etag": "W/\"f7793a7a078d9115253614fb61e9b647\"",
+    "generatedAt": "2026-10-27T01:07:07.035Z",
     "sourceLastUpdated": "October 26, 2026",
     "totalModels": 993,
     "rankedModels": 225,
@@ -82,7 +82,7 @@
           "sha": "b61f21852680ee02a29e946e18cf8697f4844061",
           "lastModified": "2026-10-09T06:30:24.000Z",
           "downloads": 32170,
-          "likes": 780
+          "likes": 782
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -93,42 +93,14 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-26T22:41:03.563Z",
+          "ts": "2026-10-27T05:07:31.685Z",
           "slug": "mimo-v2-6-pro",
-          "field": "displayScore",
-          "from": 73.62,
-          "to": 73.63
-        },
-        {
-          "ts": "2026-10-26T22:41:03.563Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "overallRank",
-          "from": 12,
-          "to": 13
-        },
-        {
-          "ts": "2026-10-26T22:41:03.563Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryScores.coding",
-          "from": 63.3,
-          "to": 63.2
-        },
-        {
-          "ts": "2026-10-26T22:41:03.563Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.coding",
-          "from": 13,
-          "to": 14
-        },
-        {
-          "ts": "2026-10-26T22:41:03.563Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.knowledge",
-          "from": 19,
-          "to": 20
+          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
+          "from": 780,
+          "to": 782
         }
       ],
-      "changedAt": "2026-10-26T22:41:03.563Z"
+      "changedAt": "2026-10-27T05:07:31.685Z"
     }
   ]
 }
