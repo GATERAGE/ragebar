@@ -1,13 +1,13 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-28T12:56:47.585Z",
+  "checkedAt": "2026-10-28T22:36:40.956Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"c7f9ae094be36624cb8efcb2d9efee5a\"",
-    "generatedAt": "2026-10-27T20:17:42.621Z",
-    "sourceLastUpdated": "October 27, 2026",
-    "totalModels": 1000,
-    "rankedModels": 226,
+    "etag": "W/\"4cf7514545afd13452b9711f10361609\"",
+    "generatedAt": "2026-10-28T21:17:10.522Z",
+    "sourceLastUpdated": "October 28, 2026",
+    "totalModels": 1002,
+    "rankedModels": 213,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/"
@@ -21,23 +21,23 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 73.85,
+      "displayScore": 56.47,
       "interval90": [
-        64.12,
-        83.57
+        46.75,
+        66.19
       ],
-      "overallRank": 13,
-      "openRank": 1,
+      "overallRank": 58,
+      "openRank": 13,
       "categoryScores": {
         "agentic": 77.9,
         "coding": 63.2,
         "reasoning": 82.5,
-        "knowledge": 58.2
+        "knowledge": 53.3
       },
       "categoryRanks": {
-        "agentic": 12,
-        "coding": 13,
-        "knowledge": 20
+        "agentic": 39,
+        "coding": 21,
+        "knowledge": 43
       },
       "benchmarks": {
         "agentic.gdpvalAa": 1673,
@@ -51,7 +51,7 @@
         "agentic.cyberGym": 94,
         "agentic.exploitGym": 17.8,
         "agentic.gdpvalAaNormalized": 59.2,
-        "agentic.aaBriefcaseElo": 1512,
+        "agentic.aaBriefcaseElo": 1511,
         "agentic.aaAutomationBench": 58.6,
         "agentic.aaGdpPdf": 19.2,
         "agentic.aaTerminalBench4": 34.8,
@@ -65,12 +65,12 @@
         "reasoning.lcr": 86.3,
         "reasoning.critpt": 26.6,
         "reasoning.aaMlcr": 12.8,
-        "multimodalGrounded.designArenaWebsite": 1306,
+        "multimodalGrounded.designArenaWebsite": 1307,
         "knowledge.artificialAnalysis": 46.32,
         "knowledge.aaHle": 49.4,
-        "knowledge.aaOmniscienceIndex": 8.4,
+        "knowledge.aaOmniscienceIndex": -4.5,
         "knowledge.omniscienceAccuracy": 34.8,
-        "knowledge.omniscienceHallucinationRate": 40.6,
+        "knowledge.omniscienceHallucinationRate": 60.2,
         "external.exploitBench": 47.9,
         "external.secBenchPro": 66.3
       },
@@ -79,10 +79,10 @@
         {
           "id": "XiaomiMiMo/MiMo-V2.6-Pro-RL",
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
-          "sha": "e12aa2c989c2291922a7abe1f516dcb7145b2706",
-          "lastModified": "2026-10-28T12:18:45.000Z",
+          "sha": "a066ba0057192126bd5d255f37138265fc1a435e",
+          "lastModified": "2026-10-28T14:16:57.000Z",
           "downloads": 31650,
-          "likes": 783
+          "likes": 787
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -93,14 +93,98 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-28T12:56:47.585Z",
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "displayScore",
+          "from": 73.85,
+          "to": 56.47
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "overallRank",
+          "from": 13,
+          "to": 58
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "openRank",
+          "from": 1,
+          "to": 13
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.knowledge",
+          "from": 58.2,
+          "to": 53.3
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.agentic",
+          "from": 12,
+          "to": 39
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.coding",
+          "from": 13,
+          "to": 21
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.knowledge",
+          "from": 20,
+          "to": 43
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.agentic.aaBriefcaseElo",
+          "from": 1512,
+          "to": 1511
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
+          "from": 1306,
+          "to": 1307
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.knowledge.aaOmniscienceIndex",
+          "from": 8.4,
+          "to": -4.5
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.knowledge.omniscienceHallucinationRate",
+          "from": 40.6,
+          "to": 60.2
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
           "slug": "mimo-v2-6-pro",
           "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.sha",
-          "from": "b61f21852680ee02a29e946e18cf8697f4844061",
-          "to": "e12aa2c989c2291922a7abe1f516dcb7145b2706"
+          "from": "e12aa2c989c2291922a7abe1f516dcb7145b2706",
+          "to": "a066ba0057192126bd5d255f37138265fc1a435e"
+        },
+        {
+          "ts": "2026-10-28T22:36:40.956Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
+          "from": 783,
+          "to": 787
         }
       ],
-      "changedAt": "2026-10-28T12:56:47.585Z"
+      "changedAt": "2026-10-28T22:36:40.956Z"
     }
   ]
 }

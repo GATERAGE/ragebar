@@ -126,3 +126,16 @@
 {"ts":"2026-10-27T22:15:15.126Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":781,"to":782}
 {"ts":"2026-10-28T05:44:10.996Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":782,"to":783}
 {"ts":"2026-10-28T12:56:47.585Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.sha","from":"b61f21852680ee02a29e946e18cf8697f4844061","to":"e12aa2c989c2291922a7abe1f516dcb7145b2706"}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"displayScore","from":73.85,"to":56.47}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"overallRank","from":13,"to":58}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"openRank","from":1,"to":13}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"categoryScores.knowledge","from":58.2,"to":53.3}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"categoryRanks.agentic","from":12,"to":39}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"categoryRanks.coding","from":13,"to":21}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"categoryRanks.knowledge","from":20,"to":43}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"benchmarks.agentic.aaBriefcaseElo","from":1512,"to":1511}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"benchmarks.multimodalGrounded.designArenaWebsite","from":1306,"to":1307}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"benchmarks.knowledge.aaOmniscienceIndex","from":8.4,"to":-4.5}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"benchmarks.knowledge.omniscienceHallucinationRate","from":40.6,"to":60.2}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.sha","from":"e12aa2c989c2291922a7abe1f516dcb7145b2706","to":"a066ba0057192126bd5d255f37138265fc1a435e"}
+{"ts":"2026-10-28T22:36:40.956Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":783,"to":787}
