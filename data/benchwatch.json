@@ -1,12 +1,12 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-28T22:36:40.956Z",
+  "checkedAt": "2026-10-29T05:49:58.511Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"4cf7514545afd13452b9711f10361609\"",
-    "generatedAt": "2026-10-28T21:17:10.522Z",
-    "sourceLastUpdated": "October 28, 2026",
-    "totalModels": 1002,
+    "etag": "W/\"21c5de9a1ed8bb2e641b096f7939ebe0\"",
+    "generatedAt": "2026-10-29T04:35:41.167Z",
+    "sourceLastUpdated": "October 29, 2026",
+    "totalModels": 1003,
     "rankedModels": 213,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
@@ -21,10 +21,10 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 56.47,
+      "displayScore": 56.44,
       "interval90": [
-        46.75,
-        66.19
+        46.72,
+        66.16
       ],
       "overallRank": 58,
       "openRank": 13,
@@ -36,7 +36,7 @@
       },
       "categoryRanks": {
         "agentic": 39,
-        "coding": 21,
+        "coding": 25,
         "knowledge": 43
       },
       "benchmarks": {
@@ -93,98 +93,21 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-28T22:36:40.956Z",
+          "ts": "2026-10-29T05:49:58.511Z",
           "slug": "mimo-v2-6-pro",
           "field": "displayScore",
-          "from": 73.85,
-          "to": 56.47
+          "from": 56.47,
+          "to": 56.44
         },
         {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "overallRank",
-          "from": 13,
-          "to": 58
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "openRank",
-          "from": 1,
-          "to": 13
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryScores.knowledge",
-          "from": 58.2,
-          "to": 53.3
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.agentic",
-          "from": 12,
-          "to": 39
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
+          "ts": "2026-10-29T05:49:58.511Z",
           "slug": "mimo-v2-6-pro",
           "field": "categoryRanks.coding",
-          "from": 13,
-          "to": 21
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.knowledge",
-          "from": 20,
-          "to": 43
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.agentic.aaBriefcaseElo",
-          "from": 1512,
-          "to": 1511
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
-          "from": 1306,
-          "to": 1307
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.knowledge.aaOmniscienceIndex",
-          "from": 8.4,
-          "to": -4.5
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.knowledge.omniscienceHallucinationRate",
-          "from": 40.6,
-          "to": 60.2
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.sha",
-          "from": "e12aa2c989c2291922a7abe1f516dcb7145b2706",
-          "to": "a066ba0057192126bd5d255f37138265fc1a435e"
-        },
-        {
-          "ts": "2026-10-28T22:36:40.956Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 783,
-          "to": 787
+          "from": 21,
+          "to": 25
         }
       ],
-      "changedAt": "2026-10-28T22:36:40.956Z"
+      "changedAt": "2026-10-29T05:49:58.511Z"
     }
   ]
 }
