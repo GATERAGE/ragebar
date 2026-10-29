@@ -1,13 +1,13 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-29T13:03:37.818Z",
+  "checkedAt": "2026-10-29T22:46:11.648Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"21c5de9a1ed8bb2e641b096f7939ebe0\"",
-    "generatedAt": "2026-10-29T04:35:41.167Z",
+    "etag": "W/\"9d7c4e7b6a00635808df626119712b42\"",
+    "generatedAt": "2026-10-29T16:50:36.279Z",
     "sourceLastUpdated": "October 29, 2026",
-    "totalModels": 1003,
-    "rankedModels": 213,
+    "totalModels": 1004,
+    "rankedModels": 214,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/"
@@ -26,8 +26,8 @@
         46.72,
         66.16
       ],
-      "overallRank": 58,
-      "openRank": 13,
+      "overallRank": 59,
+      "openRank": 14,
       "categoryScores": {
         "agentic": 77.9,
         "coding": 63.2,
@@ -35,9 +35,9 @@
         "knowledge": 53.3
       },
       "categoryRanks": {
-        "agentic": 39,
+        "agentic": 40,
         "coding": 25,
-        "knowledge": 43
+        "knowledge": 44
       },
       "benchmarks": {
         "agentic.gdpvalAa": 1673,
@@ -56,6 +56,10 @@
         "agentic.aaGdpPdf": 19.2,
         "agentic.aaTerminalBench4": 34.8,
         "agentic.aaAnalystAgent": 37.5,
+        "agentic.aaCyberIndex": 56.1,
+        "agentic.aaCweBench": 63.3,
+        "agentic.aaDeepsecBench": 26.2,
+        "agentic.aaCyberGymE2e": 78.6,
         "coding.deepSwe": 71.9,
         "coding.programBench": 26.5,
         "coding.terminalBench21": 89.9,
@@ -82,7 +86,7 @@
           "sha": "a066ba0057192126bd5d255f37138265fc1a435e",
           "lastModified": "2026-10-28T14:16:57.000Z",
           "downloads": 29508,
-          "likes": 787
+          "likes": 789
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -93,21 +97,70 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-29T05:49:58.511Z",
+          "ts": "2026-10-29T22:46:11.648Z",
           "slug": "mimo-v2-6-pro",
-          "field": "displayScore",
-          "from": 56.47,
-          "to": 56.44
+          "field": "overallRank",
+          "from": 58,
+          "to": 59
         },
         {
-          "ts": "2026-10-29T05:49:58.511Z",
+          "ts": "2026-10-29T22:46:11.648Z",
           "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.coding",
-          "from": 21,
-          "to": 25
+          "field": "openRank",
+          "from": 13,
+          "to": 14
+        },
+        {
+          "ts": "2026-10-29T22:46:11.648Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.agentic",
+          "from": 39,
+          "to": 40
+        },
+        {
+          "ts": "2026-10-29T22:46:11.648Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.knowledge",
+          "from": 43,
+          "to": 44
+        },
+        {
+          "ts": "2026-10-29T22:46:11.648Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.agentic.aaCyberIndex",
+          "from": null,
+          "to": 56.1
+        },
+        {
+          "ts": "2026-10-29T22:46:11.648Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.agentic.aaCweBench",
+          "from": null,
+          "to": 63.3
+        },
+        {
+          "ts": "2026-10-29T22:46:11.648Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.agentic.aaDeepsecBench",
+          "from": null,
+          "to": 26.2
+        },
+        {
+          "ts": "2026-10-29T22:46:11.648Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.agentic.aaCyberGymE2e",
+          "from": null,
+          "to": 78.6
+        },
+        {
+          "ts": "2026-10-29T22:46:11.648Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
+          "from": 787,
+          "to": 789
         }
       ],
-      "changedAt": "2026-10-29T05:49:58.511Z"
+      "changedAt": "2026-10-29T22:46:11.648Z"
     }
   ]
 }
