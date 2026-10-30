@@ -1,6 +1,6 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-29T22:46:11.648Z",
+  "checkedAt": "2026-10-30T12:57:45.815Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
     "etag": "W/\"9d7c4e7b6a00635808df626119712b42\"",
@@ -85,8 +85,8 @@
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
           "sha": "a066ba0057192126bd5d255f37138265fc1a435e",
           "lastModified": "2026-10-28T14:16:57.000Z",
-          "downloads": 29508,
-          "likes": 789
+          "downloads": 28328,
+          "likes": 790
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -97,70 +97,14 @@
       ],
       "changes": [
         {
-          "ts": "2026-10-29T22:46:11.648Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "overallRank",
-          "from": 58,
-          "to": 59
-        },
-        {
-          "ts": "2026-10-29T22:46:11.648Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "openRank",
-          "from": 13,
-          "to": 14
-        },
-        {
-          "ts": "2026-10-29T22:46:11.648Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.agentic",
-          "from": 39,
-          "to": 40
-        },
-        {
-          "ts": "2026-10-29T22:46:11.648Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.knowledge",
-          "from": 43,
-          "to": 44
-        },
-        {
-          "ts": "2026-10-29T22:46:11.648Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.agentic.aaCyberIndex",
-          "from": null,
-          "to": 56.1
-        },
-        {
-          "ts": "2026-10-29T22:46:11.648Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.agentic.aaCweBench",
-          "from": null,
-          "to": 63.3
-        },
-        {
-          "ts": "2026-10-29T22:46:11.648Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.agentic.aaDeepsecBench",
-          "from": null,
-          "to": 26.2
-        },
-        {
-          "ts": "2026-10-29T22:46:11.648Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.agentic.aaCyberGymE2e",
-          "from": null,
-          "to": 78.6
-        },
-        {
-          "ts": "2026-10-29T22:46:11.648Z",
+          "ts": "2026-10-30T12:57:45.815Z",
           "slug": "mimo-v2-6-pro",
           "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 787,
-          "to": 789
+          "from": 789,
+          "to": 790
         }
       ],
-      "changedAt": "2026-10-29T22:46:11.648Z"
+      "changedAt": "2026-10-30T12:57:45.815Z"
     }
   ]
 }

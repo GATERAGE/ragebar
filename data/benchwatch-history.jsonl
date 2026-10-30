@@ -150,3 +150,4 @@
 {"ts":"2026-10-29T22:46:11.648Z","slug":"mimo-v2-6-pro","field":"benchmarks.agentic.aaDeepsecBench","from":null,"to":26.2}
 {"ts":"2026-10-29T22:46:11.648Z","slug":"mimo-v2-6-pro","field":"benchmarks.agentic.aaCyberGymE2e","from":null,"to":78.6}
 {"ts":"2026-10-29T22:46:11.648Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":787,"to":789}
+{"ts":"2026-10-30T12:57:45.815Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":789,"to":790}
