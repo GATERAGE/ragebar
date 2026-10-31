@@ -1,6 +1,6 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-10-30T12:57:45.815Z",
+  "checkedAt": "2026-10-31T12:33:11.881Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
     "etag": "W/\"9d7c4e7b6a00635808df626119712b42\"",
@@ -85,7 +85,7 @@
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
           "sha": "a066ba0057192126bd5d255f37138265fc1a435e",
           "lastModified": "2026-10-28T14:16:57.000Z",
-          "downloads": 28328,
+          "downloads": 27797,
           "likes": 790
         },
         {
