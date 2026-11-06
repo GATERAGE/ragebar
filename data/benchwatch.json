@@ -1,12 +1,12 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-05T19:58:00.709Z",
+  "checkedAt": "2026-11-06T06:49:15.470Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"72be879aadcad5f8654435ea2e80466e\"",
-    "generatedAt": "2026-11-05T16:41:50.389Z",
+    "etag": "W/\"cca4155aa8748c487406af63ca0a5de8\"",
+    "generatedAt": "2026-11-05T21:02:37.994Z",
     "sourceLastUpdated": "November 5, 2026",
-    "totalModels": 1014,
+    "totalModels": 1015,
     "rankedModels": 214,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
@@ -86,7 +86,7 @@
           "sha": "a066ba0057192126bd5d255f37138265fc1a435e",
           "lastModified": "2026-10-28T14:16:57.000Z",
           "downloads": 24370,
-          "likes": 803
+          "likes": 806
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -97,42 +97,14 @@
       ],
       "changes": [
         {
-          "ts": "2026-11-05T19:58:00.709Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "displayScore",
-          "from": 56.44,
-          "to": 57.27
-        },
-        {
-          "ts": "2026-11-05T19:58:00.709Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "overallRank",
-          "from": 59,
-          "to": 58
-        },
-        {
-          "ts": "2026-11-05T19:58:00.709Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.knowledge",
-          "from": 44,
-          "to": 42
-        },
-        {
-          "ts": "2026-11-05T19:58:00.709Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.agentic.aaBriefcaseElo",
-          "from": 1511,
-          "to": 1512
-        },
-        {
-          "ts": "2026-11-05T19:58:00.709Z",
+          "ts": "2026-11-06T06:49:15.470Z",
           "slug": "mimo-v2-6-pro",
           "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 802,
-          "to": 803
+          "from": 803,
+          "to": 806
         }
       ],
-      "changedAt": "2026-11-05T19:58:00.709Z"
+      "changedAt": "2026-11-06T06:49:15.470Z"
     }
   ]
 }
