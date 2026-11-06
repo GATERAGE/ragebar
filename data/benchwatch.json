@@ -1,13 +1,13 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-06T06:49:15.470Z",
+  "checkedAt": "2026-11-06T19:25:51.594Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"cca4155aa8748c487406af63ca0a5de8\"",
-    "generatedAt": "2026-11-05T21:02:37.994Z",
-    "sourceLastUpdated": "November 5, 2026",
-    "totalModels": 1015,
-    "rankedModels": 214,
+    "etag": "W/\"38fd95c56a3ef1c3acb8a8c2ea050be4\"",
+    "generatedAt": "2026-11-06T18:42:55.223Z",
+    "sourceLastUpdated": "November 6, 2026",
+    "totalModels": 1016,
+    "rankedModels": 210,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/"
@@ -21,22 +21,22 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 57.27,
+      "displayScore": 57.31,
       "interval90": [
-        47.55,
-        66.99
+        47.59,
+        67.03
       ],
-      "overallRank": 58,
+      "overallRank": 59,
       "openRank": 15,
       "categoryScores": {
-        "agentic": 77.9,
-        "coding": 63.2,
-        "reasoning": 82.5,
-        "knowledge": 53.3
+        "agentic": 78.2,
+        "coding": 63.1,
+        "reasoning": 80.8,
+        "knowledge": 53.5
       },
       "categoryRanks": {
         "agentic": 40,
-        "coding": 25,
+        "coding": 26,
         "knowledge": 42
       },
       "benchmarks": {
@@ -69,7 +69,7 @@
         "reasoning.lcr": 86.3,
         "reasoning.critpt": 26.6,
         "reasoning.aaMlcr": 12.8,
-        "multimodalGrounded.designArenaWebsite": 1307,
+        "multimodalGrounded.designArenaWebsite": 1306,
         "knowledge.artificialAnalysis": 46.32,
         "knowledge.aaHle": 49.4,
         "knowledge.aaOmniscienceIndex": -4.5,
@@ -85,8 +85,8 @@
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
           "sha": "a066ba0057192126bd5d255f37138265fc1a435e",
           "lastModified": "2026-10-28T14:16:57.000Z",
-          "downloads": 24370,
-          "likes": 806
+          "downloads": 24056,
+          "likes": 807
         },
         {
           "id": "Gregory-L/MiMo-V2.6-Pro-RL",
@@ -97,14 +97,70 @@
       ],
       "changes": [
         {
-          "ts": "2026-11-06T06:49:15.470Z",
+          "ts": "2026-11-06T19:25:51.594Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "displayScore",
+          "from": 57.27,
+          "to": 57.31
+        },
+        {
+          "ts": "2026-11-06T19:25:51.594Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "overallRank",
+          "from": 58,
+          "to": 59
+        },
+        {
+          "ts": "2026-11-06T19:25:51.594Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.agentic",
+          "from": 77.9,
+          "to": 78.2
+        },
+        {
+          "ts": "2026-11-06T19:25:51.594Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.coding",
+          "from": 63.2,
+          "to": 63.1
+        },
+        {
+          "ts": "2026-11-06T19:25:51.594Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.reasoning",
+          "from": 82.5,
+          "to": 80.8
+        },
+        {
+          "ts": "2026-11-06T19:25:51.594Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.knowledge",
+          "from": 53.3,
+          "to": 53.5
+        },
+        {
+          "ts": "2026-11-06T19:25:51.594Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.coding",
+          "from": 25,
+          "to": 26
+        },
+        {
+          "ts": "2026-11-06T19:25:51.594Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
+          "from": 1307,
+          "to": 1306
+        },
+        {
+          "ts": "2026-11-06T19:25:51.594Z",
           "slug": "mimo-v2-6-pro",
           "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 803,
-          "to": 806
+          "from": 806,
+          "to": 807
         }
       ],
-      "changedAt": "2026-11-06T06:49:15.470Z"
+      "changedAt": "2026-11-06T19:25:51.594Z"
     }
   ]
 }
