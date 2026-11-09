@@ -1,13 +1,13 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-09T06:33:09.678Z",
+  "checkedAt": "2026-11-09T22:23:04.824Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"6c454d4743803df8dad133b36d956de2\"",
-    "generatedAt": "2026-11-07T23:39:21.893Z",
-    "sourceLastUpdated": "November 7, 2026",
-    "totalModels": 1016,
-    "rankedModels": 210,
+    "etag": "W/\"1962ea101b664e898a99d0638443978f\"",
+    "generatedAt": "2026-11-09T21:59:44.410Z",
+    "sourceLastUpdated": "November 9, 2026",
+    "totalModels": 1020,
+    "rankedModels": 212,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/"
@@ -21,23 +21,24 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 57.31,
+      "displayScore": 57.08,
       "interval90": [
-        47.59,
-        67.03
+        47.36,
+        66.8
       ],
-      "overallRank": 59,
+      "overallRank": 60,
       "openRank": 15,
       "categoryScores": {
         "agentic": 78.2,
-        "coding": 63.1,
+        "coding": 62.6,
         "reasoning": 80.8,
-        "knowledge": 53.5
+        "knowledge": 52.8
       },
       "categoryRanks": {
-        "agentic": 40,
+        "agentic": 41,
         "coding": 26,
-        "knowledge": 42
+        "reasoning": 26,
+        "knowledge": 44
       },
       "benchmarks": {
         "agentic.gdpvalAa": 1673,
@@ -69,7 +70,7 @@
         "reasoning.lcr": 86.3,
         "reasoning.critpt": 26.6,
         "reasoning.aaMlcr": 12.8,
-        "multimodalGrounded.designArenaWebsite": 1306,
+        "multimodalGrounded.designArenaWebsite": 1305,
         "knowledge.artificialAnalysis": 46.32,
         "knowledge.aaHle": 49.4,
         "knowledge.aaOmniscienceIndex": -4.5,
@@ -85,7 +86,7 @@
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
           "sha": "a066ba0057192126bd5d255f37138265fc1a435e",
           "lastModified": "2026-10-28T14:16:57.000Z",
-          "downloads": 24396,
+          "downloads": 24312,
           "likes": 813
         },
         {
@@ -97,14 +98,63 @@
       ],
       "changes": [
         {
-          "ts": "2026-11-09T06:33:09.678Z",
+          "ts": "2026-11-09T22:23:04.824Z",
           "slug": "mimo-v2-6-pro",
-          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 812,
-          "to": 813
+          "field": "displayScore",
+          "from": 57.31,
+          "to": 57.08
+        },
+        {
+          "ts": "2026-11-09T22:23:04.824Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "overallRank",
+          "from": 59,
+          "to": 60
+        },
+        {
+          "ts": "2026-11-09T22:23:04.824Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.coding",
+          "from": 63.1,
+          "to": 62.6
+        },
+        {
+          "ts": "2026-11-09T22:23:04.824Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.knowledge",
+          "from": 53.5,
+          "to": 52.8
+        },
+        {
+          "ts": "2026-11-09T22:23:04.824Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.agentic",
+          "from": 40,
+          "to": 41
+        },
+        {
+          "ts": "2026-11-09T22:23:04.824Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.knowledge",
+          "from": 42,
+          "to": 44
+        },
+        {
+          "ts": "2026-11-09T22:23:04.824Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.reasoning",
+          "from": null,
+          "to": 26
+        },
+        {
+          "ts": "2026-11-09T22:23:04.824Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
+          "from": 1306,
+          "to": 1305
         }
       ],
-      "changedAt": "2026-11-09T06:33:09.678Z"
+      "changedAt": "2026-11-09T22:23:04.824Z"
     }
   ]
 }
