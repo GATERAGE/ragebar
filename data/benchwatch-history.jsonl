@@ -190,3 +190,4 @@
 {"ts":"2026-11-09T22:23:04.824Z","slug":"mimo-v2-6-pro","field":"categoryRanks.knowledge","from":42,"to":44}
 {"ts":"2026-11-09T22:23:04.824Z","slug":"mimo-v2-6-pro","field":"categoryRanks.reasoning","from":null,"to":26}
 {"ts":"2026-11-09T22:23:04.824Z","slug":"mimo-v2-6-pro","field":"benchmarks.multimodalGrounded.designArenaWebsite","from":1306,"to":1305}
+{"ts":"2026-11-10T07:20:44.417Z","slug":"mimo-v2-6-pro","field":"benchmarks.external.stealthMark","from":null,"to":47.9}

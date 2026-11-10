@@ -1,11 +1,11 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-09T22:23:04.824Z",
+  "checkedAt": "2026-11-10T07:20:44.417Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"1962ea101b664e898a99d0638443978f\"",
-    "generatedAt": "2026-11-09T21:59:44.410Z",
-    "sourceLastUpdated": "November 9, 2026",
+    "etag": "W/\"b084bc3d00f1dd04c68edecfe41f7499\"",
+    "generatedAt": "2026-11-10T04:58:51.933Z",
+    "sourceLastUpdated": "November 10, 2026",
     "totalModels": 1020,
     "rankedModels": 212,
     "attribution": "Data from BenchLM.ai",
@@ -76,6 +76,7 @@
         "knowledge.aaOmniscienceIndex": -4.5,
         "knowledge.omniscienceAccuracy": 34.8,
         "knowledge.omniscienceHallucinationRate": 60.2,
+        "external.stealthMark": 47.9,
         "external.exploitBench": 47.9,
         "external.secBenchPro": 66.3
       },
@@ -98,63 +99,14 @@
       ],
       "changes": [
         {
-          "ts": "2026-11-09T22:23:04.824Z",
+          "ts": "2026-11-10T07:20:44.417Z",
           "slug": "mimo-v2-6-pro",
-          "field": "displayScore",
-          "from": 57.31,
-          "to": 57.08
-        },
-        {
-          "ts": "2026-11-09T22:23:04.824Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "overallRank",
-          "from": 59,
-          "to": 60
-        },
-        {
-          "ts": "2026-11-09T22:23:04.824Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryScores.coding",
-          "from": 63.1,
-          "to": 62.6
-        },
-        {
-          "ts": "2026-11-09T22:23:04.824Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryScores.knowledge",
-          "from": 53.5,
-          "to": 52.8
-        },
-        {
-          "ts": "2026-11-09T22:23:04.824Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.agentic",
-          "from": 40,
-          "to": 41
-        },
-        {
-          "ts": "2026-11-09T22:23:04.824Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.knowledge",
-          "from": 42,
-          "to": 44
-        },
-        {
-          "ts": "2026-11-09T22:23:04.824Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.reasoning",
+          "field": "benchmarks.external.stealthMark",
           "from": null,
-          "to": 26
-        },
-        {
-          "ts": "2026-11-09T22:23:04.824Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
-          "from": 1306,
-          "to": 1305
+          "to": 47.9
         }
       ],
-      "changedAt": "2026-11-09T22:23:04.824Z"
+      "changedAt": "2026-11-10T07:20:44.417Z"
     }
   ]
 }
