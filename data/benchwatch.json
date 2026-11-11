@@ -1,12 +1,12 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-11T06:24:35.873Z",
+  "checkedAt": "2026-11-11T19:36:51.568Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"341daaa78f0b05cab68a32148eef1915\"",
-    "generatedAt": "2026-11-11T03:03:08.797Z",
-    "sourceLastUpdated": "November 10, 2026",
-    "totalModels": 1020,
+    "etag": "W/\"72d5b08d2b007af8f9708f31441b914e\"",
+    "generatedAt": "2026-11-11T19:25:31.711Z",
+    "sourceLastUpdated": "November 11, 2026",
+    "totalModels": 1024,
     "rankedModels": 212,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
@@ -77,6 +77,7 @@
         "knowledge.aaOmniscienceIndex": -4.5,
         "knowledge.omniscienceAccuracy": 34.8,
         "knowledge.omniscienceHallucinationRate": 60.2,
+        "external.frontierPhysics": 1.2,
         "external.stealthMark": 47.9,
         "external.exploitBench": 47.9,
         "external.secBenchPro": 66.3
@@ -88,7 +89,7 @@
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
           "sha": "a066ba0057192126bd5d255f37138265fc1a435e",
           "lastModified": "2026-10-28T14:16:57.000Z",
-          "downloads": 24882,
+          "downloads": 24257,
           "likes": 816
         },
         {
@@ -100,21 +101,14 @@
       ],
       "changes": [
         {
-          "ts": "2026-11-11T06:24:35.873Z",
+          "ts": "2026-11-11T19:36:51.568Z",
           "slug": "mimo-v2-6-pro",
-          "field": "displayScore",
-          "from": 57.18,
-          "to": 57.15
-        },
-        {
-          "ts": "2026-11-11T06:24:35.873Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "categoryRanks.reasoning",
-          "from": 26,
-          "to": 27
+          "field": "benchmarks.external.frontierPhysics",
+          "from": null,
+          "to": 1.2
         }
       ],
-      "changedAt": "2026-11-11T06:24:35.873Z"
+      "changedAt": "2026-11-11T19:36:51.568Z"
     }
   ]
 }
