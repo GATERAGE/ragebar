@@ -1,10 +1,10 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-10T19:44:49.794Z",
+  "checkedAt": "2026-11-11T06:24:35.873Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"f7e724f742d61c192044484dab01b02f\"",
-    "generatedAt": "2026-11-10T19:33:15.314Z",
+    "etag": "W/\"341daaa78f0b05cab68a32148eef1915\"",
+    "generatedAt": "2026-11-11T03:03:08.797Z",
     "sourceLastUpdated": "November 10, 2026",
     "totalModels": 1020,
     "rankedModels": 212,
@@ -21,10 +21,10 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 57.18,
+      "displayScore": 57.15,
       "interval90": [
-        47.46,
-        66.91
+        47.43,
+        66.87
       ],
       "overallRank": 60,
       "openRank": 15,
@@ -37,7 +37,7 @@
       "categoryRanks": {
         "agentic": 41,
         "coding": 26,
-        "reasoning": 26,
+        "reasoning": 27,
         "knowledge": 44
       },
       "benchmarks": {
@@ -100,42 +100,21 @@
       ],
       "changes": [
         {
-          "ts": "2026-11-10T19:44:49.794Z",
+          "ts": "2026-11-11T06:24:35.873Z",
           "slug": "mimo-v2-6-pro",
           "field": "displayScore",
-          "from": 57.08,
-          "to": 57.18
+          "from": 57.18,
+          "to": 57.15
         },
         {
-          "ts": "2026-11-10T19:44:49.794Z",
+          "ts": "2026-11-11T06:24:35.873Z",
           "slug": "mimo-v2-6-pro",
-          "field": "categoryScores.coding",
-          "from": 62.6,
-          "to": 62.8
-        },
-        {
-          "ts": "2026-11-10T19:44:49.794Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
-          "from": 1305,
-          "to": 1304
-        },
-        {
-          "ts": "2026-11-10T19:44:49.794Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "benchmarks.agentic.mka",
-          "from": null,
-          "to": 37.3
-        },
-        {
-          "ts": "2026-11-10T19:44:49.794Z",
-          "slug": "mimo-v2-6-pro",
-          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 813,
-          "to": 816
+          "field": "categoryRanks.reasoning",
+          "from": 26,
+          "to": 27
         }
       ],
-      "changedAt": "2026-11-10T19:44:49.794Z"
+      "changedAt": "2026-11-11T06:24:35.873Z"
     }
   ]
 }
