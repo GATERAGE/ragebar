@@ -214,3 +214,4 @@
 {"ts":"2026-11-13T06:48:08.458Z","slug":"mimo-v2-6-pro","field":"categoryRanks.knowledge","from":44,"to":36}
 {"ts":"2026-11-13T06:48:08.458Z","slug":"mimo-v2-6-pro","field":"benchmarks.multimodalGrounded.designArenaWebsite","from":1304,"to":1303}
 {"ts":"2026-11-13T06:48:08.458Z","slug":"mimo-v2-6-pro","field":"benchmarks.agentic.valsTerminalBench21","from":null,"to":67.8}
+{"ts":"2026-11-13T19:43:51.263Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":818,"to":820}
