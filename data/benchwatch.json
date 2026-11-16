@@ -1,13 +1,13 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-15T18:52:13.461Z",
+  "checkedAt": "2026-11-16T06:32:00.177Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"78d942f0c996af2b10fc941941d8761b\"",
-    "generatedAt": "2026-11-15T12:37:17.670Z",
-    "sourceLastUpdated": "November 13, 2026",
+    "etag": "W/\"4fd568b2e311a8e0022287b3d6c1c296\"",
+    "generatedAt": "2026-11-16T04:34:36.480Z",
+    "sourceLastUpdated": "November 16, 2026",
     "totalModels": 1033,
-    "rankedModels": 213,
+    "rankedModels": 214,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/"
@@ -21,26 +21,27 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 57.25,
+      "displayScore": 57.3,
       "interval90": [
-        47.53,
-        66.97
+        47.58,
+        67.02
       ],
-      "overallRank": 58,
+      "overallRank": 59,
       "openRank": 13,
       "categoryScores": {
         "agentic": 78.2,
-        "coding": 62.8,
+        "coding": 64.4,
         "reasoning": 80.8,
-        "knowledge": 53.1
+        "knowledge": 53.5
       },
       "categoryRanks": {
-        "agentic": 23,
+        "agentic": 25,
         "coding": 25,
         "reasoning": 25,
-        "knowledge": 36
+        "knowledge": 37
       },
       "benchmarks": {
+        "agentic.terminalBench41": 27,
         "agentic.gdpvalAa": 1673,
         "agentic.toolathlonVerified": 76.9,
         "agentic.automationBench": 53.1,
@@ -72,7 +73,7 @@
         "reasoning.lcr": 86.3,
         "reasoning.critpt": 26.6,
         "reasoning.aaMlcr": 12.8,
-        "multimodalGrounded.designArenaWebsite": 1303,
+        "multimodalGrounded.designArenaWebsite": 1311,
         "knowledge.artificialAnalysis": 46.32,
         "knowledge.aaHle": 49.4,
         "knowledge.aaOmniscienceIndex": -4.5,
@@ -102,14 +103,63 @@
       ],
       "changes": [
         {
-          "ts": "2026-11-14T22:25:31.635Z",
+          "ts": "2026-11-16T06:32:00.177Z",
           "slug": "mimo-v2-6-pro",
           "field": "displayScore",
-          "from": 57.27,
-          "to": 57.25
+          "from": 57.25,
+          "to": 57.3
+        },
+        {
+          "ts": "2026-11-16T06:32:00.177Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "overallRank",
+          "from": 58,
+          "to": 59
+        },
+        {
+          "ts": "2026-11-16T06:32:00.177Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.coding",
+          "from": 62.8,
+          "to": 64.4
+        },
+        {
+          "ts": "2026-11-16T06:32:00.177Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.knowledge",
+          "from": 53.1,
+          "to": 53.5
+        },
+        {
+          "ts": "2026-11-16T06:32:00.177Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.agentic",
+          "from": 23,
+          "to": 25
+        },
+        {
+          "ts": "2026-11-16T06:32:00.177Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.knowledge",
+          "from": 36,
+          "to": 37
+        },
+        {
+          "ts": "2026-11-16T06:32:00.177Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
+          "from": 1303,
+          "to": 1311
+        },
+        {
+          "ts": "2026-11-16T06:32:00.177Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.agentic.terminalBench41",
+          "from": null,
+          "to": 27
         }
       ],
-      "changedAt": "2026-11-14T22:25:31.635Z"
+      "changedAt": "2026-11-16T06:32:00.177Z"
     }
   ]
 }
