@@ -1,13 +1,13 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-17T20:56:59.567Z",
+  "checkedAt": "2026-11-18T07:30:37.806Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"b4decf695a9faa8abe90a880feb93893\"",
-    "generatedAt": "2026-11-17T20:04:28.266Z",
-    "sourceLastUpdated": "November 17, 2026",
-    "totalModels": 1040,
-    "rankedModels": 214,
+    "etag": "W/\"cd9c83ca69b0570d654e5bb2d55f879d\"",
+    "generatedAt": "2026-11-18T02:57:35.388Z",
+    "sourceLastUpdated": "November 18, 2026",
+    "totalModels": 1023,
+    "rankedModels": 212,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-nc/4.0/"
@@ -21,24 +21,24 @@
       "releaseDate": "2026-09-22",
       "sourceType": "Open Weight",
       "evidenceStatus": "estimated",
-      "displayScore": 57.29,
+      "displayScore": 56.69,
       "interval90": [
-        47.56,
-        67.01
+        46.97,
+        66.42
       ],
-      "overallRank": 59,
-      "openRank": 13,
+      "overallRank": 61,
+      "openRank": 14,
       "categoryScores": {
-        "agentic": 78.2,
-        "coding": 64.3,
-        "reasoning": 80.8,
+        "agentic": 79.2,
+        "coding": 64.5,
+        "reasoning": 81.5,
         "knowledge": 53.5
       },
       "categoryRanks": {
-        "agentic": 24,
-        "coding": 25,
+        "agentic": 26,
+        "coding": 27,
         "reasoning": 25,
-        "knowledge": 37
+        "knowledge": 41
       },
       "benchmarks": {
         "agentic.terminalBench41": 27,
@@ -73,7 +73,7 @@
         "reasoning.lcr": 86.3,
         "reasoning.critpt": 26.6,
         "reasoning.aaMlcr": 12.8,
-        "multimodalGrounded.designArenaWebsite": 1311,
+        "multimodalGrounded.designArenaWebsite": 1310,
         "knowledge.artificialAnalysis": 46.32,
         "knowledge.aaHle": 49.4,
         "knowledge.aaOmniscienceIndex": -4.5,
@@ -103,21 +103,77 @@
       ],
       "changes": [
         {
-          "ts": "2026-11-17T20:56:59.567Z",
+          "ts": "2026-11-18T07:30:37.806Z",
           "slug": "mimo-v2-6-pro",
           "field": "displayScore",
-          "from": 57.3,
-          "to": 57.29
+          "from": 57.29,
+          "to": 56.69
         },
         {
-          "ts": "2026-11-17T20:56:59.567Z",
+          "ts": "2026-11-18T07:30:37.806Z",
           "slug": "mimo-v2-6-pro",
-          "field": "hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes",
-          "from": 822,
-          "to": 823
+          "field": "overallRank",
+          "from": 59,
+          "to": 61
+        },
+        {
+          "ts": "2026-11-18T07:30:37.806Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "openRank",
+          "from": 13,
+          "to": 14
+        },
+        {
+          "ts": "2026-11-18T07:30:37.806Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.agentic",
+          "from": 78.2,
+          "to": 79.2
+        },
+        {
+          "ts": "2026-11-18T07:30:37.806Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.coding",
+          "from": 64.3,
+          "to": 64.5
+        },
+        {
+          "ts": "2026-11-18T07:30:37.806Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryScores.reasoning",
+          "from": 80.8,
+          "to": 81.5
+        },
+        {
+          "ts": "2026-11-18T07:30:37.806Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.agentic",
+          "from": 24,
+          "to": 26
+        },
+        {
+          "ts": "2026-11-18T07:30:37.806Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.coding",
+          "from": 25,
+          "to": 27
+        },
+        {
+          "ts": "2026-11-18T07:30:37.806Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "categoryRanks.knowledge",
+          "from": 37,
+          "to": 41
+        },
+        {
+          "ts": "2026-11-18T07:30:37.806Z",
+          "slug": "mimo-v2-6-pro",
+          "field": "benchmarks.multimodalGrounded.designArenaWebsite",
+          "from": 1311,
+          "to": 1310
         }
       ],
-      "changedAt": "2026-11-17T20:56:59.567Z"
+      "changedAt": "2026-11-18T07:30:37.806Z"
     }
   ]
 }
