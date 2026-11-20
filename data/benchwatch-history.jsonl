@@ -246,3 +246,12 @@
 {"ts":"2026-11-19T07:27:30.814Z","slug":"mimo-v2-6-pro","field":"categoryRanks.coding","from":27,"to":26}
 {"ts":"2026-11-19T07:27:30.814Z","slug":"mimo-v2-6-pro","field":"benchmarks.multimodalGrounded.designArenaWebsite","from":1310,"to":1308}
 {"ts":"2026-11-19T20:39:11.079Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":825,"to":826}
+{"ts":"2026-11-20T07:17:56.060Z","slug":"mimo-v2-6-pro","field":"displayScore","from":56.71,"to":63.5}
+{"ts":"2026-11-20T07:17:56.060Z","slug":"mimo-v2-6-pro","field":"overallRank","from":61,"to":40}
+{"ts":"2026-11-20T07:17:56.060Z","slug":"mimo-v2-6-pro","field":"openRank","from":14,"to":8}
+{"ts":"2026-11-20T07:17:56.060Z","slug":"mimo-v2-6-pro","field":"evidenceStatus","from":"estimated","to":"supported"}
+{"ts":"2026-11-20T07:17:56.060Z","slug":"mimo-v2-6-pro","field":"categoryRanks.coding","from":26,"to":31}
+{"ts":"2026-11-20T07:17:56.060Z","slug":"mimo-v2-6-pro","field":"categoryRanks.reasoning","from":25,"to":60}
+{"ts":"2026-11-20T07:17:56.060Z","slug":"mimo-v2-6-pro","field":"categoryRanks.knowledge","from":41,"to":null}
+{"ts":"2026-11-20T07:17:56.060Z","slug":"mimo-v2-6-pro","field":"categoryRanks.multimodalGrounded","from":null,"to":36}
+{"ts":"2026-11-20T07:17:56.060Z","slug":"mimo-v2-6-pro","field":"hf.XiaomiMiMo/MiMo-V2.6-Pro-RL.likes","from":826,"to":827}
