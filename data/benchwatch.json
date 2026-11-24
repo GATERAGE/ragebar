@@ -1,10 +1,10 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-24T09:55:44.210Z",
+  "checkedAt": "2026-11-24T22:27:53.309Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"a889c68cb73df174308b16075cd6ea70\"",
-    "generatedAt": "2026-11-24T00:02:32.207Z",
+    "etag": "W/\"e95b41fcc9ad5e77beba26bd7dd45657\"",
+    "generatedAt": "2026-11-24T21:52:08.577Z",
     "sourceLastUpdated": "November 23, 2026",
     "totalModels": 1036,
     "rankedModels": 215,
