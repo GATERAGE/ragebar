@@ -1,10 +1,10 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-25T08:36:47.987Z",
+  "checkedAt": "2026-11-25T21:42:55.615Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"0c03430ea0e388044c67d8f097d3e3c9\"",
-    "generatedAt": "2026-11-25T01:19:38.703Z",
+    "etag": "W/\"ecf848afe013eb197a2e57200c5b2602\"",
+    "generatedAt": "2026-11-25T20:32:45.688Z",
     "sourceLastUpdated": "November 23, 2026",
     "totalModels": 1036,
     "rankedModels": 215,
@@ -92,7 +92,7 @@
           "url": "https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL",
           "sha": "a066ba0057192126bd5d255f37138265fc1a435e",
           "lastModified": "2026-10-28T14:16:57.000Z",
-          "downloads": 31964,
+          "downloads": 31901,
           "likes": 834
         },
         {
