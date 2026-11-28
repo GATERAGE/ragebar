@@ -1,12 +1,12 @@
 {
   "schema": "ragebar.benchwatch/1",
-  "checkedAt": "2026-11-27T21:18:31.701Z",
+  "checkedAt": "2026-11-28T07:51:16.909Z",
   "source": {
     "url": "https://benchlm.ai/data/models.json",
-    "etag": "W/\"e84ad1bd52edfb3fcbe86a3ffa2be3f8\"",
-    "generatedAt": "2026-11-27T20:42:47.904Z",
+    "etag": "W/\"6b44e0ac4552ddd36aa551a9b24d23cf\"",
+    "generatedAt": "2026-11-28T01:45:11.901Z",
     "sourceLastUpdated": "November 27, 2026",
-    "totalModels": 1036,
+    "totalModels": 1037,
     "rankedModels": 215,
     "attribution": "Data from BenchLM.ai",
     "license": "CC BY-NC 4.0",
